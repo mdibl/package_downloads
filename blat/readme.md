@@ -1,39 +1,30 @@
-# Jenkins
+# BLAT
 
-Base directory to store Jenkins downloads scripts and config files
+Base directory to store Blat downloads scripts and config files
 
 ```
-Jenkins is an open source automation server written in Java. 
-Jenkins helps to automate the non-human part of software development process, 
-with continuous integration and facilitating technical aspects of continuous delivery
+Blat produces two major classes of alignments:
+* at the DNA level between two sequences that are of 95% or greater identity, but which may include large inserts.
+* at the protein or translated DNA level between sequences that are of 80% or greater identity and may also include large inserts.
+
+The main programs in the blat suite are:
+ * gfServer – a server that maintains an index of the genome in memory and uses the index to quickly find regions with high levels of sequence similarity to a query sequence.
+ * gfClient – a program that queries gfServer over the network and does a detailed alignment of the query sequence with regions found by gfServer.
+ * blat – client and server combined into a single program, first building the index, then using the index, and then exiting.
 ```
 
-## What do we download from Jenkins -- http://mirrors.jenkins-ci.org/war-stable/latest/?
+## What do we download from Blat -- http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/blat/?
 
-We download the ``` jenkins.war ``` file of the latest stable release verion
+We download:
+
+ * blat
+ * gfClient
+ * gfServer
 
 ## Upgrades Frequency
 
-According to Jenkins site (https://jenkins.io/download/lts/) , 
-The weekly Jenkins releases deliver bug fixes and new features rapidly to users 
-and plugin developers who need them. But for more conservative users, it’s preferable to stick to a release line which 
-changes less often and only receives important bug fixes, even if such a release line lags behind in terms of features.
-
-We run the upgrades on demand - meaning whenever the "Manage Jenkins" window shows
-a new release alert on our Jenkins server, we toggle an upgrade
-
-See : https://jenkins.mdibl.org/manage
-
+See: http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/blat/FOOTER.txt
 Runs: On demand
 
 ## How to upgrade Jenkins
-  * Log on to Jenkins web server : http://jenkins.mdibl.org
-  * Click on "Manage Jenkins" 
-  * if there is a new release suggestion then 
-    * ssh to jenkins server to user "bioadmin" home directory
-    * cd to /home/bioadmin/package_downloads
-    * run ``` ./download_package jenkins/jenkins.cfg ```
-  * Go back to jenkins web server
-    * Click on "Manage Jenkins" (you should see the option to upgrade automatically)
-    * Click on "upgrade automatically" then follow instructions 
-    
+  
