@@ -2,6 +2,10 @@
 
 Base directory to store Jenkins downloads scripts and config files
 
+```
+Jenkins is an open source automation server written in Java. Jenkins helps to automate the non-human part of software development process, with continuous integration and facilitating technical aspects of continuous delivery
+```
+
 ## What do we download from Jenkins -- http://mirrors.jenkins-ci.org/war-stable/latest/?
 
 We download the ``` jenkins.war ``` file of the latest stable release verion
