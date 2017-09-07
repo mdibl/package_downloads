@@ -21,7 +21,7 @@ See : https://jenkins.mdibl.org/manage
 Runs: On demand
 
 ## How to upgrade Jenkins
-  * Log on to Jenkins server : jenkins.mdibl.org
+  * Log on to Jenkins server : http://jenkins.mdibl.org
   * Click on "Manage Jenkins" 
   * if there is a new release suggestion, copy the "download" link
   * ssh to lintilla
