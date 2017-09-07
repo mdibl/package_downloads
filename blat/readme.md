@@ -17,6 +17,7 @@ The main programs in the blat suite are:
 
 We download:
 
+ * FOOTER.txt ( contains info on the version)
  * blat
  * gfClient
  * gfServer
