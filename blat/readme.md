@@ -27,5 +27,5 @@ We download:
 See: http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/blat/FOOTER.txt
 Runs: On demand
 
-## How to upgrade Jenkins
+## How to Install Blat
   
