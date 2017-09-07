@@ -21,7 +21,7 @@ fi
 #
 #Relative to current working directory
 #
-ANNOT_CONFIG=$1
+PACKAGE_CONFIG=$1
 MAIN_CONFIG=Configuration
 
 if [ ! -f $MAIN_CONFIG ]
@@ -29,19 +29,20 @@ then
   echo "$MAIN_CONFIG file missing "     
   exit 1
 fi
-if [ ! -f $ANNOT_CONFIG ]
+if [ ! -f $PACKAGE_CONFIG ]
 then
-  echo "'$ANNOT_CONFIG' file missing "     
+  echo "'$PACKAGE_CONFIG' file missing "     
   exit 1
 fi
 
 # get global environment variable from config files
 #
 source ./$MAIN_CONFIG
-source ./$ANNOT_CONFIG
+source ./$PACKAGE_CONFIG
 
 LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.$SHORT_NAME.$DATE.log
 WGET_COMMAND="wget $WGET_OPTIONS '$REMOTE_URL'"
+
 rm -f $LOG
 touch $LOG
 echo "==" | tee -a $LOG
