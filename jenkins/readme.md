@@ -8,7 +8,8 @@ The weekly Jenkins releases deliver bug fixes and new features rapidly to users
 and plugin developers who need them. But for more conservative users, it’s preferable to stick to a release line which 
 changes less often and only receives important bug fixes, even if such a release line lags behind in terms of features.
 
-We run the upgrades on demand - meaning whenever the "Manage Jenkins" window shows  a new release alert on our Jenkins server.
+We run the upgrades on demand - meaning whenever the "Manage Jenkins" window shows
+a new release alert on our Jenkins server, we toggle an upgrade
 
 See : https://jenkins.mdibl.org/manage
 
