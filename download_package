@@ -53,14 +53,20 @@ echo "Start Date:"`date` | tee -a $LOG
 echo "Package: $SHORT_NAME"  | tee -a $LOG
 echo "Remote site: $REMOTE_SITE"  | tee -a $LOG
 echo "Remote directory: $REMOTE_DIR"  | tee -a $LOG
-echo "Remote files: $REMOTE_FILES"  | tee -a $LOG
-echo "Local directory: $LOCAL_DIR" | tee -a $LOG 
+echo "Remote files: $REMOTE_FILE"  | tee -a $LOG
 echo "Remote url: $REMOTE_URL" | tee -a $LOG
+echo "==" | tee -a $LOG
+echo "Local directory: $LOCAL_DIR" | tee -a $LOG 
 echo "==" | tee -a $LOG
 echo "Running $SCRIPT_NAME from: $WORKING_DIR"| tee -a $LOG
 
 cd $LOCAL_DIR
 download_base=`pwd`
+
+if [ -f $REMOTE_FILE ]
+then 
+  cp -p $REMOTE_FILE $REMOTE_FILE.old
+fi
 
 echo "Running wget command  from: $download_base"| tee -a $LOG
 echo "Command - $WGET_COMMAND " | tee -a $LOG
