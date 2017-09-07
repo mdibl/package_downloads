@@ -60,6 +60,11 @@ echo "Local directory: $LOCAL_DIR" | tee -a $LOG
 echo "==" | tee -a $LOG
 echo "Running $SCRIPT_NAME from: $WORKING_DIR"| tee -a $LOG
 
+if [ ! -d $LOCAL_DIR ]
+then
+  mkdir --parents $LOCAL_DIR
+fi
+  
 cd $LOCAL_DIR
 download_base=`pwd`
 
