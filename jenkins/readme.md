@@ -1,7 +1,12 @@
+# Jenkins
+
 Base directory to store Jenkins downloads scripts and config files
 
 ## What do we download from Jenkins -- http://updates.jenkins-ci.org/download/war?
 
+We download the jenkins.war file for the specified release line verion
+
+## Upgrades Frequency
 
 According to Jenkins site (https://jenkins.io/download/lts/) , 
 The weekly Jenkins releases deliver bug fixes and new features rapidly to users 
