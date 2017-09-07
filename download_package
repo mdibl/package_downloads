@@ -10,7 +10,10 @@
 cd `dirname $0`
 WORKING_DIR=`pwd`
 SCRIPT_NAME=`basename $0`
-DATE=`date +"%B %d %Y"` | sed -e 's/[[:space:]]/-/g'
+DATE=`date +"%B %d %Y"`
+DATE=`echo $DATE | sed -e 's/[[:space:]]/-/g'`
+
+WGET=`which wget`
 
 if [ $# -lt 1 ]
 then
@@ -41,7 +44,7 @@ source ./$MAIN_CONFIG
 source ./$PACKAGE_CONFIG
 
 LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.$SHORT_NAME.$DATE.log
-WGET_COMMAND="wget $WGET_OPTIONS '$REMOTE_URL'"
+WGET_COMMAND="$WGET_OPTIONS '$REMOTE_URL'"
 
 rm -f $LOG
 touch $LOG
@@ -50,22 +53,29 @@ echo "Start Date:"`date` | tee -a $LOG
 echo "Package: $SHORT_NAME"  | tee -a $LOG
 echo "Remote site: $REMOTE_SITE"  | tee -a $LOG
 echo "Remote directory: $REMOTE_DIR"  | tee -a $LOG
+echo "Remote files: $REMOTE_FILES"  | tee -a $LOG
 echo "Local directory: $LOCAL_DIR" | tee -a $LOG 
 echo "Remote url: $REMOTE_URL" | tee -a $LOG
 echo "==" | tee -a $LOG
 echo "Running $SCRIPT_NAME from: $WORKING_DIR"| tee -a $LOG
+
 cd $LOCAL_DIR
 download_base=`pwd`
-echo "Running command - $WGET_COMMAND from: $download_base"| tee -a $LOG
-echo"$WGET_COMMAND"  2>&1 | tee -a $LOG
-echo "=="
+
+echo "Running wget command  from: $download_base"| tee -a $LOG
+echo "Command - $WGET_COMMAND " | tee -a $LOG
+
+$WGET $WGET_OPTIONS "$REMOTE_URL"  2>&1 | tee -a $LOG
+
+echo "==" | tee -a $LOG
+
 if [ $? -ne 0 ]
 then
   echo "Status: FAILED" | tee -a $LOG
   exit 1
 fi
 echo "Status: SUCCESS" | tee -a $LOG
-echo "=="
 echo "End Date:"`date` | tee -a $LOG
+echo "==" | tee -a $LOG
 echo ""
 exit 0
