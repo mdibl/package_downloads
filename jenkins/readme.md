@@ -29,16 +29,10 @@ Runs: On demand
 ## How to upgrade Jenkins
   * Log on to Jenkins server : http://jenkins.mdibl.org
   * Click on "Manage Jenkins" 
-  * if there is a new release suggestion, copy the "download" link
-  * ssh to lintilla
-    * cd to /opt/software/external/jenkins
-    * rm -f jenkins.war.bak
-    * mv jenkins.war jenkins.war.bak
-    * wget "http://mirrors.jenkins-ci.org/war-stable/latest/jenkins.war
-     ```bash
-     Example: I just upgraded from 2.60.2 to 2.60.3
-     cmd: wget "http://mirrors.jenkins-ci.org/war-stable/latest/jenkins.war
-     ```
+  * if there is a new release suggestion then 
+   * ssh to lintilla to user "bioadmin" home directory
+   * cd to /home/bioadmin/package_downloads
+   * run ``` ./download_package jenkins/jenkins.cfg ```
   * Go back to jenkins web server
     * Click on "Manage Jenkins" (you should see the option to upgrade automatically)
     * Click on "upgrade automatically" then follow instructions 
