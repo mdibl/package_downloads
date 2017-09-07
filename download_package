@@ -10,6 +10,7 @@
 cd `dirname $0`
 WORKING_DIR=`pwd`
 SCRIPT_NAME=`basename $0`
+DATE=`date +"%B %d %Y"` | sed -e 's/[[:space:]]/-/g'
 
 if [ $# -lt 1 ]
 then
