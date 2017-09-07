@@ -30,7 +30,7 @@ Runs: On demand
   * Log on to Jenkins server : http://jenkins.mdibl.org
   * Click on "Manage Jenkins" 
   * if there is a new release suggestion then 
-    * ssh to lintilla to user "bioadmin" home directory
+    * ssh to jenkins server to user "bioadmin" home directory
     * cd to /home/bioadmin/package_downloads
     * run ``` ./download_package jenkins/jenkins.cfg ```
   * Go back to jenkins web server
