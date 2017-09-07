@@ -2,7 +2,7 @@
 
 Base directory to store Jenkins downloads scripts and config files
 
-## What do we download from Jenkins -- http://updates.jenkins-ci.org/download/war?
+## What do we download from Jenkins -- http://mirrors.jenkins-ci.org/war-stable/latest/?
 
 We download the ``` jenkins.war ``` file of the specified release line verion
 
