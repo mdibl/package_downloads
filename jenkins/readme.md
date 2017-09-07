@@ -27,7 +27,7 @@ See : https://jenkins.mdibl.org/manage
 Runs: On demand
 
 ## How to upgrade Jenkins
-  * Log on to Jenkins server : http://jenkins.mdibl.org
+  * Log on to Jenkins web server : http://jenkins.mdibl.org
   * Click on "Manage Jenkins" 
   * if there is a new release suggestion then 
     * ssh to jenkins server to user "bioadmin" home directory
