@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+# Organization: MDIBL
+# Author: Lucie Hutchins
+# Date: September 2017
+#
+#
+# Note:
+#  If for some reasons you want the downloads to
+#  be sotered somewhere else than EXTERNAL_SOFTWARE_BASE,
+#  then change the following base directories as needed
+#
+EXTERNAL_SOFTWARE_BASE=/opt/software/external
+LOGS_BASE=/data/logs
+WORKING_DIR=`pwd`
+
+PACKAGE_DOWNLOADS_BASE=`realpath $WORKING_DIR`
+
+#
+# Log directory base for this product
+# Log files associated with scripts included in this product
+# will be stored here
+#
+DOWNLOADS_LOG_DIR=${LOGS_BASE}/parkage_downloads
+
+export EXTERNAL_SOFTWARE_BASE LOGS_BASE DOWNLOADS_LOG_DIR PACKAGE_DOWNLOADS_BASE
+
+EMAIL_TO=lucie.hutchins@mdibl.org
+
+export EMAIL_TO
