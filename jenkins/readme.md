@@ -34,10 +34,10 @@ Runs: On demand
     * cd to /opt/software/external/jenkins
     * rm -f jenkins.war.bak
     * mv jenkins.war jenkins.war.bak
-    * wget "http://updates.jenkins-ci.org/download/war/new_release_number/jenkins.war
+    * wget "http://mirrors.jenkins-ci.org/war-stable/latest/jenkins.war
      ```bash
      Example: I just upgraded from 2.60.2 to 2.60.3
-     cmd: wget "http://updates.jenkins-ci.org/download/war/2.60.3/jenkins.war
+     cmd: wget "http://mirrors.jenkins-ci.org/war-stable/latest/jenkins.war
      ```
   * Go back to jenkins web server
     * Click on "Manage Jenkins" (you should see the option to upgrade automatically)
