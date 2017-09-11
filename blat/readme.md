@@ -25,6 +25,7 @@ We download:
 ## Upgrades Frequency
 
 See: http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/blat/FOOTER.txt
+
 Runs: On demand
 
 ## How to Install Blat
