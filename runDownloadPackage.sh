@@ -57,7 +57,7 @@ echo "Running script from: $WORKING_DIR"| tee -a $LOG
 echo "Command: ./$DOWNLOAD_SCRIPT $PACK_CONFIG"| tee -a $LOG
 echo "==" | tee -a $LOG
 
-#./$DOWNLOAD_SCRIPT $PACK_CONFIG   2>&1 | tee -a $LOG
+./$DOWNLOAD_SCRIPT $PACK_CONFIG   2>&1 | tee -a $LOG
 
 echo "=="
 if [ $? -ne 0 ]
