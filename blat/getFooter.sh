@@ -17,9 +17,7 @@ cd `dirname $0`
 
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
-SRC_CONFIG_BASE=`realpath $WORKING_DIR`
 README_CONFIG=footer.cfg
-CURRENT_README=FOOTER.txt
 DOWNLOAD_SCRIPT=download_package
 CURRENT_RELEASE_FLAG=current_release_NUMBER
 
@@ -56,12 +54,9 @@ echo "Log: $SCRIPT_NAME.log"| tee -a $LOG_FILE
 echo "Log: $README_CONFIG.log"| tee -a $LOG_FILE
 echo ""| tee -a $LOG_FILE
 echo " FILES"| tee -a $LOG_FILE
-echo "Source Config files and script Files are under ${SRC_CONFIG_BASE}"| tee -a $LOG_FILE
 echo "Downloaded files are under ${SRC_BASE}"| tee -a $LOG_FILE
-echo "File:$CURRENT_README"| tee -a $LOG_FILE
+echo "File to download:$REMOTE_FILE"| tee -a $LOG_FILE
 
-
-export SRC_CONFIG_BASE
 
 ./../$DOWNLOAD_SCRIPT $readme_config_path
 
