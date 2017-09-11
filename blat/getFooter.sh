@@ -20,6 +20,8 @@ WORKING_DIR=`pwd`
 README_CONFIG=footer.cfg
 DOWNLOAD_SCRIPT=download_package
 CURRENT_RELEASE_FLAG=current_release_NUMBER
+release_prefix='blat - Standalone BLAT v.'
+release_sufix='fast sequence search command line tool'
 
 if [ ! -f ../Configuration ]
 then
@@ -37,7 +39,6 @@ source ./$README_CONFIG
 
 readme_config_path="$SHORT_NAME/$README_CONFIG"
 SRC_BASE="$EXTERNAL_SOFTWARE_BASE/$SHORT_NAME"
-#setup the log
 LOG_FILE="${DOWNLOADS_LOG_DIR}/$SCRIPT_NAME.log"
 
 rm -rf $LOG_FILE
@@ -56,21 +57,24 @@ echo ""| tee -a $LOG_FILE
 echo " FILES"| tee -a $LOG_FILE
 echo "Downloaded files are under ${SRC_BASE}"| tee -a $LOG_FILE
 echo "File to download:$REMOTE_FILE"| tee -a $LOG_FILE
+echo "Script :$DOWNLOAD_SCRIPT"| tee -a $LOG_FILE
 
 
-./../$DOWNLOAD_SCRIPT $readme_config_path
+./../$DOWNLOAD_SCRIPT $readme_config_path 2>&1 | tee -a $LOG_FILE
 
-if [ ! -f ${SRC_BASE}/$CURRENT_README ]
+if [ ! -f ${SRC_BASE}/$REMOTE_FILE ]
 then
-   echo "Download failed: ${SRC_BASE}/$CURRENT_README is missing" 
+   echo "Download failed: ${SRC_BASE}/$REMOTE_FILE is missing" 
    exit 1
 fi
 
+RELEASE_NUMBER=`head ${SRC_BASE}/$REMOTE_FILE | grep "$release_prefix" |sed "s/$release_prefix//" | sed "s/$release_sufix//"`
+RELEASE_NUMBER=`echo $RELEASE_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
+
 ## Create the current release Number file
 release_flag=${SRC_BASE}/$CURRENT_RELEASE_FLAG
-
 touch $release_flag
-echo "$RELEASE_NUMBER" > $release_flag
+echo "v.$RELEASE_NUMBER" > $release_flag
 
 echo "Current Release Number:$RELEASE_NUMBER"| tee -a $LOG_FILE
 echo ""| tee -a $LOG_FILE
