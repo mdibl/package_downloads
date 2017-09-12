@@ -17,6 +17,7 @@ LOGS_BASE=/data/logs
 #
 PACKAGE_DOWNLOADS_BASE=/home/bioadmin/package_downloads
 PACKAGE_GIT_CLONE_BASE=/home/bioadmin/github_repos
+EXPORT_REPOS_SCRIPT=/home/bioadmin/biocore_misc/gitExportRepos.sh
 
 GIT_CLONE_URL_BASE=https://github.com
 GIT_DOWNLOADS_URL_BASE=https://api.github.com
@@ -31,6 +32,7 @@ DOWNLOADS_LOG_DIR=${LOGS_BASE}/parkage_downloads
 DOWNLOAD_SCRIPT=download_package
 
 export EXTERNAL_SOFTWARE_BASE LOGS_BASE DOWNLOADS_LOG_DIR PACKAGE_DOWNLOADS_BASE DOWNLOAD_SCRIPT
+export PACKAGE_GIT_CLONE_BASE GIT_CLONE_URL_BASE GIT_DOWNLOADS_URL_BASE EXPORT_REPOS_SCRIPT
 
 EMAIL_TO=lucie.hutchins@mdibl.org
 
