@@ -56,19 +56,19 @@ echo "Log: $README_CONFIG.log"| tee -a $LOG_FILE
 echo ""| tee -a $LOG_FILE
 echo " FILES"| tee -a $LOG_FILE
 echo "Downloaded files are under ${SRC_BASE}"| tee -a $LOG_FILE
-echo "File to download:$REMOTE_FILE"| tee -a $LOG_FILE
+echo "File to download:$REMOTE_FILES"| tee -a $LOG_FILE
 echo "Script :$DOWNLOAD_SCRIPT"| tee -a $LOG_FILE
 
 
 ./../$DOWNLOAD_SCRIPT $readme_config_path 2>&1 | tee -a $LOG_FILE
 
-if [ ! -f ${SRC_BASE}/$REMOTE_FILE ]
+if [ ! -f ${SRC_BASE}/$REMOTE_FILES ]
 then
-   echo "Download failed: ${SRC_BASE}/$REMOTE_FILE is missing" 
+   echo "Download failed: ${SRC_BASE}/$REMOTE_FILES is missing" 
    exit 1
 fi
 
-RELEASE_NUMBER=`head ${SRC_BASE}/$REMOTE_FILE | grep "$release_prefix" |sed "s/$release_prefix//" | sed "s/$release_sufix//"`
+RELEASE_NUMBER=`head ${SRC_BASE}/$REMOTE_FILES | grep "$release_prefix" |sed "s/$release_prefix//" | sed "s/$release_sufix//"`
 RELEASE_NUMBER=`echo $RELEASE_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
 
 ## Create the current release Number file
