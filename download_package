@@ -45,9 +45,17 @@ source ./$PACKAGE_CONFIG
 
 LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.$SHORT_NAME.$DATE.log
 WGET_COMMAND="$WGET_OPTIONS '$REMOTE_URL'"
-
 rm -f $LOG
 touch $LOG
+#
+# Set path of files on local server
+#
+if [ "$LOCAL_DIR" = "" ]
+then
+    echo "LOCAL_DIR not defined in  $PACKAGE_CONFIG "  | tee -a $LOG   
+    exit 1
+fi
+
 echo "==" | tee -a $LOG
 echo "Start Date:"`date` | tee -a $LOG
 echo "Package: $SHORT_NAME"  | tee -a $LOG
@@ -64,28 +72,51 @@ if [ ! -d $LOCAL_DIR ]
 then
   mkdir --parents $LOCAL_DIR
 fi
-  
-cd $LOCAL_DIR
-download_base=`pwd`
 
-if [ -f $REMOTE_FILE ]
-then 
-  cp -p $REMOTE_FILE $REMOTE_FILE.old
-fi
-
-echo "Running wget command  from: $download_base"| tee -a $LOG
-echo "Command - $WGET_COMMAND " | tee -a $LOG
-
-$WGET $WGET_OPTIONS "$REMOTE_URL"  2>&1 | tee -a $LOG
-
-echo "==" | tee -a $LOG
-
-if [ $? -ne 0 ]
+if [ $is_xml_query ]
 then
-  echo "Status: FAILED" | tee -a $LOG
-  exit 1
-fi
-echo "Status: SUCCESS" | tee -a $LOG
+   ##don't do the loop if this is a xml query string
+   target_file="$REMOTE_SITE$REMOTE_DIR/${REMOTE_FILES}"
+   echo "---- $WGET $WGET_OPTIONS $target_file" | tee -a  ${LOG_FILE}
+   cd ${LOCAL_DIR}
+   $WGET -a ${LOG_FILE} $WGET_OPTIONS "$target_file"
+else
+(
+set -f
+for remote_file in ${REMOTE_FILES}
+do
+   echo "$remote_file"
+   target_file="$REMOTE_SITE$REMOTE_DIR/$remote_file"
+   ## get the directory part from the remote_file name
+   target_local_dir=`dirname $remote_file`
+   echo "Creating new directory $target_local_dir"
+   #
+   # Make parent directories as needed
+   if [ "$target_local_dir" != "" ]
+   then
+      if [ ! -d ${LOCAL_DIR}/$target_local_dir ]
+      then
+          echo "Creating new directory ${LOCAL_DIR}/$target_local_dir"
+          mkdir -p ${LOCAL_DIR}/$target_local_dir
+      fi
+   fi
+   #cd to LOCAL_DOWNLOAD_BASE and run wget command 
+   cd ${LOCAL_DIR}/$target_local_dir 
+   # delete local files as needed
+   if [ "$do_deletes" = true ]
+   then
+       rm -f $remote_file
+   fi
+   if [ "$IS_HTTP_PATTERN" = true ]
+   then
+       $WGET -a ${LOG_FILE} $WGET_OPTIONS -A "$remote_file" "$REMOTE_SITE$REMOTE_DIR/" 
+    else
+       $WGET -a ${LOG_FILE} $WGET_OPTIONS "$target_file" 
+    fi
+ done
+ )
+ fi
+ 
 echo "End Date:"`date` | tee -a $LOG
 echo "==" | tee -a $LOG
 echo ""
