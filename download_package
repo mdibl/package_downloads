@@ -61,7 +61,7 @@ echo "Start Date:"`date` | tee -a $LOG
 echo "Package: $SHORT_NAME"  | tee -a $LOG
 echo "Remote site: $REMOTE_SITE"  | tee -a $LOG
 echo "Remote directory: $REMOTE_DIR"  | tee -a $LOG
-echo "Remote files: $REMOTE_FILE"  | tee -a $LOG
+echo "Remote files: $REMOTE_FILES"  | tee -a $LOG
 echo "Remote url: $REMOTE_URL" | tee -a $LOG
 echo "==" | tee -a $LOG
 echo "Local directory: $LOCAL_DIR" | tee -a $LOG 
@@ -85,11 +85,12 @@ else
 set -f
 for remote_file in ${REMOTE_FILES}
 do
-   echo "$remote_file"
+   echo "Downloading $remote_file"
    target_file="$REMOTE_SITE$REMOTE_DIR/$remote_file"
+   echo "Downloading $target_file"
    ## get the directory part from the remote_file name
    target_local_dir=`dirname $remote_file`
-   echo "Creating new directory $target_local_dir"
+  
    #
    # Make parent directories as needed
    if [ "$target_local_dir" != "" ]
@@ -111,7 +112,8 @@ do
    then
        $WGET -a ${LOG_FILE} $WGET_OPTIONS -A "$remote_file" "$REMOTE_SITE$REMOTE_DIR/" 
     else
-       $WGET -a ${LOG_FILE} $WGET_OPTIONS "$target_file" 
+      echo "Running command: $WGET -a ${LOG_FILE} $WGET_OPTIONS $target_file "
+       $WGET -a ${LOG_FILE} $WGET_OPTIONS $target_file 
     fi
  done
  )
