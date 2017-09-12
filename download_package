@@ -113,7 +113,7 @@ do
        $WGET -a ${LOG} $WGET_OPTIONS -A "$remote_file" "$REMOTE_SITE$REMOTE_DIR/" 
     else
       echo "Running command: $WGET -a ${LOG} $WGET_OPTIONS $target_file "
-       $WGET -a ${LOG} $WGET_OPTIONS $target_file 
+       $WGET  $WGET_OPTIONS $target_file 2>&1 | tee -a ${LOG}
     fi
  done
  )
