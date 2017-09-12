@@ -16,6 +16,7 @@ LOGS_BASE=/data/logs
 #Path where the repos package_downloads is installed
 #
 PACKAGE_DOWNLOADS_BASE=/home/bioadmin/package_downloads
+PACKAGE_GIT_CLONE_BASE=/home/bioadmin/github_repos
 
 #
 # Log directory base for this product
