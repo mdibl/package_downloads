@@ -13,12 +13,7 @@
 EXTERNAL_SOFTWARE_BASE=/opt/software/external
 LOGS_BASE=/data/logs
 
-TOP=`pwd`
-CONFIG_BASE=`dirname $0`
-cd $CONFIG_BASE
-CONFIG_DIR=`pwd`
-PACKAGE_DOWNLOADS_BASE=`realpath $CONFIG_DIR`
-cd $TOP
+PACKAGE_DOWNLOADS_BASE=/home/bioadmin/package_downloads
 
 #
 # Log directory base for this product
