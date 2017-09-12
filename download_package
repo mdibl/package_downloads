@@ -77,9 +77,9 @@ if [ $is_xml_query ]
 then
    ##don't do the loop if this is a xml query string
    target_file="$REMOTE_SITE$REMOTE_DIR/${REMOTE_FILES}"
-   echo "---- $WGET $WGET_OPTIONS $target_file" | tee -a  ${LOG_FILE}
+   echo "---- $WGET $WGET_OPTIONS $target_file" | tee -a  ${LOG}
    cd ${LOCAL_DIR}
-   $WGET -a ${LOG_FILE} $WGET_OPTIONS "$target_file"
+   $WGET -a ${LOG} $WGET_OPTIONS "$target_file"
 else
 (
 set -f
@@ -110,10 +110,10 @@ do
    fi
    if [ "$IS_HTTP_PATTERN" = true ]
    then
-       $WGET -a ${LOG_FILE} $WGET_OPTIONS -A "$remote_file" "$REMOTE_SITE$REMOTE_DIR/" 
+       $WGET -a ${LOG} $WGET_OPTIONS -A "$remote_file" "$REMOTE_SITE$REMOTE_DIR/" 
     else
-      echo "Running command: $WGET -a ${LOG_FILE} $WGET_OPTIONS $target_file "
-       $WGET -a ${LOG_FILE} $WGET_OPTIONS $target_file 
+      echo "Running command: $WGET -a ${LOG} $WGET_OPTIONS $target_file "
+       $WGET -a ${LOG} $WGET_OPTIONS $target_file 
     fi
  done
  )
