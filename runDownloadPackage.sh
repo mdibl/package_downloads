@@ -20,7 +20,6 @@ fi
 #
 #Relative to current working directory
 #
-DOWNLOAD_SCRIPT=download_package
 PACK_CONFIG=$1
 MAIN_CONFIG=Configuration
 
