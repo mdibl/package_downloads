@@ -12,9 +12,13 @@
 #
 EXTERNAL_SOFTWARE_BASE=/opt/software/external
 LOGS_BASE=/data/logs
-WORKING_DIR=`pwd`
 
-PACKAGE_DOWNLOADS_BASE=`realpath $WORKING_DIR`
+TOP=`pwd`
+CONFIG_BASE=`dirname $0`
+cd $CONFIG_BASE
+CONFIG_DIR=`pwd`
+PACKAGE_DOWNLOADS_BASE=`realpath $CONFIG_DIR`
+cd $TOP
 
 #
 # Log directory base for this product
