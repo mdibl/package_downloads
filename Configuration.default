@@ -18,6 +18,10 @@ LOGS_BASE=/data/logs
 PACKAGE_DOWNLOADS_BASE=/home/bioadmin/package_downloads
 PACKAGE_GIT_CLONE_BASE=/home/bioadmin/github_repos
 
+GIT_CLONE_URL_BASE=https://github.com
+GIT_DOWNLOADS_URL_BASE=https://api.github.com
+
+
 #
 # Log directory base for this product
 # Log files associated with scripts included in this product
