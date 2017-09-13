@@ -15,7 +15,7 @@ RELEASE_NUMBER=0
 if [ $# -lt 1 ]
 then 
   echo "Usage: ./$SCRIPT_NAME package_name/package_name.cfg"
-  echo "Example: ./$SCRIPT_NAME blat/blat.cfg"
+  echo "Example: ./$SCRIPT_NAME blat/blat_package.cfg"
   exit 1
 fi
 
