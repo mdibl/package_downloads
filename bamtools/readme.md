@@ -11,7 +11,7 @@ or download it here: http://www.cmake.org/cmake/resources/software.html .
 ```
 ## Build BamTools
 ```
-  * cd to the install root directory
+  * cd to the install root directory (path2/bamtools
   * mkdir build
   * cd build
   * cmake ..
