@@ -10,12 +10,12 @@ or download it here: http://www.cmake.org/cmake/resources/software.html .
   Note: To check is cmake is installed, run the following command: cmake --version
 ```
 ## Build BamTools
-  # cd to the install root directory
-  # mkdir build
-  # cd build
-  # cmake ..
-  # make
-  # cd ..
+  * cd to the install root directory
+  * mkdir build
+  * cd build
+  * cmake ..
+  * make
+  * cd ..
   
 ## Check the Install
 There should be the bin/ , lib/ , and include/ subdirectories 
