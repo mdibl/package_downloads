@@ -8,7 +8,7 @@ check your OS package manager (for Linux users)
 or download it here: http://www.cmake.org/cmake/resources/software.html .
  ```bash
   Note: To check is cmake is installed, run the following command: cmake --version
-
+```
 ## Build BamTools
   # cd to the install root directory
   # mkdir build
