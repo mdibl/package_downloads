@@ -41,10 +41,11 @@ then
     cd $RELEASE_BASE
     RELEASE_NUMBER=`cat $CURRENT_RELEASE_FLAG | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
     #Create symbolic link 'latest' as needed
-    if [ -d $RELEASE_NUMBER ]
+    RELEASE_DIR=$INSTALL_PREFIX$RELEASE_NUMBER
+    if [ -d $RELEASE_DIR ]
     then
-        rm -f latest
-        ln -s $RELEASE_NUMBER latest
+        rm -f $SHORT_NAME
+        ln -s $RELEASE_DIR $SHORT_NAME
     fi
 fi 
 echo "$RELEASE_NUMBER"
