@@ -41,8 +41,7 @@ fi
 source ./Configuration
 source ./$1
 
-PACKAGE_INSTALL_BASE="$EXTERNAL_SOFTWARE_BASE/$SHORT_NAME"
-release_flag=${PACKAGE_INSTALL_BASE}/$CURRENT_RELEASE_FLAG
+release_flag=${LOCAL_DIR}/$CURRENT_RELEASE_FLAG
 
 if [ ! -f $release_flag ]
 then
@@ -69,13 +68,13 @@ echo "Git Repos:$GIT_REPOS" | tee -a $LOG_FILE
 echo "Git repos url: $GIT_DOWNLOADS_URL_BASE" | tee -a $LOG_FILE
 echo "==" | tee -a $LOG_FILE
 
-if [ ! -d $PACKAGE_INSTALL_BASE ]
+if [ ! -d $LOCAL_DIR ]
 then
-  mkdir -p $PACKAGE_INSTALL_BASE
+  mkdir -p $LOCAL_DIR
 fi
 TOP=`pwd`
 
-$EXPORT_REPOS_SCRIPT $GIT_ORG $GIT_REPOS $RELEASE_NUMBER $PACKAGE_INSTALL_BASE
+$EXPORT_REPOS_SCRIPT $GIT_ORG $GIT_REPOS $RELEASE_NUMBER $LOCAL_DIR
 cd $TOP
 
 echo "Current Release Number:$RELEASE_NUMBER"| tee -a $LOG_FILE
