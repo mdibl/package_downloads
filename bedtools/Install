@@ -3,7 +3,7 @@
 # Organization: MDIBL
 # Author: Lucie Hutchins
 # Date: September 2017
-#
+# Source : http://bedtools.readthedocs.io/en/stable/content/installation.html
 ## Script to build and install a new package
 
 cd `dirname $0`
