@@ -9,3 +9,5 @@ A repository to store scripts and configuration files used to download external 
   ```
 ### BedTools
  * zlib.h
+### Bwa tools
+ * zlib.h
