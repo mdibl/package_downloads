@@ -7,3 +7,5 @@ A repository to store scripts and configuration files used to download external 
   ```
   version >=2.6.4
   ```
+### BedTools
+ * zlib.h
