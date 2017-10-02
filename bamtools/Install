@@ -98,7 +98,7 @@ cd ..
 rstatus="SUCCESS"
 for folder in $DIR_CHECK
 do
-    if [ ! -f $PACKAGE_BASE/$folder ]
+    if [ ! -d $PACKAGE_BASE/$folder ]
     then
        echo "$PACKAGE_BASE/$folder missing" | tee -a $LOG_FILE
        rstatus="FAILED"
