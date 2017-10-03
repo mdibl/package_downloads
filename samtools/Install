@@ -58,6 +58,12 @@ echo "Install on Server Name: `uname -n`" | tee -a $LOG_FILE
 echo "==" | tee -a $LOG_FILE
 echo "Running the dependency test" | tee -a $LOG_FILE
 echo "Missing dependencies:" | tee -a $LOG_FILE
+
+if [ ! -d $HTSLIB_DIR ]
+then
+   echo "Dependency htslib path: $HTSLIB_DIR"
+   rstatus="Failed"
+fi
 for dependency in $DEPENDENCIES
 do
     token=`which $dependency`
@@ -115,9 +121,9 @@ fi
 #specify that samtools is to be built and installed into bin,
 # lib, etc subdirectories under $PACKAGE_BASE.
 
-./configure  --prefix=$PACKAGE_BASE --without-curses 2>&1 | tee -a $LOG_FILE
-make 2>&1 | tee -a $LOG_FILE
-make install  install-htslib 2>&1 | tee -a $LOG_FILE
+./configure  --prefix=$PACKAGE_BASE --without-curses  --with-htslib=$HTSLIB_DIR  2>&1 | tee -a $LOG_FILE
+make  2>&1 | tee -a $LOG_FILE
+make install 2>&1 | tee -a $LOG_FILE
 
 #Check the install
 rstatus="SUCCESS"
