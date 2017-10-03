@@ -67,6 +67,20 @@ do
        rstatus="Failed"
     fi
 done
+# Check zLib dependency
+for dependency in $LIB_DEPENDENCIES
+do
+  tokens=`locate $dependency`
+  for lib_path in $tokens
+  do
+    if [ ! -f $lib_path ]
+    then
+      echo "Dependency: $dependency" | tee -a $LOG_FILE
+      rstatus="Failed"
+    fi
+  done
+done
+
 echo "==" | tee -a $LOG_FILE
 if [ "$rstatus" == Failed ]
 then
@@ -74,7 +88,6 @@ then
   exit 1
 fi
 echo "Dependency test passed" | tee -a $LOG_FILE
-
 # Execute the Install command for this package
 if [ ! -d $PACKAGE_BASE ]
 then
