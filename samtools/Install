@@ -67,6 +67,21 @@ do
        rstatus="Failed"
     fi
 done
+
+# Check zLib dependency
+for dependency in $LIB_DEPENDENCIES
+do
+  tokens=`locate $dependency`
+  for lib_path in $tokens
+  do
+    if [ ! -f $lib_path ]
+    then
+      echo "Dependency: $dependency - $lib_path" | tee -a $LOG_FILE
+      rstatus="Failed"
+    fi
+  done
+done
+
 echo "==" | tee -a $LOG_FILE
 if [ "$rstatus" == Failed ]
 then
@@ -100,9 +115,9 @@ fi
 #specify that samtools is to be built and installed into bin,
 # lib, etc subdirectories under $PACKAGE_BASE.
 
-./configure  --prefix=$PACKAGE_BASE  2>&1 | tee -a $LOG_FILE
+./configure  --prefix=$PACKAGE_BASE --without-curses 2>&1 | tee -a $LOG_FILE
 make 2>&1 | tee -a $LOG_FILE
-make install 2>&1 | tee -a $LOG_FILE
+make install  install-htslib 2>&1 | tee -a $LOG_FILE
 
 #Check the install
 rstatus="SUCCESS"
