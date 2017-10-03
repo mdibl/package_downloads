@@ -121,7 +121,7 @@ fi
 #specify that samtools is to be built and installed into bin,
 # lib, etc subdirectories under $PACKAGE_BASE.
 
-./configure  --prefix=$PACKAGE_BASE --without-curses  --with-htslib=$HTSLIB_DIR  2>&1 | tee -a $LOG_FILE
+./configure  --prefix=$PACKAGE_BASE --with-htslib=$HTSLIB_DIR  2>&1 | tee -a $LOG_FILE
 make  2>&1 | tee -a $LOG_FILE
 make install 2>&1 | tee -a $LOG_FILE
 
