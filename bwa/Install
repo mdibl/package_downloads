@@ -56,6 +56,7 @@ echo "Install directory: $PACKAGE_BASE" | tee -a $LOG_FILE
 echo "Release version: $RELEASE_NUMBER" | tee -a $LOG_FILE
 echo "Install on Server Name: `uname -n`" | tee -a $LOG_FILE
 echo "==" | tee -a $LOG_FILE
+
 echo "Running the dependency test" | tee -a $LOG_FILE
 echo "Missing dependencies:" | tee -a $LOG_FILE
 for dependency in $DEPENDENCIES
@@ -88,6 +89,7 @@ then
   exit 1
 fi
 echo "Dependency test passed" | tee -a $LOG_FILE
+
 # Execute the Install command for this package
 if [ ! -d $PACKAGE_BASE ]
 then
