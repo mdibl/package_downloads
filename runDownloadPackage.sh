@@ -42,13 +42,15 @@ source ./$PACK_CONFIG
 LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.$SHORT_NAME.$RELEASE_NUMBER.log
 rm -f $LOG
 touch $LOG
-echo "==" | tee -a $LOG
-echo "Start Date:"`date` | tee -a $LOG
-echo "$SHORT_NAME Release: $RELEASE_NUMBER"  | tee -a $LOG
+echo "Package: $SHORT_NAME"  | tee -a $LOG
+echo "Version: $RELEASE_NUMBER"  | tee -a $LOG
 echo "Remote site: $REMOTE_SITE"  | tee -a $LOG
 echo "Remote directory: $REMOTE_DIR"  | tee -a $LOG
-echo "Local directory: $LOCAL_DIR" | tee -a $LOG 
-echo "==" | tee -a $LOG
+echo "Install directory: ${LOCAL_DIR}" | tee -a $LOG
+echo "Path to Install logs: ${DOWNLOADS_LOG_DIR}" | tee -a $LOG
+echo "Install Date:"`date` | tee -a $LOG
+echo "Git Organization:$GIT_ORG" | tee -a $LOG
+echo "Git Repos:$GIT_REPOS" | tee -a $LOG
 echo "Remote files:" | tee -a $LOG
 echo " $REMOTE_FILES" | tee -a $LOG
 echo "==" | tee -a $LOG
