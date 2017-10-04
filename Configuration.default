@@ -28,7 +28,7 @@ GIT_DOWNLOADS_URL_BASE=https://api.github.com
 # Log files associated with scripts included in this product
 # will be stored here
 #
-DOWNLOADS_LOG_DIR=${LOGS_BASE}/parkage_downloads
+DOWNLOADS_LOG_DIR=${LOGS_BASE}/package_downloads
 DOWNLOAD_SCRIPT=download_package
 
 export EXTERNAL_SOFTWARE_BASE LOGS_BASE DOWNLOADS_LOG_DIR PACKAGE_DOWNLOADS_BASE DOWNLOAD_SCRIPT
