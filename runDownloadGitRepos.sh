@@ -67,12 +67,16 @@ fi
 rm -rf $LOG_FILE
 touch $LOG_FILE
 echo "==" | tee -a $LOG_FILE
-echo "Start Date:"`date` | tee -a $LOG_FILE
-echo "$SHORT_NAME Release: $RELEASE_NUMBER"  | tee -a $LOG_FILE
-echo "Local path to package install: ${LOCAL_DIR}" | tee -a $LOG_FILE
+echo "Package: $SHORT_NAME"  | tee -a $LOG_FILE
+echo "Version: $RELEASE_NUMBER"  | tee -a $LOG_FILE
+echo "Remote site: $GIT_DOWNLOADS_URL_BASE"  | tee -a $LOG
+echo "Install directory: ${LOCAL_DIR}" | tee -a $LOG_FILE
+echo "Path to Install logs: ${DOWNLOADS_LOG_DIR}" | tee -a $LOG_FILE
+echo "Install Date:"`date` | tee -a $LOG_FILE
 echo "Git Organization:$GIT_ORG" | tee -a $LOG_FILE
 echo "Git Repos:$GIT_REPOS" | tee -a $LOG_FILE
-echo "Git repos url: $GIT_DOWNLOADS_URL_BASE" | tee -a $LOG_FILE
+echo "Remote files:" | tee -a $LOG
+echo " $REMOTE_FILES" | tee -a $LOG
 echo "==" | tee -a $LOG_FILE
 echo "Running git export:" | tee -a $LOG_FILE
 
