@@ -68,7 +68,7 @@ do
        rstatus="Failed"
     fi
 done
-# Check zLib dependency
+# Check Lib dependency
 for dependency in $LIB_DEPENDENCIES
 do
   tokens=`locate $dependency`
