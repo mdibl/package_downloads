@@ -110,7 +110,13 @@ then
    echo "$rstatus" | tee -a $LOG_FILE
    exit 1
 fi
-
 echo $rstatus | tee -a $LOG_FILE
+#Copy binaries and libs to global path
+for folder in $DIR_CHECK
+do
+    echo "Copying $PACKAGE_BASE/$folder/* to $SOFTWARE_BASE/$folder/" | tee -a $LOG_FILE
+    cp -pR $PACKAGE_BASE/$folder/* $SOFTWARE_BASE/$folder/
+done
+
 exit 0
 
