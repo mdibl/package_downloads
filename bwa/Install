@@ -99,7 +99,25 @@ fi
 
 cd $PACKAGE_BASE
 make 2>&1 | tee -a $LOG_FILE
-cd ..
+
 #Check the install
+rstatus="SUCCESS"
+for bin_file in $FILE_CHECK
+do
+    if [ ! -f $PACKAGE_BASE/$bin_file ]
+    then
+       echo "$PACKAGE_BASE/$bin_file missing" | tee -a $LOG_FILE
+       rstatus="FAILED"
+     fi
+done
+
+if [ "$rstatus" == FAILED ]
+then
+   echo "$rstatus" | tee -a $LOG_FILE
+   exit 1
+fi
+echo $rstatus | tee -a $LOG_FILE
+cp -f bwa $SOFTWARE_BASE/bin
+
 exit 0
 
