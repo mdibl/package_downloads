@@ -59,14 +59,21 @@ echo "Command: ./$DOWNLOAD_SCRIPT $PACK_CONFIG"| tee -a $LOG
 echo "==" | tee -a $LOG
 
 ./$DOWNLOAD_SCRIPT $PACK_CONFIG   2>&1 | tee -a $LOG
-
 echo "=="
-if [ $? -ne 0 ]
+cd $WORKING_DIR
+echo `pwd`
+#Check the install
+if [ -f $SHORT_NAME/Install ]
 then
-  echo "Status: FAILED" | tee -a $LOG
-  exit 1
+   cd $SHORT_NAME
+   ./Install
+   if [ $? -ne 0 ]
+   then
+      echo "Status: FAILED" | tee -a $LOG
+      exit 1
+   fi
+   echo "Status: SUCCESS" | tee -a $LOG
 fi
-echo "Status: SUCCESS" | tee -a $LOG
 echo "=="
 echo "End Date:"`date` | tee -a $LOG
 echo ""
