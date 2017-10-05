@@ -117,8 +117,6 @@ fi
 
 ./configure  --prefix=$PACKAGE_BASE  2>&1 | tee -a $LOG_FILE
 #
-#update path to binaries to /opt/software/bin
-sed -i -e 's/prefix =[[:space:]].*/prefix = \/opt\/software/' Makefile
 make 2>&1 | tee -a $LOG_FILE
 make install 2>&1 | tee -a $LOG_FILE
 
@@ -140,5 +138,11 @@ then
 fi
 
 echo $rstatus | tee -a $LOG_FILE
+#Copy binaries and libs to global path
+for folder in $DIR_CHECK
+do
+    echo "Copying $PACKAGE_BASE/$folder/* to $SOFTWARE_BASE/$folder/" | tee -a $LOG_FILE    
+    cp -pR $PACKAGE_BASE/$folder/* $SOFTWARE_BASE/$folder/
+done
 exit 0
 
