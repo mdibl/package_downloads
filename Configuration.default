@@ -10,6 +10,7 @@
 #  be sotered somewhere else than EXTERNAL_SOFTWARE_BASE,
 #  then change the following base directories as needed
 #
+SOFTWARE_BASE=/opt/software
 EXTERNAL_SOFTWARE_BASE=/opt/software/external
 LOGS_BASE=/data/logs
 
