@@ -2,7 +2,7 @@
 
 # Organization: MDIBL
 # Author: Lucie Hutchins
-# Date: September 2017
+# Date: October 2017
 # Source : https://github.com/BenLangmead/bowtie
 ## Script to build and install a new package
 
@@ -98,17 +98,17 @@ then
 fi
 
 cd $PACKAGE_BASE
-prefix=$PACKAGE_BASE
-
-make  2>&1 | tee -a $LOG_FILE
-
+#
+#update path to binaries to /opt/software/bin
+sed -i -e 's/prefix =[[:space:]].*/prefix = \/opt\/software/' Makefile
+make allall 2>&1 | tee -a $LOG_FILE
 #Check the install
 rstatus="SUCCESS"
-for folder in $DIR_CHECK
+for bin_file in $FILE_CHECK
 do
-    if [ ! -d $PACKAGE_BASE/$folder ]
+    if [ ! -f $PACKAGE_BASE/$bin_file ]
     then
-       echo "$PACKAGE_BASE/$folder missing" | tee -a $LOG_FILE
+       echo "$PACKAGE_BASE/$bin_file missing" | tee -a $LOG_FILE
        rstatus="FAILED"
      fi
 done
@@ -119,5 +119,8 @@ then
    exit 1
 fi
 echo $rstatus | tee -a $LOG_FILE
+#Copy binaries to /opt/software/bin
+make install
+#make clean
 exit 0
 
