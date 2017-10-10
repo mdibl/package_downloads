@@ -13,7 +13,7 @@ WORKING_DIR=`pwd`
 ##These config files are relative to
 # the Install script working directory
 dependents_file=dependencies.cfg
-pack_config_file=bowtie_repos.cfg
+pack_config_file=bowtie2_repos.cfg
 
 if [ ! -f $dependents_file ]
 then
