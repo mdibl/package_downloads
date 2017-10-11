@@ -2,39 +2,27 @@
 
 # Organization: MDIBL
 # Author: Lucie Hutchins
-# Date: September 2017
-# Source : https://github.com/lh3/bwa
+# Date: October 2017
 ## Script to build and install a new package
 
 cd `dirname $0`
 
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
+TAR=`which tar`
 ##These config files are relative to
 # the Install script working directory
 dependents_file=dependencies.cfg
-pack_config_file=corset_repos.cfg
+pack_config_file=R_package.cfg
 
-if [ ! -f $dependents_file ]
-then
-   echo "The dependencies file: $dependents_file is missing"
-   echo " From $WORKING_DIR"
-   exit 1
-fi
 if [ ! -f ../Configuration ]
 then
   echo "'../Configuration' file missing "     
   exit 1
 fi
-if [ ! -f $1 ]
-then
-  echo "'$1' file missing"     
-  exit 1
-fi
-
 source ./../Configuration
-source ./$dependents_file
 source ./$pack_config_file
+source ./$dependents_file
 
 if [ ! -f ${LOCAL_DIR}/current_release_NUMBER ]
 then
@@ -44,14 +32,13 @@ fi
 
 RELEASE_NUMBER=`cat ${LOCAL_DIR}/current_release_NUMBER`
 LOG_FILE="${DOWNLOADS_LOG_DIR}/$SCRIPT_NAME.$SHORT_NAME.$RELEASE_NUMBER.log"
-PACKAGE_BASE=$LOCAL_DIR/$GIT_REPOS 
 
 rm -rf $LOG_FILE
 touch $LOG_FILE
 
 rstatus=""
 echo "==" | tee -a $LOG_FILE
-echo "Product: $GIT_REPOS" | tee -a $LOG_FILE
+echo "Product: $SHORT_NAME" | tee -a $LOG_FILE
 echo "Install directory: $PACKAGE_BASE" | tee -a $LOG_FILE
 echo "Release version: $RELEASE_NUMBER" | tee -a $LOG_FILE
 echo "Install on Server Name: `uname -n`" | tee -a $LOG_FILE
@@ -90,28 +77,42 @@ then
 fi
 echo "Dependency test passed" | tee -a $LOG_FILE
 
-# Execute the Install command for this package
-if [ ! -d $PACKAGE_BASE ]
+
+cd $LOCAL_DIR
+echo "Running $TAR -xvf $REMOTE_FILES command from "`pwd` | tee -a $LOG_FILE
+if [ ! -f $REMOTE_FILES ]
 then
-   echo "Path to $GIT_REPOS install directory not correct. See $PACKAGE_BASE" | tee -a $LOG_FILE
-   exit 1
+   echo "ERROR - Missing the tar file:$REMOTE_FILES"
+   exit 1 
 fi
 
-rstatus="SUCCESS"
-cd $PACKAGE_BASE
-./configure --with-bam_inc=$SAMTOOLS_BASE  --with-bam_lib=$BAMLIB_BASE  2>&1 | tee -a $LOG_FILE
-make 2>&1 | tee -a $LOG_FILE
-make install 2>&1 | tee -a $LOG_FILE
-if [ $? -ne 0 ]
+$TAR -xvf $REMOTE_FILES 2>&1 | tee -a $LOG_FILE
+if [ ! -d $SHORT_NAME-$RELEASE_NUMBER ]
 then
- rstatus="FAILED"
+   rstatus="FAILED"
+   echo "Command $TAR -xvf $REMOTE_FILES failed - missing directory $SHORT_NAME-$RELEASE_NUMBER"
+   exit 1
 fi
+#cleanup the tar file
+rm -f $REMOTE_FILES
+#create the symbolic link
+rm -f $SHORT_NAME
+ln -s $SHORT_NAME-$RELEASE_NUMBER $SHORT_NAME
+
+cd $SHORT_NAME
+echo "Running the install from "`pwd` | tee -a $LOG_FILE
+./configure --prefix=$SOFTWARE_BASE --with-x=no
+make
+make install
+#make install-info
+#make install-pdf
 #Check the install
+rstatus="SUCCESS"
 for bin_file in $FILE_CHECK
 do
-    if [ ! -f $PACKAGE_BASE/$bin_file ]
+    if [ ! -f $bin_file ]
     then
-       echo "$PACKAGE_BASE/$bin_file missing" | tee -a $LOG_FILE
+       echo "$bin_file missing" | tee -a $LOG_FILE
        rstatus="FAILED"
      fi
 done
@@ -122,7 +123,6 @@ then
    exit 1
 fi
 echo $rstatus | tee -a $LOG_FILE
-cp -f corset $SOFTWARE_BASE/bin
 
 exit 0
 
