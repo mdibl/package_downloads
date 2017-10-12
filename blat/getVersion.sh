@@ -17,7 +17,7 @@ cd `dirname $0`
 
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
-README_CONFIG=footer.cfg
+README_CONFIG=version.cfg
 DOWNLOAD_SCRIPT=download_package
 CURRENT_RELEASE_FLAG=current_release_NUMBER
 release_prefix='blat - Standalone BLAT v.'
