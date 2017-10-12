@@ -1,4 +1,4 @@
-# BLAT
+# R
 
 Base directory to store R downloads scripts and config files
 
