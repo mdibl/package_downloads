@@ -61,7 +61,7 @@ echo "==" | tee -a $LOG
 
 ./$DOWNLOAD_SCRIPT $PACK_CONFIG   2>&1 | tee -a $LOG
 echo "=="
-if [ -d ${LOCAL_DIR} ]
+if [ ! -d ${LOCAL_DIR} ]
 then
    echo "Download failed: missing ${LOCAL_DIR}"
    exit 1
