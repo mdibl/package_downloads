@@ -61,6 +61,18 @@ echo "==" | tee -a $LOG
 
 ./$DOWNLOAD_SCRIPT $PACK_CONFIG   2>&1 | tee -a $LOG
 echo "=="
+if [ -d ${LOCAL_DIR} ]
+then
+   echo "Download failed: missing ${LOCAL_DIR}"
+   exit 1
+fi
+# Update symbolic link of this package to point to
+# the downloaded version
+#
+cd $EXTERNAL_SOFTWARE_BASE/$SHORT_NAME
+rm -f $SHORT_NAME
+ln -s ${LOCAL_DIR} $SHORT_NAME
+####
 cd $WORKING_DIR
 echo `pwd`
 #Check the install
