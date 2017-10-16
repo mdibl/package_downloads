@@ -42,6 +42,7 @@ source ./$PACK_CONFIG
 LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.$SHORT_NAME.$RELEASE_NUMBER.log
 rm -f $LOG
 touch $LOG
+echo "==" | tee -a $LOG
 echo "Package: $SHORT_NAME"  | tee -a $LOG
 echo "Version: $RELEASE_NUMBER"  | tee -a $LOG
 echo "Remote site: $REMOTE_SITE"  | tee -a $LOG
