@@ -27,15 +27,15 @@ fi
 source ./../Configuration
 source ./$pack_config_file
 
-if [ ! -f ${LOCAL_DIR}/current_release_NUMBER ]
+if [ ! -f ${RELEASE_FILE} ]
 then
-   echo "File ${LOCAL_DIR}/current_release_NUMBER does not exists"
+   echo "File ${RELEASE_FILE} does not exists"
    exit 1
 fi
 
-RELEASE_NUMBER=`cat ${LOCAL_DIR}/current_release_NUMBER`
+RELEASE_NUMBER=`cat ${RELEASE_FILE}`
 LOG_FILE="${DOWNLOADS_LOG_DIR}/$SCRIPT_NAME.$SHORT_NAME.$RELEASE_NUMBER.log"
-PACKAGE_BASE=$LOCAL_DIR/$SHORT_NAME
+PACKAGE_BASE=$LOCAL_DIR
 
 rm -rf $LOG_FILE
 touch $LOG_FILE
