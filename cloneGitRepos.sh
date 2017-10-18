@@ -87,12 +87,17 @@ $GIT pull 2>&1 | tee -a $LOG_FILE
 RELEASE_TOKEN=`$GIT rev-list --tags --max-count=1`
 RELEASE_NUMBER=`$GIT describe --tags $RELEASE_TOKEN`
 
-## Create the current release Number file
-
-touch $release_flag
-echo "$RELEASE_NUMBER" > $release_flag
-
-echo "Current Release Number:$RELEASE_NUMBER"| tee -a $LOG_FILE
+echo "Latest release is: $RELEASE_NUMBER"
+## Update the current release Number file
+# Only if the detected new release is a public release
+#
+if [[ "$RELEASE_NUMBER" =~ "$REPOS_TAG_PATTERN" ]]
+then
+    touch $release_flag
+    echo "$RELEASE_NUMBER" > $release_flag
+fi
+RELEASE_NUMBER=`cat $release_flag`
+echo "Current public Release Number:$RELEASE_NUMBER"| tee -a $LOG_FILE
 echo ""| tee -a $LOG_FILE
 echo "Program complete"| tee -a $LOG_FILE
 
