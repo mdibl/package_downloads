@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Organization: MDIBL
 # Author: Lucie Hutchins
@@ -87,17 +87,23 @@ $GIT pull 2>&1 | tee -a $LOG_FILE
 RELEASE_TOKEN=`$GIT rev-list --tags --max-count=1`
 RELEASE_NUMBER=`$GIT describe --tags $RELEASE_TOKEN`
 
-echo "Latest release is: $RELEASE_NUMBER"
+echo "Latest release is: $RELEASE_NUMBER --- Release patter: $REPOS_TAG_PATTERN" | tee -a $LOG_FILE
 ## Update the current release Number file
 # Only if the detected new release is a public release
 #
-if [[ "$RELEASE_NUMBER" =~ "$REPOS_TAG_PATTERN" ]]
+
+if [[ $RELEASE_NUMBER =~ $REPOS_TAG_PATTERN ]] 
 then
-    touch $release_flag
-    echo "$RELEASE_NUMBER" > $release_flag
+   rm -f $release_flag
+   touch $release_flag
+   echo "Current pattern match:$RELEASE_NUMBER" | tee -a $LOG_FILE
+   echo "$RELEASE_NUMBER" > $release_flag
 fi
-RELEASE_NUMBER=`cat $release_flag`
-echo "Current public Release Number:$RELEASE_NUMBER"| tee -a $LOG_FILE
+if [ -f $release_flag ]
+then
+   RELEASE_NUMBER=`cat $release_flag`
+fi
+echo "Detected  Release Number:$RELEASE_NUMBER"| tee -a $LOG_FILE
 echo ""| tee -a $LOG_FILE
 echo "Program complete"| tee -a $LOG_FILE
 
