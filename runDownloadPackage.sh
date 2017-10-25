@@ -61,24 +61,32 @@ echo "==" | tee -a $LOG
 
 ./$DOWNLOAD_SCRIPT $PACK_CONFIG   2>&1 | tee -a $LOG
 echo "=="
-if [ ! -d ${LOCAL_DIR} ]
+cd $EXTERNAL_SOFTWARE_BASE/$SHORT_NAME
+
+if [ "$untar_flag" = true ]
 then
-   echo "Download failed: missing ${LOCAL_DIR}"
+   [ -f $REMOTE_FILES ] && $untar_prog $REMOTE_FILES
+fi
+#Check if this release directory was created
+
+if [ ! -d ${RELEASE_DIR} ]
+then
+   echo "Download failed: missing ${RELEASE_DIR}"
    exit 1
 fi
 # Update symbolic link of this package to point to
 # the downloaded version
 #
-cd $EXTERNAL_SOFTWARE_BASE/$SHORT_NAME
 rm -f $SHORT_NAME
-ln -s ${LOCAL_DIR} $SHORT_NAME
+ln -s ${RELEASE_DIR} $SHORT_NAME
+rm -f $REMOTE_FILES 
 ####
 cd $WORKING_DIR
-echo `pwd`
 #Check the install
 if [ -f $SHORT_NAME/Install ]
 then
    cd $SHORT_NAME
+   echo "Running the install script from:"`pwd`
    ./Install
    if [ $? -ne 0 ]
    then
