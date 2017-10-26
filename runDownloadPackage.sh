@@ -14,7 +14,7 @@ SCRIPT_NAME=`basename $0`
 if [ $# -lt 1 ]
 then
   echo "Usage: ./$SCRIPT_NAME path2package_config"
-  echo "Example: ./$SCRIPT_NAME blat/blat.cfg"
+  echo "Example: ./$SCRIPT_NAME blat/blat_package.cfg"
   exit 1
 fi
 #
@@ -65,7 +65,7 @@ cd $EXTERNAL_SOFTWARE_BASE/$SHORT_NAME
 
 if [ "$untar_flag" = true ]
 then
-   [ -f $REMOTE_FILES ] && $untar_prog $REMOTE_FILES
+   [ -f $REMOTE_FILES ] && $untar_prog $REMOTE_FILES $local_untar_dir
 fi
 #Check if this release directory was created
 
