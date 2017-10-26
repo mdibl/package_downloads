@@ -72,14 +72,22 @@ RELEASE_NUMBER=`head ${SRC_BASE}/$REMOTE_FILES | grep "$release_prefix" |sed "s/
 RELEASE_NUMBER=`echo $RELEASE_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
 
 ## Create the current release Number file
-release_flag=${SRC_BASE}/$CURRENT_RELEASE_FLAG
-touch $release_flag
-echo "v.$RELEASE_NUMBER" > $release_flag
+## Create the current release Number file
+if [[ $RELEASE_NUMBER =~ $REPOS_TAG_PATTERN ]]
+then
+   rm -f $RELEASE_FILE
+   touch $RELEASE_FILE
+   echo "Current pattern match:$RELEASE_NUMBER" | tee -a $LOG_FILE
+   echo "v.$RELEASE_NUMBER" > $RELEASE_FILE
+fi
+if [ -f $RELEASE_FILE ]
+then
+   RELEASE_NUMBER=`cat $RELEASE_FILE`
+fi
 
 echo "Current Release Number:$RELEASE_NUMBER"| tee -a $LOG_FILE
 echo ""| tee -a $LOG_FILE
 echo "Program complete"| tee -a $LOG_FILE
-
 
 echo "********** System dump *******************"| tee -a $LOG_FILE
 echo " ENVIRONMENT VARIABLES DUMP"| tee -a $LOG_FILE
