@@ -62,7 +62,7 @@ echo "Script :$DOWNLOAD_SCRIPT"| tee -a $LOG_FILE
 
 
 #./../$DOWNLOAD_SCRIPT $readme_config_path 2>&1 | tee -a $LOG_FILE
-wget -O ${SRC_BASE}/$REMOTE_FILES "$REMOTE_URL"
+wget -t 5 -O ${SRC_BASE}/$REMOTE_FILES "$REMOTE_URL"
 
 if [ ! -f ${SRC_BASE}/$REMOTE_FILES ]
 then
@@ -74,11 +74,19 @@ RELEASE_NUMBER=`grep "$release_prefix" ${SRC_BASE}/$REMOTE_FILES | sed "s/$relea
 RELEASE_NUMBER=`echo $RELEASE_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
 
 ## Create the current release Number file
-release_flag=${SRC_BASE}/$CURRENT_RELEASE_FLAG
-touch $release_flag
-echo "$RELEASE_NUMBER" > $release_flag
-rm -f ${SRC_BASE}/$REMOTE_FILES
+if [[ $RELEASE_NUMBER =~ $REPOS_TAG_PATTERN ]]
+then
+   rm -f $RELEASE_FILE
+   touch $RELEASE_FILE
+   echo "Current pattern match:$RELEASE_NUMBER" | tee -a $LOG_FILE
+   echo "$RELEASE_NUMBER" > $RELEASE_FILE
+fi
 
+if [ -f $RELEASE_FILE ]
+then
+   RELEASE_NUMBER=`cat $RELEASE_FILE`
+fi
+rm -f ${SRC_BASE}/$REMOTE_FILES
 echo "Current Release Number:$RELEASE_NUMBER"| tee -a $LOG_FILE
 echo ""| tee -a $LOG_FILE
 echo "Program complete"| tee -a $LOG_FILE
