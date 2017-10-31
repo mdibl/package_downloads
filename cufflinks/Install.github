@@ -99,7 +99,20 @@ then
   exit 1
 fi
 
-#Check the install
+cd $PACKAGE_BASE
+if [ ! -f configure ]
+then
+   autoreconf --install
+fi
+if [ ! -f configure ]
+then
+   echo "Install Failed: Missing $PACKAGE_BASE/configure file"
+   exit 1 
+fi
+
+./configure --prefix=$SOFTWARE_BASE --with-boost=$SOFTWARE_BASE --with-eigen=$SOFTWARE_BASE --with-bam=$SOFTWARE_BASE 
+
+make  2>&1 | tee -a $LOG_FILE
 rstatus="SUCCESS"
 for bin_file in $FILE_CHECK
 do
@@ -115,12 +128,9 @@ then
    echo "$rstatus" | tee -a $LOG_FILE
    exit 1
 fi
+make install
 echo $rstatus | tee -a $LOG_FILE
-#Copy binaries to /opt/software/bin
-for bin_file in $FILE_CHECK
-do
-    cp -P  $PACKAGE_BASE/$bin_file $SOFTWARE_BASE/bin
-done
-
+#make manual
+#make clean
 exit 0
 
