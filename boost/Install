@@ -116,5 +116,9 @@ if [ $? -ne 0 ]; then
       echo "Consult $LOG_FILE for more details"
       exit 1
 fi
+cd $SOFTWARE_BASE/include/boost
+mkdir tr1
+cp *.hpp tr1
+
 exit 0
 
