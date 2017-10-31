@@ -121,7 +121,7 @@ fi
 #specify that samtools is to be built and installed into bin,
 # lib, etc subdirectories under $PACKAGE_BASE.
 
-./configure  --prefix=$PACKAGE_BASE --with-htslib=$HTSLIB_DIR  2>&1 | tee -a $LOG_FILE
+./configure  --prefix=$SOFTWARE_BASE --with-htslib=$HTSLIB_DIR  2>&1 | tee -a $LOG_FILE
 make  2>&1 | tee -a $LOG_FILE
 make install 2>&1 | tee -a $LOG_FILE
 
@@ -141,6 +141,13 @@ then
    echo "$rstatus" | tee -a $LOG_FILE
    exit 1
 fi
+
+# Copy the header files to the bam include directory
+if [ ! -d  $SOFTWARE_BASE/include/bam ]
+then
+   mkdir -p $SOFTWARE_BASE/include/bam
+fi
+cp $PACKAGE_BASE/*.h $SOFTWARE_BASE/include/bam/
 
 echo $rstatus | tee -a $LOG_FILE
 #Copy binaries and libs to global path

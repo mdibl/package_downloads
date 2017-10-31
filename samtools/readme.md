@@ -22,8 +22,8 @@ is not needed - see HTSlib  INSTALL file for details.
 ``` 
 ## Configure and Install SamTools
 ```
-  * cd to the install directory (/opt/software/external/samtools) then run:
-  * ./configure --prefix=/opt/software/external/samtools
+  * cd to the install directory (/opt/software/external/samtools/samtools) then run:
+  * ./configure --prefix=/opt/software
   * make 
   * make install
  ```
@@ -35,4 +35,13 @@ under the install root directory
  samtools/bin
  samtools/lib
  samtools/share/man
+
+```
+
+```
+   - Copy libbam.a to the /opt/software/lib/ directory 
+   - Create a directory called "bam" in the include/ directory (e.g. /opt/software/include/bam)
+   - Copy the headers (files ending in .h) to the include/bam directory 
+   - Copy the samtools binary to some directory in your PATH.
+
 ```
