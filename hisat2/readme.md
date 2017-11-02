@@ -1,32 +1,19 @@
-# BLAT
+# Hisat2
 
-Base directory to store Blat downloads scripts and config files
+Base directory to store Hisat2 downloads scripts and config files
 
 ```
-Blat produces two major classes of alignments:
-* at the DNA level between two sequences that are of 95% or greater identity, but which may include large inserts.
-* at the protein or translated DNA level between sequences that are of 80% or greater identity and may also include large inserts.
+Hisat2:
 
-The main programs in the blat suite are:
- * gfServer – a server that maintains an index of the genome in memory and uses the index to quickly find regions with high levels of sequence similarity to a query sequence.
- * gfClient – a program that queries gfServer over the network and does a detailed alignment of the query sequence with regions found by gfServer.
- * blat – client and server combined into a single program, first building the index, then using the index, and then exiting.
+HISAT2 is a successor to both HISAT and TopHat2. It's recommended that the HISAT and TopHat2 users switch to HISAT2. A fast and sensitive spliced alignment program for mapping RNA-seq reads. In addition to one global FM index that represents a whole genome, HISAT uses a large set of small FM indexes that collectively cover the whole genome (each index represents a genomic region of ~64,000 bp and ~48,000 indexes are needed to cover the human genome).
+
+
 ```
 
-## What do we download from Blat -- http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/blat/?
-
-We download:
-
- * FOOTER.txt ( contains info on the version)
- * blat
- * gfClient
- * gfServer
 
 ## Upgrades Frequency
 
-See: http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/blat/FOOTER.txt
+See:
 
-Runs: On demand
-
-## How to Install Blat
+## How to Install Hisat2
   
