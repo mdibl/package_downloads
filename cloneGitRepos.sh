@@ -11,7 +11,6 @@ cd `dirname $0`
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
 RELEASE_NUMBER=0
-CURRENT_RELEASE_FLAG=current_release_NUMBER
 GIT=`which git`
 
 if [ ! -f $GIT ]
@@ -43,7 +42,6 @@ source ./$1
 LOG_FILE="${DOWNLOADS_LOG_DIR}/$SCRIPT_NAME.$SHORT_NAME.log"
 PACKAGE_INSTALL_BASE="$EXTERNAL_SOFTWARE_BASE/$SHORT_NAME"
 REPOS_URL=$GIT_CLONE_URL_BASE/$GIT_ORG/$GIT_REPOS.git
-release_flag=${PACKAGE_INSTALL_BASE}/$CURRENT_RELEASE_FLAG
 
 rm -rf $LOG_FILE
 touch $LOG_FILE
@@ -94,14 +92,14 @@ echo "Latest release is: $RELEASE_NUMBER --- Release patter: $REPOS_TAG_PATTERN"
 
 if [[ $RELEASE_NUMBER =~ $REPOS_TAG_PATTERN ]] 
 then
-   rm -f $release_flag
-   touch $release_flag
+   rm -f $RELEASE_FILE
+   touch $RELEASE_FILE
    echo "Current pattern match:$RELEASE_NUMBER" | tee -a $LOG_FILE
-   echo "$RELEASE_NUMBER" > $release_flag
+   echo "$RELEASE_NUMBER" > $RELEASE_FILE
 fi
-if [ -f $release_flag ]
+if [ -f $RELEASE_FILE ]
 then
-   RELEASE_NUMBER=`cat $release_flag`
+   RELEASE_NUMBER=`cat $RELEASE_FILE`
 fi
 echo "Detected  Release Number:$RELEASE_NUMBER"| tee -a $LOG_FILE
 echo ""| tee -a $LOG_FILE
