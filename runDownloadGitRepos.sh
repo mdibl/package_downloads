@@ -47,15 +47,15 @@ fi
 source ./Configuration
 source ./$1
 
-release_flag=${LOCAL_DIR}/$CURRENT_RELEASE_FLAG
-if [ ! -f $release_flag ]
+if [ ! -f $RELEASE_FILE ]
 then
-   echo "File $release_flag does not exists"
+   echo "File $RELEASE_FILE does not exists"
    exit 1
 fi
 TOP=`pwd`
-RELEASE_NUMBER=`cat ${LOCAL_DIR}/$CURRENT_RELEASE_FLAG`
-LOG_FILE="${DOWNLOADS_LOG_DIR}/$SCRIPT_NAME.$SHORT_NAME.$RELEASE_NUMBER.log"
+RELEASE_NUMBER=`cat ${RELEASE_FILE}`
+RELEASE_TOKEN=`basename $RELEASE_NUMBER`
+LOG_FILE="${DOWNLOADS_LOG_DIR}/$SCRIPT_NAME.$SHORT_NAME.$RELEASE_TOKEN.log"
 INSTALL_SCRIPT_BASE=$TOP/$SHORT_NAME
 
 if [ ! -f $EXPORT_REPOS_SCRIPT ]
@@ -95,12 +95,14 @@ then
 fi
 echo "Export ended:"`date` | tee -a $LOG_FILE
 echo "==" | tee -a $LOG_FILE
-echo "Installing $SHORT_NAME-$RELEASE_NUMBER" | tee -a $LOG_FILE
+echo "Installing $SHORT_NAME-$RELEASE_TOKEN" | tee -a $LOG_FILE
 echo "Running  $INSTALL_SCRIPT_BASE/Install" | tee -a $LOG_FILE
 #Run the install script
 cd $INSTALL_SCRIPT_BASE
-./Install
-
+if [ -f Install ]
+then
+   ./Install
+fi
 if [ $? -ne 0 ]
 then
    echo "./$INSTALL_SCRIPT_BASE/Install FAILED"
