@@ -21,3 +21,23 @@ Runs: weekly
 
 ## How to Install R
   * See: https://cran.r-project.org/src/base/INSTALL
+
+# R Packages -  
+## Install Bioconductor Packages
+
+Bioconductor provides tools for the analysis and comprehension of high-throughput genomic data. 
+Use the biocLite.R script to install Bioconductor packages.
+
+To install core packages, type the following in an R command window:
+```
+   > source("https://bioconductor.org/biocLite.R")
+   > biocLite()
+``` 
+See: http://bioconductor.org/install/
+
+## Get The List Of Installed Packages
+To get the list of installed R packages, type the following in an R command window:
+```
+  > installed.packages()
+  
+```
