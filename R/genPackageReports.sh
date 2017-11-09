@@ -13,9 +13,12 @@ DATE=`date +"%Y-%m-%d"`
 REPORT_FILE=$REPORTS_DIR/$DATE.R.Packages.log
 R_SCRIPT=genPackageReports.r
 UPDATE_PACKAGE_SCRIPT=checkPackageUpdate.r
+LOG=$REPORT_FILE
+rm -f $LOG
+touch $LOG
 cd `dirname $0`
 
-./$UPDATE_PACKAGE_SCRIPT  
+./$UPDATE_PACKAGE_SCRIPT  2>&1 | tee -a  $LOG
 
 #There should be the genPackageReports.r R script
 # in the same directory as this script
@@ -25,16 +28,17 @@ then
    echo "R script genPackageReports.r missing from:"`pwd`
    exit 1
 fi
-echo "************"
-echo "Generating $REPORT_FILE"
-echo "************"
+echo "Date generated: `date`" | tee -a $LOG
+echo "***********************************" | tee -a $LOG
+echo "Generating $REPORT_FILE" 
+echo "***********************************"
 
-echo "Command: ./$R_SCRIPT > $REPORT_FILE"
+echo "Command: ./$R_SCRIPT > $LOG"
 
-./$R_SCRIPT > $REPORT_FILE
+./$R_SCRIPT >>  $LOG
 
 
-lines_count=`wc -l  $REPORT_FILE | cut -f1`
+lines_count=`wc -l  $LOG | cut -f1`
 echo "Report generated."
 echo "Lines Count:$lines_count"
 

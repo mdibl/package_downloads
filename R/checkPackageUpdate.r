@@ -5,4 +5,4 @@
 # Credit: https://bioconductor.org/install/ 
 #
 source("https://bioconductor.org/biocLite.R")
-biocLite()  
+biocLite(ask=FALSE)  
