@@ -33,6 +33,11 @@ To install core packages, type the following in an R command window:
    > source("https://bioconductor.org/biocLite.R")
    > biocLite()
 ``` 
+
+To Install specific packages, e.g., “GenomicFeatures” and “AnnotationDbi”
+```
+   > biocLite(c("GenomicFeatures", "AnnotationDbi"))
+```
 See: http://bioconductor.org/install/
 
 ## Get The List Of Installed Packages
