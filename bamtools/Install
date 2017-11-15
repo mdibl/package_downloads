@@ -36,7 +36,7 @@ source ./../Configuration
 source ./$dependents_file
 source ./$pack_config_file
 
-if [ ! -f ${RELEASE_FILE ]
+if [ ! -f ${RELEASE_FILE} ]
 then
    echo "File $RELEASE_FILE does not exists"
    exit 1
