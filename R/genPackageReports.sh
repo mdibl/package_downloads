@@ -7,15 +7,19 @@
 #
 
 REPORTS_DIR=/data/logs/reports/R
+LOG_DIR=/data/logs/package_downloads
 
 mkdir -p $REPORTS_DIR
 DATE=`date +"%Y-%m-%d"`
-REPORT_FILE=$REPORTS_DIR/$DATE.R.Packages.log
+REPORT=$REPORTS_DIR/$DATE.R.Packages.txt
+LOG=$LOG_DIR/$DATE.R.Packages.log
 R_SCRIPT=genPackageReports.r
 UPDATE_PACKAGE_SCRIPT=checkPackageUpdate.r
-LOG=$REPORT_FILE
 rm -f $LOG
 touch $LOG
+
+rm -f $REPORT
+touch $REPORT
 cd `dirname $0`
 
 ./$UPDATE_PACKAGE_SCRIPT  2>&1 | tee -a  $LOG
@@ -30,15 +34,15 @@ then
 fi
 echo "Date generated: `date`" | tee -a $LOG
 echo "***********************************" | tee -a $LOG
-echo "Generating $REPORT_FILE" 
+echo "Generating $REPORT" 
 echo "***********************************"
 
-echo "Command: ./$R_SCRIPT > $LOG"
+echo "Command: ./$R_SCRIPT > $REPORT"
 
-./$R_SCRIPT >>  $LOG
+./$R_SCRIPT >>  $REPORT
 
 
-lines_count=`wc -l  $LOG | cut -f1`
+lines_count=`wc -l  $REPORT | cut -f1`
 echo "Report generated."
 echo "Lines Count:$lines_count"
 
