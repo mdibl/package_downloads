@@ -1,0 +1,128 @@
+#!/bin/sh
+
+# Organization: MDIBL
+# Author: Lucie Hutchins
+# Date: November 2017
+# Source : https://combine-lab.github.io/salmon/getting_started/#obtaining-salmon
+## Script to build and install a new package
+
+cd `dirname $0`
+
+SCRIPT_NAME=`basename $0`
+WORKING_DIR=`pwd`
+##These config files are relative to
+# the Install script working directory
+dependents_file=dependencies.cfg
+pack_config_file=salmon_repos.cfg
+
+if [ ! -f $dependents_file ]
+then
+   echo "The dependencies file: $dependents_file is missing"
+   echo " From $WORKING_DIR"
+   exit 1
+fi
+if [ ! -f ../Configuration ]
+then
+  echo "'../Configuration' file missing "     
+  exit 1
+fi
+if [ ! -f $1 ]
+then
+  echo "'$1' file missing"     
+  exit 1
+fi
+
+source ./../Configuration
+source ./$dependents_file
+source ./$pack_config_file
+
+if [ ! -f $RELEASE_FILE ]
+then
+   echo "File $RELEASE_FILE does not exists"
+   exit 1
+fi
+
+RELEASE_NUMBER=`cat $RELEASE_FILE`
+LOG_FILE="${DOWNLOADS_LOG_DIR}/$SCRIPT_NAME.$SHORT_NAME.$RELEASE_NUMBER.log"
+PACKAGE_BASE=$LOCAL_DIR/$GIT_REPOS 
+
+rm -rf $LOG_FILE
+touch $LOG_FILE
+
+rstatus=""
+echo "==" | tee -a $LOG_FILE
+echo "Product: $GIT_REPOS" | tee -a $LOG_FILE
+echo "Install directory: $PACKAGE_BASE" | tee -a $LOG_FILE
+echo "Release version: $RELEASE_NUMBER" | tee -a $LOG_FILE
+echo "Install on Server Name: `uname -n`" | tee -a $LOG_FILE
+echo "==" | tee -a $LOG_FILE
+
+echo "Running the dependency test" | tee -a $LOG_FILE
+echo "Missing dependencies:" | tee -a $LOG_FILE
+for dependency in $DEPENDENCIES
+do
+    token=`which $dependency`
+    if [ ! -f "$token" ]
+    then
+       echo "Dependency: $dependency" | tee -a $LOG_FILE
+       rstatus="Failed"
+    fi
+done
+# Check Lib dependency
+for dependency in $LIB_DEPENDENCIES
+do
+  tokens=`locate $dependency`
+  for lib_path in $tokens
+  do
+    if [ ! -f $lib_path ]
+    then
+      echo "Dependency: $dependency" | tee -a $LOG_FILE
+      rstatus="Failed"
+    fi
+  done
+done
+
+echo "==" | tee -a $LOG_FILE
+if [ "$rstatus" == Failed ]
+then
+  echo "Dependency test Failed" | tee -a $LOG_FILE
+  exit 1
+fi
+echo "Dependency test passed" | tee -a $LOG_FILE
+
+# Execute the Install command for this package
+#
+if [ ! -d $PACKAGE_BASE ]
+then
+  echo "ERROR:$PACKAGE_BASE directory missing"
+  echo "Status: FAILED"
+  exit 1
+fi
+
+#Check the install
+rstatus="SUCCESS"
+for dir in $DIR_CHECK
+do
+    if [ ! -d $PACKAGE_BASE/$dir ]
+    then
+       echo "$PACKAGE_BASE/$dir missing" | tee -a $LOG_FILE
+       rstatus="FAILED"
+     fi
+done
+
+if [ "$rstatus" == FAILED ]
+then
+   echo "$rstatus" | tee -a $LOG_FILE
+   exit 1
+fi
+echo $rstatus | tee -a $LOG_FILE
+#Copy binaries and libraries to /opt/software/bin and /opt/software/lib
+for dir in $DIR_CHECK
+do
+    cp -P  $PACKAGE_BASE/$dir/* $SOFTWARE_BASE/$dir/
+done
+
+
+
+exit 0
+
