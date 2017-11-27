@@ -91,7 +91,7 @@ then
 fi
 # Run the install commands
 cd build
-cmake .. 2>&1 | tee -a $LOG_FILE
+cmake -DCMAKE_INSTALL_PREFIX=$SOFTWARE_BASE .. 2>&1 | tee -a $LOG_FILE
 make 2>&1 | tee -a $LOG_FILE
 cd ..
 #Check the install
