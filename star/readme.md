@@ -1,3 +1,7 @@
+# About STAR
+
+SEE: https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf
+
 ## COMPILING FROM SOURCE
 
 To compile STAR from source, you must first download the latest release and uncompress it and then build it.
