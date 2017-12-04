@@ -16,6 +16,10 @@ In order to identify differentially expressed genes between experiments,
 StringTie's output can be processed by specialized software like Ballgown, 
 Cuffdiff or other programs (DESeq2, edgeR, etc.).
 
+The main input of the program is a BAM file with RNA-Seq read mappings 
+which must be sorted by their genomic location (for example the accepted_hits.
+bam file produced by TopHat or the output of HISAT2 after sorting and converting it using samtools). 
+
 ```
 ## Usage
 
