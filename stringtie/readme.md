@@ -17,7 +17,9 @@ StringTie's output can be processed by specialized software like Ballgown,
 Cuffdiff or other programs (DESeq2, edgeR, etc.).
 
 ```
+## Usage
 
+See: http://ccb.jhu.edu/software/stringtie/index.shtml?t=manual#run
 
 ## Upgrades Frequency
 
