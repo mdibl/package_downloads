@@ -1,3 +1,12 @@
+# Overview
+
+Salmon is a wicked-fast program to produce a highly-accurate, transcript-level quantification estimates 
+from RNA-seq data.
+Salmon works by (quasi)-mapping sequencing reads directly to the transcriptome. 
+This means the Salmon index should be built on a set of target transcripts,
+not on the genome of the underlying organism.
+
+
 ## Obtaining Salmon
 
 Once you’ve downloaded the appropriate binary (e.g. Salmon-0.8.1_linux_x86_64.tar.gz for a 64-bit Linux system), you simply decompress it like so:
