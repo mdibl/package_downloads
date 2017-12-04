@@ -1,5 +1,7 @@
 ## Building Cufflinks
 
+Publication: https://www.nature.com/articles/nprot.2012.016
+
 Unpack the Cufflinks source tarball (in this example for version 2.2.1):
 ```
 tar zxvf cufflinks-2.2.1.tar.gz
