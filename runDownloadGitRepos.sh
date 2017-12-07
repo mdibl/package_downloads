@@ -99,10 +99,10 @@ echo "Installing $SHORT_NAME-$RELEASE_TOKEN" | tee -a $LOG_FILE
 echo "Running  $INSTALL_SCRIPT_BASE/Install" | tee -a $LOG_FILE
 #Run the install script
 cd $INSTALL_SCRIPT_BASE
-#if [ -f Install ]
-#then
-#   ./Install
-#fi
+if [ -f Install ]
+then
+   ./Install
+fi
 if [ $? -ne 0 ]
 then
    echo "./$INSTALL_SCRIPT_BASE/Install FAILED"
