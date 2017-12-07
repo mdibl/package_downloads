@@ -78,6 +78,13 @@ do
    chmod 755 $bin_file
    cp  $bin_file $SOFTWARE_BASE/bin
 done
+#
+# Update symbolic link of this package to point to
+# the downloaded version
+#
+cd $PACKAGE_DOWNLOADS_BASE
+rm -f $SHORT_NAME
+ln -s ${RELEASE_DIR} $SHORT_NAME
 
 exit 0
 
