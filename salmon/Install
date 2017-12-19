@@ -90,6 +90,7 @@ then
 fi
 echo "Dependency test passed" | tee -a $LOG_FILE
 
+echo "Checking the Install directory:" | tee -a $LOG_FILE
 # Execute the Install command for this package
 #
 if [ ! -d $PACKAGE_BASE ]
@@ -98,6 +99,9 @@ then
   echo "Status: FAILED"
   exit 1
 fi
+
+##move content to this version root directory 
+[ -d $PACKAGE_BASE/$TEMP_DOWNLOAD_DIR ] && mv $PACKAGE_BASE/$TEMP_DOWNLOAD_DIR/* $PACKAGE_BASE/ 
 
 #Check the install
 rstatus="SUCCESS"
