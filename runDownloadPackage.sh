@@ -63,8 +63,18 @@ echo "==" | tee -a $LOG
 echo "=="
 cd $EXTERNAL_SOFTWARE_BASE/$SHORT_NAME
 
+## The zip file was downloaded under $EXTERNAL_SOFTWARE_BASE/$SHORT_NAME
+if [ "$NO_LOCAL_PARENT_DIR" = true ]
+then
+   REMOTE_FILES=`basename $REMOTE_FILES`
+fi
+if [ "$local_untar_dir" != "" ]
+then
+   [ "$is_tar" = true ] && mkdir --parent $untar_dir
+fi
 if [ "$untar_flag" = true ]
 then
+   echo "Untar: $untar_prog $REMOTE_FILES $local_untar_dir From: "`pwd`
    [ -f $REMOTE_FILES ] && $untar_prog $REMOTE_FILES $local_untar_dir
 fi
 #Check if this release directory was created

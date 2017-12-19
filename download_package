@@ -90,16 +90,17 @@ do
    echo "Downloading $target_file"
    ## get the directory part from the remote_file name
    target_local_dir=`dirname $remote_file`
-  
    #
    # Make parent directories as needed
    if [ "$target_local_dir" != "" ]
    then
-      if [ ! -d ${LOCAL_DIR}/$target_local_dir ]
-      then
-          echo "Creating new directory ${LOCAL_DIR}/$target_local_dir"
-          mkdir -p ${LOCAL_DIR}/$target_local_dir
-      fi
+       if [ "$NO_LOCAL_PARENT_DIR" = true ]
+       then 
+           target_local_dir=""
+       else
+           echo "Creating ${LOCAL_DIR}/$target_local_dir"
+           mkdir -p ${LOCAL_DIR}/$target_local_dir
+       fi
    fi
    #cd to LOCAL_DOWNLOAD_BASE and run wget command 
    cd ${LOCAL_DIR}/$target_local_dir 
