@@ -42,7 +42,7 @@ then
    exit 1
 fi
 
-RELEASE_NUMBER=`cat $RELEASE_FILE`
+RELEASE_NUMBER=`cat $RELEASE_FILE | sed -e 's/^v//'`
 LOG_FILE="${DOWNLOADS_LOG_DIR}/$SCRIPT_NAME.$SHORT_NAME.$RELEASE_NUMBER.log"
 PACKAGE_BASE=$LOCAL_DIR/$GIT_REPOS 
 
@@ -66,6 +66,19 @@ do
        echo "Dependency: $dependency" | tee -a $LOG_FILE
        rstatus="Failed"
     fi
+done
+# Check zLib dependency
+for dependency in $LIB_DEPENDENCIES
+do
+  tokens=`locate $dependency`
+  for lib_path in $tokens
+  do
+    if [ ! -f $lib_path ]
+    then
+      echo "Dependency: $dependency - $lib_path" | tee -a $LOG_FILE
+      rstatus="Failed"
+    fi
+  done
 done
 echo "==" | tee -a $LOG_FILE
 if [ "$rstatus" == Failed ]
@@ -91,9 +104,10 @@ then
 fi
 # Run the install commands
 cd build
-cmake -DCMAKE_INSTALL_PREFIX=$SOFTWARE_BASE .. 2>&1 | tee -a $LOG_FILE
+cmake -DCMAKE_INSTALL_PREFIX=$PACKAGE_BASE .. 2>&1 | tee -a $LOG_FILE
 make 2>&1 | tee -a $LOG_FILE
-cd ..
+make install 2>&1 | tee -a $LOG_FILE
+cd $PACKAGE_BASE
 #Check the install
 rstatus="SUCCESS"
 for folder in $DIR_CHECK
@@ -111,12 +125,45 @@ then
    exit 1
 fi
 echo $rstatus | tee -a $LOG_FILE
-#Copy binaries and libs to global path
-for folder in $DIR_CHECK
-do
-    echo "Copying $PACKAGE_BASE/$folder/* to $SOFTWARE_BASE/$folder/" | tee -a $LOG_FILE
-    cp -pR $PACKAGE_BASE/$folder/* $SOFTWARE_BASE/$folder/
-done
+## Copy the excutable to the path  
+cd $PACKAGE_BASE/$BIN_DIR
+if [ -f $BIN_FILE ]
+then
+   cp -p $BIN_FILE $SOFTWARE_BASE/$BIN_DIR/$BIN_FILE-$RELEASE_NUMBER
+   cd $SOFTWARE_BASE/$BIN_DIR
+   rm -f $BIN_FILE
+   ln -s $BIN_FILE-$RELEASE_NUMBER $BIN_FILE 
+fi
+echo "$BIN_FILE copied to $SOFTWARE_BASE/$BIN_DIR" | tee -a $LOG_FILE
+## Copy the include to the path 
+cd $PACKAGE_BASE/$INCLUDE_DIR
+if [ -d $INCLUDE_DIR_NAME ]
+then
+   cp -pR $INCLUDE_DIR_NAME  $SOFTWARE_BASE/$INCLUDE_DIR/$INCLUDE_DIR_NAME-$RELEASE_NUMBER
+   cd $SOFTWARE_BASE/$INCLUDE_DIR
+   [ -f $INCLUDE_DIR_NAME ] && rm -f $INCLUDE_DIR_NAME
+   ln -s $INCLUDE_DIR_NAME-$RELEASE_NUMBER $INCLUDE_DIR_NAME
+fi
+echo "$INCLUDE_DIR_NAME copied to $SOFTWARE_BASE/$INCLUDE_DIR" | tee -a $LOG_FILE 
+## Copy libs to the path 
+cd $PACKAGE_BASE/$LIB_DIR
+if [ -d $LIB_PACKG_CFG ]
+then
+   cp -pR $LIB_PACKG_CFG  $SOFTWARE_BASE/$LIB_DIR/$GIT_REPOS-$LIB_PACKG_CFG-$RELEASE_NUMBER
+   cd $SOFTWARE_BASE/$LIB_DIR
+   [ -f $LIB_PACKG_CFG ] && rm -f $SOFTWARE_BASE/$LIB_DIR/$LIB_PACKG_CFG
+   ln -s $GIT_REPOS-$LIB_PACKG_CFG-$RELEASE_NUMBER $LIB_PACKG_CFG
+fi
+echo "$LIB_PACKG_CFG copied to $SOFTWARE_BASE/$LIB_DIR" | tee -a $LOG_FILE
 
+cd $PACKAGE_BASE/$LIB_DIR
+if [ -f $LIB_FILE ]
+then
+   cp -p $LIB_FILE $SOFTWARE_BASE/$LIB_DIR/$LIB_FILE-$RELEASE_NUMBER
+   [ -f $SOFTWARE_BASE/$LIB_DIR/$LIB_FILE ] && rm -f $SOFTWARE_BASE/$LIB_DIR/$LIB_FILE
+   cd $SOFTWARE_BASE/$LIB_DIR
+   ln -s $LIB_FILE-$RELEASE_NUMBER $LIB_FILE
+fi
+echo "$LIB_FILE copied to $SOFTWARE_BASE/$LIB_DIR" | tee -a $LOG_FILE
 exit 0
 
