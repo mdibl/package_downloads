@@ -1,29 +1,27 @@
 # Building and installing
- See : https://github.com/pezmaster31/bamtools/wiki/Building-and-installing 
+ See : https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
  
 ## Dependency
-From their site, BamTools has been migrated to a CMake-based build system.
-BamTools requires CMake (version >= 2.6.4). If you are missing CMake or have an older version, 
-check your OS package manager (for Linux users) 
-or download it here: http://www.cmake.org/cmake/resources/software.html .
- ```bash
-  Note: To check is cmake is installed, run the following command: cmake --version
+From their site: A suitable Java Runtime Environment 
+
+## Build fastqc
 ```
-## Build BamTools
-```
-  * cd to the install root directory (path2/bamtools
-  * mkdir build
-  * cd build
-  * cmake ..
-  * make
-  * cd ..
+  Linux:  They have included a wrapper script, called 'fastqc' which is the easiest way to
+start the program.  The wrapper is in the top level of the FastQC installation.  You
+may need to make this file executable:
+
+chmod 755 fastqc
+
+..but once you have done that you can run it directly
+
+./fastqc
+
+..or place a link in /usr/local/bin to be able to run the program from any location:
+
+sudo ln -s /path/to/FastQC/fastqc /opt/software/bin/fastqc
+
+
  ```
 ## Check the Install
-There should be the bin/ , lib/ , and include/ subdirectories 
-under the install root directory
+There should be the executable fastqc is under the install root directory
 
-```
- bamtools/bin
- bamtools/lib
- bamtools/include
-```
