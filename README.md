@@ -1,6 +1,12 @@
 # package_downloads
 A repository to store scripts and configuration files used to create pipelines to download external bioinformatics packages.
 
+## To Install
+ * FASTQC
+ * FASTX
+ * Trimgalore
+ * Trimmomatic
+
 ## Pipeline Setting on Jenkins:
 1) Create the Package-XX-CheckNewVersion job with the following config:
 ```
