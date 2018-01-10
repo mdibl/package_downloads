@@ -58,8 +58,15 @@ echo "==" | tee -a $LOG
 echo "Running script from: $WORKING_DIR"| tee -a $LOG
 echo "Command: ./$DOWNLOAD_SCRIPT $PACK_CONFIG"| tee -a $LOG
 echo "==" | tee -a $LOG
-
-./$DOWNLOAD_SCRIPT $PACK_CONFIG   2>&1 | tee -a $LOG
+#
+##We don't need to download files - case of cutadapt
+#
+if [ "$NO_DOWNLOAD" = true ]
+then
+    mkdir -p $EXTERNAL_SOFTWARE_BASE/$SHORT_NAME/${RELEASE_DIR}
+else
+    ./$DOWNLOAD_SCRIPT $PACK_CONFIG   2>&1 | tee -a $LOG
+fi
 echo "=="
 cd $EXTERNAL_SOFTWARE_BASE/$SHORT_NAME
 
@@ -89,7 +96,7 @@ fi
 #
 rm -f $SHORT_NAME
 ln -s ${RELEASE_DIR} $SHORT_NAME
-rm -f $REMOTE_FILES 
+[ -f $REMOTE_FILES ] && rm -f $REMOTE_FILES 
 ####
 cd $WORKING_DIR
 #Check the install
