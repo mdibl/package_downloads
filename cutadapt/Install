@@ -45,7 +45,7 @@ fi
 
 RELEASE_NUMBER=`cat $RELEASE_FILE`
 LOG_FILE="${DOWNLOADS_LOG_DIR}/$SCRIPT_NAME.$SHORT_NAME.$RELEASE_NUMBER.log"
-PACKAGE_BASE=$LOCAL_DIR/$SHORT_NAME
+PACKAGE_BASE=$LOCAL_DIR/$RELEASE_DIR
 
 rm -rf $LOG_FILE
 touch $LOG_FILE
@@ -98,13 +98,22 @@ then
   echo "Status: FAILED" | tee -a $LOG_FILE
   exit 1
 fi
-cd $PACKAGE_BASE 
-echo "Running 'sudo pip install --upgrade cutadapt' from `pwd`" | tee -a $LOG_FILE
-
-sudo pip install --upgrade cutadapt
+version=`echo $RELEASE_NUMBER | sed -e 's/^v//' | sed -e 's/^[[:space:]]*//'`
+echo "$version"
+#Shared installation (on a cluster)
+virtualenv $PACKAGE_BASE/venv
 if [ $? -ne 0 ]
 then
-  echo "ERROR:'sudo pip install --upgrade cutadapt' failed"
+  echo "ERROR:'virtualenv $PACKAGE_BASE/venv' failed"
+  echo "Status: FAILED"| tee -a $LOG_FILE
+  exit 1
+fi
+echo "Running 'sudo $PACKAGE_BASE/venv/bin/pip install --install-option="--install-scripts=$SOFTWARE_BASE/bin" cutadapt==$version' from `pwd`" | tee -a $LOG_FILE
+sudo $PACKAGE_BASE/venv/bin/pip install --install-option="--install-scripts=$SOFTWARE_BASE/bin" cutadapt==$version
+#sudo pip install --upgrade cutadapt
+if [ $? -ne 0 ]
+then
+  echo "ERROR:'sudo $PACKAGE_BASE/venv/bin/pip install --install-option="--install-scripts=$SOFTWARE_BASE/bin" cutadapt==$version' failed"
   echo "Status: FAILED"| tee -a $LOG_FILE
   exit 1
 fi
