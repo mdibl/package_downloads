@@ -17,7 +17,9 @@ LOGS_BASE=/data/logs
 #Path where the repos package_downloads is installed
 #
 PACKAGE_DOWNLOADS_BASE=/home/bioadmin/package_downloads
-PACKAGE_CONFIG_SUFFIX=_package.cfg
+PACKAGE_CONFIGFILE_SUFFIX=_package.cfg
+PACKAGE_DEPENDENCIES_FILE=dependencies.cfg
+GLOBAL_CONFIG=Configuration
 PACKAGE_GIT_CLONE_BASE=/home/bioadmin/github_repos
 EXPORT_REPOS_SCRIPT=/home/bioadmin/biocore_misc/gitExportRepos.sh
 
