@@ -5,35 +5,44 @@
 # Date: September 2017
 #
 ## Script to build and install a new package
+#
+# Usage: ./path2/Install tool_name
+# Where tool_name is the name of the base directory for this tool
+# as defined in the variable SHORT_NAME in the tool config file
+#
+# Example : ./path2/Install bamtools 
+# Different versions of bamtools will be installed under 
+# EXTERNAL_SOFTWARE_BASE/bamtools and the current version 
+# installed is stored in  EXTERNAL_SOFTWARE_BASE/bamtools/current_release_NUMBER
+#
 
 cd `dirname $0`
 
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
-##These config files are relative to
-# the Install script working directory
-dependents_file=dependencies.cfg
 
-if [ ! -f $dependents_file ]
+##The config file is relative to
+# the root directory of pacakage download 
+
+if [ ! -f ${GLOBAL_CONFIG} ]
 then
-   echo "The dependencies file: $dependents_file is missing"
-   echo " From $WORKING_DIR"
-   exit 1
-fi
-if [ ! -f ../Configuration ]
-then
-  echo "'../Configuration' file missing "     
+  echo "'${GLOBAL_CONFIG}' file missing under `pwd`" 
+  echo "You must run the setup.sh script first to generate this file"
+  echo "Usage: ./setup.sh "
   exit 1
 fi
-if [ ! -f $1 ]
+if [ $# -lt 1 ]
 then
-  echo "'$1' file missing"     
+  echo "Usage: ./path2/${SCRIPT_NAME} tool_name
+  echo "Example: ./${SCRIPT_NAME} bamtools 
   exit 1
 fi
-pack_config_file=bamtools_package.cfg
-source ./../Configuration
-source ./$dependents_file
-source ./$pack_config_file
+TOOL_NAME=$1
+source ./${GLOBAL_CONFIG}
+PACKAGE_CONFIG_FILE={TOOL_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
+
+source ./${PACKAGE_DEPENDENCIES_FILE}
+source ./${PACKAGE_CONFIG_FILE}
 
 if [ ! -f ${RELEASE_FILE} ]
 then
