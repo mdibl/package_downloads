@@ -13,7 +13,6 @@ WORKING_DIR=`pwd`
 ##These config files are relative to
 # the Install script working directory
 dependents_file=dependencies.cfg
-pack_config_file=bamtools_repos.cfg
 
 if [ ! -f $dependents_file ]
 then
@@ -31,7 +30,7 @@ then
   echo "'$1' file missing"     
   exit 1
 fi
-
+pack_config_file=bamtools_package.cfg
 source ./../Configuration
 source ./$dependents_file
 source ./$pack_config_file
