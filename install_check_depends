@@ -5,11 +5,12 @@
 # Date: February 2018
 #
 ## Script is called by the Install script 
-#  to setup logs and run the dependency test before running the tool's install script
+#  to run the dependency test 
 #
-# Usage: ./install_prep tool_name
-# Where tool_name is the name of the base directory for this tool
-# as defined in the variable SHORT_NAME in the tool config file
+# Usage: ./install_check_depends
+#
+# Assuming all global environment variables needed have
+# been set by the parent process
 #
 
 
