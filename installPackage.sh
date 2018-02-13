@@ -107,16 +107,16 @@ fi
 # Update symbolic link of this package to point to
 # the downloaded version
 #
-rm -f $SHORT_NAME
-ln -s ${RELEASE_DIR} $SHORT_NAME
+rm -f ${TOOL_NAME}
+ln -s ${RELEASE_DIR} ${TOOL_NAME}
 [ -f $REMOTE_FILES ] && rm -f $REMOTE_FILES 
 ####
 cd $WORKING_DIR
 #Check the install
-if [ -f $SHORT_NAME/Install ]
+if [ -f ${TOOL_NAME}/Install ]
 then
-   cd $SHORT_NAME
-   echo "Running the install script from:"`pwd`
+   cd ${TOOL_NAME}
+   echo "Running the install script from:"`pwd` | tee -a $LOG
    ./Install
    if [ $? -ne 0 ]
    then
