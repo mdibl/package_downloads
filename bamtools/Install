@@ -51,7 +51,6 @@ then
    exit 1
 fi
 
-RELEASE_NUMBER=`cat $RELEASE_FILE | sed -e 's/^v//'`
 LOG_FILE="${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${SHORT_NAME}.${RELEASE_NUMBER}.log"
 PACKAGE_BASE=${LOCAL_DIR}/${GIT_REPOS} 
 
@@ -138,6 +137,7 @@ fi
 echo ${rstatus} | tee -a ${LOG_FILE}
 ####### shared ends #####################
 ## Copy the excutable to the path  -- specific to bamtools install ## 
+RELEASE_NUMBER=`echo ${RELEASE_NUMBER}| sed -e 's/^v//'`
 cd ${PACKAGE_BASE}/${BIN_DIR}
 if [ -f $BIN_FILE ]
 then
