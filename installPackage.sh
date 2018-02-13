@@ -10,6 +10,7 @@
 cd `dirname $0`
 WORKING_DIR=`pwd`
 SCRIPT_NAME=`basename $0`
+GLOBAL_CONFIG=Configuration
 
 if [ $# -lt 1 ]
 then
@@ -36,11 +37,18 @@ then
   exit 1
 fi
 source ./${GLOBAL_CONFIG}
-PACKAGE_CONFIG_FILE={TOOL_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
+#set path to packages install base
+#and get the version to install from the flag file
+#
 PACKAGE_DOWNLOADS_BASE=$EXTERNAL_SOFTWARE_BASE/$TOOL_NAME
 RELEASE_FILE=$PACKAGE_DOWNLOADS_BASE/${CURRENT_FLAG_FILE}
+if [ ! -f ${RELEASE_FILE} ]
+then
+   echo "ERROR: ${RELEASE_FILE} file missing"
+   exit 1
+fi
 RELEASE_NUMBER=`cat $RELEASE_FILE`
-
+PACKAGE_CONFIG_FILE={TOOL_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
 source ./${PACKAGE_DEPENDENCIES_FILE}
 source ./${PACKAGE_CONFIG_FILE}
 
