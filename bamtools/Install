@@ -3,18 +3,15 @@
 # Organization: MDIBL
 # Author: Lucie Hutchins
 # Date: September 2017
+# Modified: February 2018
 #
-## Script to build and install a new package
+# Script is called by the install_package script 
+#  to install Bamtools package
 #
-# Usage: ./path2/Install tool_name
-# Where tool_name is the name of the base directory for this tool
-# as defined in the variable SHORT_NAME in the tool config file
+# Usage: ./Install 
 #
-# Example : ./path2/Install bamtools 
-# Different versions of bamtools will be installed under 
-# EXTERNAL_SOFTWARE_BASE/bamtools and the current version 
-# installed is stored in  EXTERNAL_SOFTWARE_BASE/bamtools/current_release_NUMBER
-#
+# Assumption: All the global variables have been set
+# by the install_packge script
 
 cd `dirname $0`
 
