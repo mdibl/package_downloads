@@ -35,26 +35,14 @@ cmake -DCMAKE_INSTALL_PREFIX=${PACKAGE_BASE} .. 2>&1 | tee -a ${LOG_FILE}
 make 2>&1 | tee -a ${LOG_FILE}
 make install 2>&1 | tee -a ${LOG_FILE}
 
-##### Shared starts ###########################
-cd ${PACKAGE_BASE}
-#Check the install
-rstatus="SUCCESS"
-for folder in ${DIR_CHECK}
-do
-    if [ ! -d ${PACKAGE_BASE}/${folder} ]
-    then
-       echo "${PACKAGE_BASE}/${folder} missing" | tee -a ${LOG_FILE}
-       rstatus="FAILED"
-     fi
-done
-
-if [ "${rstatus}" == FAILED ]
+# Check the install #
+cd ${WORKING_DIR}
+[ -f ../check_install ] && source ./../check_install
+if [ $? -ne 0 ]
 then
-   echo "${rstatus}" | tee -a ${LOG_FILE}
+   echo "ERROR: ./../check_install failed check the logs - ${LOG_FILE} " | tee -a ${LOG_FILE}
    exit 1
 fi
-echo ${rstatus} | tee -a ${LOG_FILE}
-####### shared ends #####################
 ## Copy the excutable to the path  -- specific to bamtools install ## 
 RELEASE_NUMBER=`echo ${RELEASE_NUMBER}| sed -e 's/^v//'`
 cd ${PACKAGE_BASE}/${BIN_DIR}
@@ -65,7 +53,7 @@ then
    rm -f ${BIN_FILE}
    ln -s ${BIN_FILE}-${RELEASE_NUMBER} ${BIN_FILE}
 fi
-echo "${BIN_FILE} copied to ${SOFTWARE_BASE}/${BIN_DIR}" | tee -a ${LOG_FILE
+echo "${BIN_FILE} copied to ${SOFTWARE_BASE}/${BIN_DIR}" | tee -a ${LOG_FILE}
 ## Copy the include to the path 
 cd ${PACKAGE_BASE}/${INCLUDE_DIR}
 if [ -d ${INCLUDE_DIR_NAME} ]
