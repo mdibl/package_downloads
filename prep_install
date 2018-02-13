@@ -4,16 +4,15 @@
 # Author: Lucie Hutchins
 # Date: February 2018
 #
-## Script to build and install a new package
+## Script is called by the Install script 
+#  to setup logs and runs the 
+#   dependency test before running the tool's install script
 #
-# Usage: ./path2/Install tool_name
+# Usage: ./prep_install tool_name
 # Where tool_name is the name of the base directory for this tool
 # as defined in the variable SHORT_NAME in the tool config file
 #
-# Example : ./path2/Install bamtools 
-# Different versions of bamtools will be installed under 
-# EXTERNAL_SOFTWARE_BASE/bamtools and the current version 
-# installed is stored in  EXTERNAL_SOFTWARE_BASE/bamtools/current_release_NUMBER
+# Example : ./prep_install bamtools 
 #
 
 cd `dirname $0`
