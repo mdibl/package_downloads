@@ -21,6 +21,14 @@ cd `dirname $0`
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
 
+if [ $# -lt 1 ]
+then
+  echo "Usage: ./path2/${SCRIPT_NAME} tool_name
+  echo "Example: ./${SCRIPT_NAME} bamtools 
+  exit 1
+fi
+TOOL_NAME=$1
+
 ##The config file is relative to
 # the root directory of pacakage download 
 
@@ -31,13 +39,6 @@ then
   echo "Usage: ./setup.sh "
   exit 1
 fi
-if [ $# -lt 1 ]
-then
-  echo "Usage: ./path2/${SCRIPT_NAME} tool_name
-  echo "Example: ./${SCRIPT_NAME} bamtools 
-  exit 1
-fi
-TOOL_NAME=$1
 source ./${GLOBAL_CONFIG}
 PACKAGE_CONFIG_FILE={TOOL_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
 
@@ -102,7 +103,7 @@ then
    echo "Path to ${GIT_REPOS} install directory not correct. See ${PACKAGE_BASE}" | tee -a ${LOG_FILE}
    exit 1
 fi
-
+##### Shared ends here #########
 cd ${PACKAGE_BASE}
 mkdir build 
 if [ ! -d build ]
