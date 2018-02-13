@@ -53,58 +53,52 @@ PACKAGE_DEPENDS=${TOOL_NAME}/${PACKAGE_DEPENDENCIES_FILE}
 
 if [ ! -f ${PACKAGE_CONFIG_FILE} ]
 then
-    echo "ERROR: missing "
+    echo "ERROR: missing ${PACKAGE_CONFIG_FILE} "
+    exit 1
 fi
-[ -f source ./${PACKAGE_DEPENDENCIES_FILE}
 source ./${PACKAGE_CONFIG_FILE}
+[ -f ${PACKAGE_DEPENDS} ] && source ./${PACKAGE_DEPENDS}
 
-LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.$TOOL_NAME.$RELEASE_NUMBER.log
-rm -f $LOG
-touch $LOG
-echo "==" | tee -a $LOG
-echo "Package: $TOOL_NAME"  | tee -a $LOG
-echo "Version: $RELEASE_NUMBER"  | tee -a $LOG
-echo "Remote site: $REMOTE_SITE"  | tee -a $LOG
-echo "Remote directory: $REMOTE_DIR"  | tee -a $LOG
-echo "Install directory: ${PACKAGE_DOWNLOADS_BASE}" | tee -a $LOG
-echo "Path to Install logs: ${DOWNLOADS_LOG_DIR}" | tee -a $LOG
-echo "Install Date:"`date` | tee -a $LOG
-echo "Git Organization:$GIT_ORG" | tee -a $LOG
-echo "Git Repos:$GIT_REPOS" | tee -a $LOG
-echo "Remote files:" | tee -a $LOG
-echo " $REMOTE_FILES" | tee -a $LOG
-echo "==" | tee -a $LOG
-echo "Running script from: $WORKING_DIR"| tee -a $LOG
-echo "Command: ./$DOWNLOAD_SCRIPT $PACK_CONFIG"| tee -a $LOG
+LOG=${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${TOOL_NAME}.${RELEASE_NUMBER}.log
+rm -f ${LOG}
+touch ${LOG}
+echo "==" | tee -a ${LOG}
+echo "Package: ${TOOL_NAME}"  | tee -a ${LOG}
+echo "Version: ${RELEASE_NUMBER}"  | tee -a ${LOG}
+echo "Remote site: ${REMOTE_SITE}"  | tee -a ${LOG}
+echo "Remote directory: ${REMOTE_DIR}"  | tee -a ${LOG}
+echo "Install directory: ${PACKAGE_DOWNLOADS_BASE}" | tee -a ${LOG}
+echo "Path to Install logs: ${DOWNLOADS_LOG_DIR}" | tee -a ${LOG}
+echo "Install Date:"`date` | tee -a ${LOG}
+echo "Git Organization:${GIT_ORG}" | tee -a ${LOG}
+echo "Git Repos:${GIT_REPOS}" | tee -a ${LOG}
+echo "Remote files:" | tee -a ${LOG}
+echo " ${REMOTE_FILES}" | tee -a ${LOG}
+echo "==" | tee -a ${LOG}
+echo "Running script from: ${WORKING_DIR}"| tee -a ${LOG}
+echo "Command: ./${DOWNLOAD_SCRIPT} ${PACKAGE_CONFIG_FILE}"| tee -a ${LOG}
 echo "==" | tee -a $LOG
 #
 ##We don't need to download files - case of cutadapt
 #
 if [ "$NO_DOWNLOAD" = true ]
 then
-    mkdir -p $EXTERNAL_SOFTWARE_BASE/$SHORT_NAME/${RELEASE_DIR}
+    mkdir -p ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR}
 else
-    ./$DOWNLOAD_SCRIPT $PACK_CONFIG   2>&1 | tee -a $LOG
+    ./$DOWNLOAD_SCRIPT ${PACKAGE_CONFIG_FILE}   2>&1 | tee -a $LOG
 fi
 echo "=="
-cd $EXTERNAL_SOFTWARE_BASE/$SHORT_NAME
+cd ${PACKAGE_DOWNLOADS_BASE}
 
 ## The zip file was downloaded under $EXTERNAL_SOFTWARE_BASE/$SHORT_NAME
-if [ "$NO_LOCAL_PARENT_DIR" = true ]
-then
-   REMOTE_FILES=`basename $REMOTE_FILES`
-fi
-if [ "$local_untar_dir" != "" ]
-then
-   [ "$is_tar" = true ] && mkdir --parent $untar_dir
-fi
+[ "$NO_LOCAL_PARENT_DIR" = true ] && REMOTE_FILES=`basename $REMOTE_FILES`
+[ "$local_untar_dir" != "" ] && [ "$is_tar" = true ] && mkdir --parent $untar_dir
 if [ "$untar_flag" = true ]
 then
    echo "Untar: $untar_prog $REMOTE_FILES $local_untar_dir From: "`pwd`
    [ -f $REMOTE_FILES ] && $untar_prog $REMOTE_FILES $local_untar_dir
 fi
 #Check if this release directory was created
-
 if [ ! -d ${RELEASE_DIR} ]
 then
    echo "Download failed: missing ${RELEASE_DIR}"
