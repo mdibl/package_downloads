@@ -5,8 +5,7 @@
 # Date: February 2018
 #
 ## Script is called by the Install script 
-#  to setup logs and runs the 
-#   dependency test before running the tool's install script
+#  to setup logs and run the dependency test before running the tool's install script
 #
 # Usage: ./prep_install tool_name
 # Where tool_name is the name of the base directory for this tool
@@ -22,7 +21,7 @@ WORKING_DIR=`pwd`
 
 if [ $# -lt 1 ]
 then
-  echo "Usage: ./path2/${SCRIPT_NAME} tool_name
+  echo "Usage: ./${SCRIPT_NAME} tool_name
   echo "Example: ./${SCRIPT_NAME} bamtools 
   exit 1
 fi
