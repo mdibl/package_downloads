@@ -80,14 +80,14 @@ echo "Running script from: ${WORKING_DIR}"| tee -a ${LOG}
 echo "Command: ./${DOWNLOAD_SCRIPT} ${PACKAGE_CONFIG_FILE}"| tee -a ${LOG}
 echo "==" | tee -a $LOG
 
-exit 0
+PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR}
 
 #
 ##We don't need to download files - case of cutadapt
 #
 if [ "${NO_DOWNLOAD}" = true ]
 then
-    mkdir -p ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR}
+    mkdir -p ${PACKAGE_BASE}
 else
     ./${DOWNLOAD_SCRIPT} ${PACKAGE_CONFIG_FILE}   2>&1 | tee -a $LOG
 fi
