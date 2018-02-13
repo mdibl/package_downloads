@@ -67,7 +67,8 @@ echo "Package: ${TOOL_NAME}"  | tee -a ${LOG}
 echo "Version: ${RELEASE_NUMBER}"  | tee -a ${LOG}
 echo "Remote site: ${REMOTE_SITE}"  | tee -a ${LOG}
 echo "Remote directory: ${REMOTE_DIR}"  | tee -a ${LOG}
-echo "Install directory: ${PACKAGE_DOWNLOADS_BASE}" | tee -a ${LOG}
+echo "Install base directory: ${PACKAGE_DOWNLOADS_BASE}" | tee -a ${LOG}
+echo "Install release directory: ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR}" | tee -a ${LOG}
 echo "Path to Install logs: ${DOWNLOADS_LOG_DIR}" | tee -a ${LOG}
 echo "Install Date:"`date` | tee -a ${LOG}
 echo "Git Organization:${GIT_ORG}" | tee -a ${LOG}
@@ -78,6 +79,9 @@ echo "==" | tee -a ${LOG}
 echo "Running script from: ${WORKING_DIR}"| tee -a ${LOG}
 echo "Command: ./${DOWNLOAD_SCRIPT} ${PACKAGE_CONFIG_FILE}"| tee -a ${LOG}
 echo "==" | tee -a $LOG
+
+exit 0
+
 #
 ##We don't need to download files - case of cutadapt
 #
