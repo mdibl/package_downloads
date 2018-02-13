@@ -101,8 +101,6 @@ then
   exit 1
 fi
 echo "Dependency test passed" | tee -a ${LOG_FILE}
-
-# Execute the Install command for this package
 if [ ! -d ${PACKAGE_BASE} ]
 then
    echo "Path to ${GIT_REPOS} install directory not correct. See ${PACKAGE_BASE}" | tee -a ${LOG_FILE}
