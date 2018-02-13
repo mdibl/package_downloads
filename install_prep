@@ -7,12 +7,11 @@
 ## Script is called by the Install script 
 #  to setup logs and run the dependency test before running the tool's install script
 #
-# Usage: ./prep_install tool_name
+# Usage: ./install_prep tool_name
 # Where tool_name is the name of the base directory for this tool
 # as defined in the variable SHORT_NAME in the tool config file
 #
-# Example : ./prep_install bamtools 
-#
+
 
 cd `dirname $0`
 
