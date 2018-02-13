@@ -17,26 +17,32 @@ LOGS_BASE=/data/logs
 #Path where the repos package_downloads is installed
 #
 PACKAGE_DOWNLOADS_BASE=/home/bioadmin/package_downloads
+#relative to this package base (package_downloads)
+CURRENT_FLAG_FILE=current_release_NUMBER
+GLOBAL_CONFIG=Configuration
+DOWNLOAD_SCRIPT=download_package
+## Relative to each bioformatics tool base within this package
 PACKAGE_CONFIGFILE_SUFFIX=_package.cfg
 PACKAGE_DEPENDENCIES_FILE=dependencies.cfg
-GLOBAL_CONFIG=Configuration
-PACKAGE_GIT_CLONE_BASE=/home/bioadmin/github_repos
-EXPORT_REPOS_SCRIPT=/home/bioadmin/biocore_misc/gitExportRepos.sh
 
+## Git setting 
+## Specifies the path where to clone git repos locally
+PACKAGE_GIT_CLONE_BASE=/home/bioadmin/github_repos
 GIT_CLONE_URL_BASE=https://github.com
 GIT_DOWNLOADS_URL_BASE=https://api.github.com
+EXPORT_REPOS_SCRIPT=gitExportRepos.sh
 
-
-#
+# Logs setting
 # Log directory base for this product
 # Log files associated with scripts included in this product
 # will be stored here
 #
 DOWNLOADS_LOG_DIR=${LOGS_BASE}/package_downloads
-DOWNLOAD_SCRIPT=download_package
 
-export EXTERNAL_SOFTWARE_BASE LOGS_BASE DOWNLOADS_LOG_DIR PACKAGE_DOWNLOADS_BASE DOWNLOAD_SCRIPT
-export PACKAGE_GIT_CLONE_BASE GIT_CLONE_URL_BASE GIT_DOWNLOADS_URL_BASE EXPORT_REPOS_SCRIPT
+export SOFTWARE_BASE EXTERNAL_SOFTWARE_BASE LOGS_BASE 
+export PACKAGE_DOWNLOADS_BASE PACKAGE_CONFIGFILE_SUFFIX
+export PACKAGE_DEPENDENCIES_FILE GLOBAL_CONFIG
+export CURRENT_FLAG_FILE PACKAGE_GIT_CLONE_BASE EXPORT_REPOS_SCRIPT
 
 EMAIL_TO=lucie.hutchins@mdibl.org
 
