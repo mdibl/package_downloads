@@ -10,39 +10,35 @@ cd `dirname $0`
 
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
-##These config files are relative to
-# the Install script working directory
-dependents_file=dependencies.cfg
-pack_config_file=bedtools_repos.cfg
+##The config file is relative to
+# the root directory of pacakage download 
 
-if [ ! -f $dependents_file ]
+if [ ! -f ${GLOBAL_CONFIG} ]
 then
-   echo "The dependencies file: $dependents_file is missing"
-   echo " From $WORKING_DIR"
-   exit 1
-fi
-if [ ! -f ../Configuration ]
-then
-  echo "'../Configuration' file missing "     
+  echo "'${GLOBAL_CONFIG}' file missing under `pwd`" 
+  echo "You must run the setup.sh script first to generate this file"
+  echo "Usage: ./setup.sh "
   exit 1
 fi
-if [ ! -f $1 ]
+if [ $# -lt 1 ]
 then
-  echo "'$1' file missing"     
+  echo "Usage: ./path2/${SCRIPT_NAME} tool_name
+  echo "Example: ./${SCRIPT_NAME} bamtools 
   exit 1
 fi
+TOOL_NAME=$1
+source ./${GLOBAL_CONFIG}
+PACKAGE_CONFIG_FILE={TOOL_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
 
-source ./../Configuration
-source ./$dependents_file
-source ./$pack_config_file
+source ./${PACKAGE_DEPENDENCIES_FILE}
+source ./${PACKAGE_CONFIG_FILE}
 
-if [ ! -f ${LOCAL_DIR}/current_release_NUMBER ]
+if [ ! -f ${RELEASE_FILE} ]
 then
-   echo "File ${LOCAL_DIR}/current_release_NUMBER does not exists"
+   echo "File ${RELEASE_FILE} does not exists"
    exit 1
 fi
-
-RELEASE_NUMBER=`cat ${LOCAL_DIR}/current_release_NUMBER`
+RELEASE_NUMBER=`cat ${RELEASE_FILE}`
 LOG_FILE="${DOWNLOADS_LOG_DIR}/$SCRIPT_NAME.$SHORT_NAME.$RELEASE_NUMBER.log"
 PACKAGE_BASE=$LOCAL_DIR/$GIT_REPOS 
 
