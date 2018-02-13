@@ -1,3 +1,18 @@
+#!/bin/sh
+
+# Organization: MDIBL
+# Author: Lucie Hutchins
+# Date: February 2018
+#
+## Script is called by the Install script 
+#  to run the dependency test 
+#
+# Usage: ./install_check_package_install
+#
+# Assuming all global environment variables needed have
+# been set by the parent process
+#
+
 
 echo "Checking the package install under ${PACKAGE_BASE}" | tee -a ${LOG_FILE}
 #Check the install
