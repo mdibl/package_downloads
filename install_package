@@ -33,3 +33,5 @@ fi
 TOOL_NAME=$1
 
 source ./prep_install ${TOOL_NAME}
+source ./${TOOL_NAME}/Install
+
