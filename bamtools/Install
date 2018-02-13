@@ -36,11 +36,10 @@ make 2>&1 | tee -a ${LOG_FILE}
 make install 2>&1 | tee -a ${LOG_FILE}
 
 # Check the install #
-cd ${WORKING_DIR}
-[ -f ../check_install ] && source ./../check_install
-if [ $? -ne 0 ]
+
+[ -f {INSTALL_CHECK_SCRIPT} ] && source ${INSTALL_CHECK_SCRIPT}
 then
-   echo "ERROR: ./../check_install failed check the logs - ${LOG_FILE} " | tee -a ${LOG_FILE}
+   echo "ERROR: ${INSTALL_CHECK_SCRIPT} failed check the logs - ${LOG_FILE} " | tee -a ${LOG_FILE}
    exit 1
 fi
 ## Copy the excutable to the path  -- specific to bamtools install ## 
