@@ -20,7 +20,7 @@ PACKAGE_DOWNLOADS_BASE=/home/bioadmin/package_downloads
 #relative to this package base (package_downloads)
 GLOBAL_CONFIG=${PACKAGE_DOWNLOADS_BASE}/Configuration
 DOWNLOAD_SCRIPT=${PACKAGE_DOWNLOADS_BASE}/download_package
-INSTALL_CHECK_SCRIPT=${PACKAGE_DOWNLOADS_BASE}/check_install
+INSTALL_CHECK_SCRIPT=${PACKAGE_DOWNLOADS_BASE}/install_check
 EXPORT_REPOS_SCRIPT=${PACKAGE_DOWNLOADS_BASE}/gitExportRepos.sh
 
 ## Relative to each bioformatics tool base within this package
