@@ -4,7 +4,7 @@
 # Author: Lucie Hutchins
 # Date: September 2017
 #
-#Wrapper script to call the download script 
+# Wrapper script to call scripts that download and install a new package
 # It creates an additional log that could be use later on
 #
 cd `dirname $0`
@@ -13,41 +13,46 @@ SCRIPT_NAME=`basename $0`
 
 if [ $# -lt 1 ]
 then
-  echo "Usage: ./$SCRIPT_NAME path2package_config"
-  echo "Example: ./$SCRIPT_NAME blat/blat_package.cfg"
+  echo "Usage: ./${SCRIPT_NAME} tool_name
+  echo "Example: ./${SCRIPT_NAME} bamtools 
   exit 1
 fi
-#
-#Relative to current working directory
-#
-PACK_CONFIG=$1
-MAIN_CONFIG=Configuration
-
-if [ ! -f $MAIN_CONFIG ]
+TOOL_NAME=$1
+if [ ! -d ${TOOL_NAME} ]
 then
-  echo "$MAIN_CONFIG file missing "     
+  echo "ERROR: No automation found for ${TOOL_NAME}"
+  echo "Check list of available automations under `pwd`"
+  echo "Also check the spelling or the case sensitive"
   exit 1
 fi
-if [ ! -f $PACK_CONFIG ]
+##The config file is relative to
+# the root directory of pacakage download 
+
+if [ ! -f ${GLOBAL_CONFIG} ]
 then
-  echo "'$PACK_CONFIG' file missing "     
+  echo "'${GLOBAL_CONFIG}' file missing under `pwd`" 
+  echo "You must run the setup.sh script first to generate this file"
+  echo "Usage: ./setup.sh "
   exit 1
 fi
+source ./${GLOBAL_CONFIG}
+PACKAGE_CONFIG_FILE={TOOL_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
+PACKAGE_DOWNLOADS_BASE=$EXTERNAL_SOFTWARE_BASE/$TOOL_NAME
+RELEASE_FILE=$PACKAGE_DOWNLOADS_BASE/${CURRENT_FLAG_FILE}
+RELEASE_NUMBER=`cat $RELEASE_FILE`
 
-# get global environment variable from config files
-#
-source ./$MAIN_CONFIG
-source ./$PACK_CONFIG
+source ./${PACKAGE_DEPENDENCIES_FILE}
+source ./${PACKAGE_CONFIG_FILE}
 
-LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.$SHORT_NAME.$RELEASE_NUMBER.log
+LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.$TOOL_NAME.$RELEASE_NUMBER.log
 rm -f $LOG
 touch $LOG
 echo "==" | tee -a $LOG
-echo "Package: $SHORT_NAME"  | tee -a $LOG
+echo "Package: $TOOL_NAME"  | tee -a $LOG
 echo "Version: $RELEASE_NUMBER"  | tee -a $LOG
 echo "Remote site: $REMOTE_SITE"  | tee -a $LOG
 echo "Remote directory: $REMOTE_DIR"  | tee -a $LOG
-echo "Install directory: ${LOCAL_DIR}" | tee -a $LOG
+echo "Install directory: ${PACKAGE_DOWNLOADS_BASE}" | tee -a $LOG
 echo "Path to Install logs: ${DOWNLOADS_LOG_DIR}" | tee -a $LOG
 echo "Install Date:"`date` | tee -a $LOG
 echo "Git Organization:$GIT_ORG" | tee -a $LOG
