@@ -5,7 +5,7 @@
 # Date: February 2018
 #
 ## Script is called by the Install script 
-#  to run the dependency test 
+#  to check whether or not the install was successful
 #
 # Usage: ./install_check_package_install
 #
