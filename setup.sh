@@ -18,15 +18,14 @@ then
 fi
 cp Configuration.default Configuration
 
-. ./Configuration
+source  ./Configuration
 
 EXECUTABLES=`ls | grep .sh`
 for script_name in ${EXECUTABLES}
 do
   [ "${script_name}" == "setup.sh" ] && continue
-  echo "Processing: $script_name"
+  chmod 755 $script_name
 done
-
 
 if [ ! -d ${DOWNLOADS_LOG_DIR} ]
 then
