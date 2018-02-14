@@ -20,7 +20,11 @@ cp Configuration.default Configuration
 
 . ./Configuration
 
-env
+EXECUTABLES=`ls | grep .sh`
+for script_name in ${EXECUTABLES}
+do
+  echo "Processing: $script_name"
+done
 
 
 if [ ! -d ${DOWNLOADS_LOG_DIR} ]
