@@ -30,8 +30,14 @@ then
   echo "Example: ./${SCRIPT_NAME} bamtools 
   exit 1
 fi
-TOOL_NAME=$1
 
-source ./prep_install ${TOOL_NAME}
+TOOL_NAME=$1
+source ./${CHECK_DEPENDS_SCRIPT} ${TOOL_NAME}
+[ $? -ne 0 ] && exit 1
 source ./${TOOL_NAME}/Install
+source ./${CHECK_INSTALL_SCRIPT}
+[ $? -ne 0 ] && exit 1
+exit 0
+
+
 
