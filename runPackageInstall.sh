@@ -123,17 +123,17 @@ then
    echo "Download failed: missing ${PACKAGE_BASE}" | tee -a $LOG
    exit 1
 fi
-cd ${PACKAGE_DOWNLOADS_BASE}
 # Update symbolic link of this package to point to
 # the downloaded version
 #
+cd ${PACKAGE_DOWNLOADS_BASE}
 rm -f ${TOOL_NAME}
 ln -s ${RELEASE_DIR} ${TOOL_NAME}
 [ -f $REMOTE_FILES ] && rm -f ${REMOTE_FILES} 
+
 #
 #Now run the install_package script
-.${INSTALL_PACKAGE_SCRIPT} ${TOOL_NAME} 2>&1 
-
+.${INSTALL_PACKAGE_SCRIPT} ${TOOL_NAME}
 if [ $? -ne 0 ]
 then
     echo "Status: FAILED" | tee -a ${LOG}
