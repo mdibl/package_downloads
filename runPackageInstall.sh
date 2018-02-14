@@ -73,13 +73,13 @@ if [ -d ${PACKAGE_BASE} ]
 then
     echo "***********************************************"
     echo ""
-    echo "Version: ${RELEASE_NUMBER} is already installed"
+    echo "${TOOL_NAME} Version: ${RELEASE_NUMBER} is already installed"
     echo ""
     echo "***********************************************"
     echo " "
-    echo "    See: ${PACKAGE_BASE} --"
-    echo "    If you want to re-install this version,"
-    echo "    you must first remove the above directory then re-run the program"
+    echo "  See: ${PACKAGE_BASE}"
+    echo "  If you want to re-install this version,"
+    echo "  you must first remove the above directory then re-run the program"
     echo " " 
     exit 0
 fi
