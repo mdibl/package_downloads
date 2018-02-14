@@ -49,6 +49,7 @@ source ./${GLOBAL_CONFIG}
 #
 PACKAGE_DOWNLOADS_BASE=${EXTERNAL_SOFTWARE_BASE}/${TOOL_NAME}
 RELEASE_FILE=${PACKAGE_DOWNLOADS_BASE}/${CURRENT_FLAG_FILE}
+
 if [ ! -f ${RELEASE_FILE} ]
 then
    echo "ERROR: ${RELEASE_FILE} file missing"
@@ -128,18 +129,18 @@ cd ${PACKAGE_DOWNLOADS_BASE}
 #
 rm -f ${TOOL_NAME}
 ln -s ${RELEASE_DIR} ${TOOL_NAME}
-[ -f $REMOTE_FILES ] && rm -f $REMOTE_FILES 
+[ -f $REMOTE_FILES ] && rm -f ${REMOTE_FILES} 
 #
 #Now run the install_package script
 .${INSTALL_PACKAGE_SCRIPT} ${TOOL_NAME} 2>&1 
 
 if [ $? -ne 0 ]
 then
-    echo "Status: FAILED" | tee -a $LOG
+    echo "Status: FAILED" | tee -a ${LOG}
     exit 1
 fi
-echo "Status: SUCCESS" | tee -a $LOG
+echo "Status: SUCCESS" | tee -a ${LOG}
 echo "=="
-echo "End Date:"`date` | tee -a $LOG
+echo "End Date:"`date` | tee -a ${LOG}
 echo ""
 exit 0
