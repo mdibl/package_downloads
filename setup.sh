@@ -35,3 +35,4 @@ if [ ! -d ${DOWNLOADS_LOG_DIR} ]
 then
     mkdir ${DOWNLOADS_LOG_DIR}
 fi
+echo "DONE"
