@@ -23,6 +23,7 @@ cp Configuration.default Configuration
 EXECUTABLES=`ls | grep .sh`
 for script_name in ${EXECUTABLES}
 do
+  [ "${script_name}" == "setup.sh" ] && continue
   echo "Processing: $script_name"
 done
 
