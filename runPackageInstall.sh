@@ -108,7 +108,7 @@ if [ "${EXPORT_GIT}" = true ]
 then
     #export git repos
     #
-   ${EXPORT_REPOS_SCRIPT} ${GIT_ORG} ${GIT_REPOS} ${RELEASE_NUMBER} ${PACKAGE_DOWNLOADS_BASE} 2>&1 | tee -a $LOG
+   ./${EXPORT_REPOS_SCRIPT} ${GIT_ORG} ${GIT_REPOS} ${RELEASE_NUMBER} ${PACKAGE_DOWNLOADS_BASE} 2>&1 | tee -a $LOG
 else
    # Download the executable
    #
