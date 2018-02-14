@@ -3,6 +3,7 @@
 # Organization: MDIBL
 # Author: Lucie Hutchins
 # Date: September 2017
+# Modified: February 2018
 #
 # Wrapper script to call scripts that download and install a new package
 # It creates an additional log that could be use later on
