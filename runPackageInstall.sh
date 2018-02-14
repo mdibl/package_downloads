@@ -72,6 +72,8 @@ PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR}
 if [ -d ${PACKAGE_BASE} ]
 then
     echo "Version: ${RELEASE_NUMBER} is already installed"
+    echo "See: ${PACKAGE_BASE} -- If you want to re-install this version,"
+    echo "you must first remove the above directory then re-run the progrem"
     exit 0
 fi
 LOG=${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${TOOL_NAME}.${RELEASE_NUMBER}.log
