@@ -21,8 +21,8 @@ fi
 
 if [ $# -lt 1 ]
 then 
-  echo "Usage: ./$SCRIPT_NAME package_name/package_name_repos.cfg"
-  echo "Example: ./$SCRIPT_NAME bedtools/bedtools_repos.cfg"
+  echo "Usage: ./$SCRIPT_NAME package_name/package_name_package.cfg"
+  echo "Example: ./$SCRIPT_NAME bedtools/bedtools_package.cfg"
   exit 1
 fi
 if [ ! -f Configuration ]
@@ -42,6 +42,7 @@ source ./$1
 LOG_FILE="${DOWNLOADS_LOG_DIR}/$SCRIPT_NAME.$SHORT_NAME.log"
 PACKAGE_INSTALL_BASE="$EXTERNAL_SOFTWARE_BASE/$SHORT_NAME"
 REPOS_URL=$GIT_CLONE_URL_BASE/$GIT_ORG/$GIT_REPOS.git
+RELEASE_FILE=${PACKAGE_INSTALL_BASE}/${CURRENT_FLAG_FILE}
 
 rm -rf $LOG_FILE
 touch $LOG_FILE
