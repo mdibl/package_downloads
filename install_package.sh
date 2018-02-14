@@ -16,6 +16,7 @@
 # installed is stored in  EXTERNAL_SOFTWARE_BASE/bamtools/current_release_NUMBER
 #
 # What it does:
+# ----------------
 # 1) Runs the dependency test
 # 2) Calls the tool's install script
 # 3) Runs the Install check
