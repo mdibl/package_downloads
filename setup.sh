@@ -10,7 +10,11 @@
 
 cd `dirname $0`
 
-pwd
+echo " "
+echo "************* Package Install Setup ****************"
+echo ""
+echo "Path:`pwd`"
+echo "*****************************************************"
 
 if [ -f Configuration ]
 then
