@@ -8,6 +8,12 @@
 # Wrapper script to call scripts that download and install a new package
 # It creates an additional log that could be use later on
 #
+# What it does:
+# 1) sources global configs
+# 2) Downloads the specified version of this package 
+# 3) Updates the symbolic link
+# 4) Calls the install_package script
+#
 cd `dirname $0`
 WORKING_DIR=`pwd`
 SCRIPT_NAME=`basename $0`
