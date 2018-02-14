@@ -71,7 +71,8 @@ PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR}
 #
 if [ -d ${PACKAGE_BASE} ]
 then
-    echo "***********************************************"
+    echo " "
+    echo "***************Package Install ****************"
     echo ""
     echo "${TOOL_NAME} Version: ${RELEASE_NUMBER} is already installed"
     echo ""
