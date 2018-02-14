@@ -13,7 +13,6 @@
 # been set by the parent process
 #
 
-
 echo "Checking the package install under ${PACKAGE_BASE}" | tee -a ${LOG_FILE}
 #Check the install
 rstatus="SUCCESS"
@@ -25,7 +24,6 @@ do
        rstatus="FAILED"
      fi
 done
-
 if [ "${rstatus}" == FAILED ]
 then
    echo "${rstatus}" | tee -a ${LOG_FILE}
