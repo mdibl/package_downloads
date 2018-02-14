@@ -109,7 +109,7 @@ then
     #export git repos
     #
    [ ! -d ${PACKAGE_BASE} ] && mkdir -p ${PACKAGE_BASE}
-   ${EXPORT_REPOS_SCRIPT} ${GIT_ORG $GIT_REPOS} ${RELEASE_NUMBER} ${PACKAGE_BASE} 2>&1 | tee -a $LOG
+   ${EXPORT_REPOS_SCRIPT} ${GIT_ORG} ${GIT_REPOS} ${RELEASE_NUMBER} ${PACKAGE_BASE} 2>&1 | tee -a $LOG
 else
    # Download the executable
    #
