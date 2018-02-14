@@ -19,11 +19,11 @@ LOGS_BASE=/data/logs
 PACKAGE_DOWNLOADS_BASE=/home/bioadmin/package_downloads
 #relative to this package base (package_downloads)
 GLOBAL_CONFIG=Configuration
-DOWNLOAD_SCRIPT=download_package
+DOWNLOAD_SCRIPT=download_package.sh
 
-CHECK_INSTALL_SCRIPT=check_package_install
-CHECK_DEPENDS_SCRIPT=check_package_depends
-INSTALL_PACKAGE_SCRIPT=install_package
+CHECK_INSTALL_SCRIPT=check_package_install.sh
+CHECK_DEPENDS_SCRIPT=check_package_depends.sh
+INSTALL_PACKAGE_SCRIPT=install_package.sh
 
 EXPORT_REPOS_SCRIPT=gitExportRepos.sh
 CLONE_REPOS_SCRIPT=gitCloneRepos.sh
