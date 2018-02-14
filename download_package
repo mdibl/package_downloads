@@ -43,6 +43,7 @@ fi
 source ./$MAIN_CONFIG
 source ./$PACKAGE_CONFIG
 
+LOCAL_DIR=${EXTERNAL_SOFTWARE_BASE}/${SHORT_NAME}
 LOG=$DOWNLOADS_LOG_DIR/$SCRIPT_NAME.$SHORT_NAME.$DATE.log
 WGET_COMMAND="$WGET_OPTIONS '$REMOTE_URL'"
 rm -f $LOG
@@ -68,11 +69,7 @@ echo "Local directory: $LOCAL_DIR" | tee -a $LOG
 echo "==" | tee -a $LOG
 echo "Running $SCRIPT_NAME from: $WORKING_DIR"| tee -a $LOG
 
-if [ ! -d $LOCAL_DIR ]
-then
-  mkdir --parents $LOCAL_DIR
-fi
-
+[ ! -d $LOCAL_DIR ] && mkdir --parents $LOCAL_DIR
 if [ $is_xml_query ]
 then
    ##don't do the loop if this is a xml query string
