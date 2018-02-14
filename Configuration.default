@@ -18,15 +18,15 @@ LOGS_BASE=/data/logs
 #
 PACKAGE_DOWNLOADS_BASE=/home/bioadmin/package_downloads
 #relative to this package base (package_downloads)
-GLOBAL_CONFIG=${PACKAGE_DOWNLOADS_BASE}/Configuration
-DOWNLOAD_SCRIPT=${PACKAGE_DOWNLOADS_BASE}/download_package
+GLOBAL_CONFIG=Configuration
+DOWNLOAD_SCRIPT=download_package
 
-CHECK_INSTALL_SCRIPT=${PACKAGE_DOWNLOADS_BASE}/check_package_install
-CHECK_DEPENDS_SCRIPT=${PACKAGE_DOWNLOADS_BASE}/check_package_depends
-INSTALL_PACKAGE_SCRIPT=${PACKAGE_DOWNLOADS_BASE}/install_package
+CHECK_INSTALL_SCRIPT=check_package_install
+CHECK_DEPENDS_SCRIPT=check_package_depends
+INSTALL_PACKAGE_SCRIPT=install_package
 
-EXPORT_REPOS_SCRIPT=${PACKAGE_DOWNLOADS_BASE}/gitExportRepos.sh
-CLONE_REPOS_SCRIPT=${PACKAGE_DOWNLOADS_BASE}/gitCloneRepos.sh
+EXPORT_REPOS_SCRIPT=gitExportRepos.sh
+CLONE_REPOS_SCRIPT=gitCloneRepos.sh
 
 ## Relative to each bioformatics tool base within this package
 PACKAGE_CONFIGFILE_SUFFIX=_package.cfg
