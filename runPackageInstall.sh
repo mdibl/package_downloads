@@ -89,27 +89,34 @@ echo "==" | tee -a $LOG
 
 PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR}
 
-#
-##We don't need to download files - case of cutadapt
-#
-if [ "${NO_DOWNLOAD}" = true ]
+if [ "${EXPORT_GIT}" = true ]
 then
-    mkdir -p ${PACKAGE_BASE}
+    #export git repos
+    #
+   [ ! -d ${PACKAGE_BASE} ] && mkdir -p ${PACKAGE_BASE}
+   ${EXPORT_REPOS_SCRIPT} ${GIT_ORG $GIT_REPOS} ${RELEASE_NUMBER} ${PACKAGE_BASE} 2>&1 | tee -a $LOG
 else
-    ./${DOWNLOAD_SCRIPT} ${PACKAGE_CONFIG_FILE}   2>&1 | tee -a $LOG
+   # Download the executable
+   #
+   if [ "${NO_DOWNLOAD}" = true ]
+   then
+       mkdir -p ${PACKAGE_BASE}
+   else
+       ./${DOWNLOAD_SCRIPT} ${PACKAGE_CONFIG_FILE}   2>&1 | tee -a $LOG
+   fi
+   echo "=="
+   cd ${PACKAGE_DOWNLOADS_BASE}
+   ## The zip file was downloaded under $EXTERNAL_SOFTWARE_BASE/$SHORT_NAME
+   [ "${NO_LOCAL_PARENT_DIR}" = true ] && REMOTE_FILES=`basename ${REMOTE_FILES}`
+   [ "${local_untar_dir}" != "" ] && [ "${is_tar}" = true ] && mkdir --parent ${untar_dir}
+   if [ "${untar_flag}" = true ]
+   then
+      echo "Untar: ${untar_prog} ${REMOTE_FILES} ${local_untar_dir} From: "`pwd`
+      [ -f ${REMOTE_FILES} ] && ${untar_prog} ${REMOTE_FILES} ${local_untar_dir}
+   fi
+   #Check if this release directory was created
 fi
-echo "=="
-cd ${PACKAGE_DOWNLOADS_BASE}
 
-## The zip file was downloaded under $EXTERNAL_SOFTWARE_BASE/$SHORT_NAME
-[ "${NO_LOCAL_PARENT_DIR}" = true ] && REMOTE_FILES=`basename ${REMOTE_FILES}`
-[ "${local_untar_dir}" != "" ] && [ "${is_tar}" = true ] && mkdir --parent ${untar_dir}
-if [ "${untar_flag}" = true ]
-then
-   echo "Untar: ${untar_prog} ${REMOTE_FILES} ${local_untar_dir} From: "`pwd`
-   [ -f ${REMOTE_FILES} ] && ${untar_prog} ${REMOTE_FILES} ${local_untar_dir}
-fi
-#Check if this release directory was created
 if [ ! -d ${RELEASE_DIR} ]
 then
    echo "Download failed: missing ${RELEASE_DIR}"
