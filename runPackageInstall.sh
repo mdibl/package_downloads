@@ -108,8 +108,7 @@ if [ "${EXPORT_GIT}" = true ]
 then
     #export git repos
     #
-   [ ! -d ${PACKAGE_BASE} ] && mkdir -p ${PACKAGE_BASE}
-   ${EXPORT_REPOS_SCRIPT} ${GIT_ORG} ${GIT_REPOS} ${RELEASE_NUMBER} ${PACKAGE_BASE} 2>&1 | tee -a $LOG
+   ${EXPORT_REPOS_SCRIPT} ${GIT_ORG} ${GIT_REPOS} ${RELEASE_NUMBER} ${PACKAGE_DOWNLOADS_BASE} 2>&1 | tee -a $LOG
 else
    # Download the executable
    #
@@ -130,24 +129,22 @@ else
       [ -f ${REMOTE_FILES} ] && ${untar_prog} ${REMOTE_FILES} ${local_untar_dir}
    fi
    #Check if this release directory was created
+   if [ ! -d ${PACKAGE_BASE} ]
+   then
+        echo "Download failed: missing ${PACKAGE_BASE}" | tee -a $LOG
+        exit 1
+   fi
+   # Update symbolic link of this package to point to
+   # the downloaded version
+   #
+   cd ${PACKAGE_DOWNLOADS_BASE}
+   rm -f ${TOOL_NAME}
+   ln -s ${RELEASE_DIR} ${TOOL_NAME}
+   [ -f $REMOTE_FILES ] && rm -f ${REMOTE_FILES} 
 fi
-
-if [ ! -d ${PACKAGE_BASE} ]
-then
-   echo "Download failed: missing ${PACKAGE_BASE}" | tee -a $LOG
-   exit 1
-fi
-# Update symbolic link of this package to point to
-# the downloaded version
-#
-cd ${PACKAGE_DOWNLOADS_BASE}
-rm -f ${TOOL_NAME}
-ln -s ${RELEASE_DIR} ${TOOL_NAME}
-[ -f $REMOTE_FILES ] && rm -f ${REMOTE_FILES} 
-
 #
 #Now run the install_package script
-.${INSTALL_PACKAGE_SCRIPT} ${TOOL_NAME}
+./${INSTALL_PACKAGE_SCRIPT} ${TOOL_NAME}
 if [ $? -ne 0 ]
 then
     echo "Status: FAILED" | tee -a ${LOG}
