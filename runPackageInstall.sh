@@ -66,7 +66,14 @@ then
 fi
 source ./${PACKAGE_CONFIG_FILE}
 [ -f ${PACKAGE_DEPENDS} ] && source ./${PACKAGE_DEPENDS}
-
+PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR}
+#If this version is already installed, skipp the install
+#
+if [ -d ${PACKAGE_BASE} ]
+then
+    echo "Version: ${RELEASE_NUMBER} is already installed"
+    exit 0
+fi
 LOG=${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${TOOL_NAME}.${RELEASE_NUMBER}.log
 rm -f ${LOG}
 touch ${LOG}
@@ -87,9 +94,6 @@ echo "==" | tee -a ${LOG}
 echo "Running script from: ${WORKING_DIR}"| tee -a ${LOG}
 echo "Command: ./${DOWNLOAD_SCRIPT} ${PACKAGE_CONFIG_FILE}"| tee -a ${LOG}
 echo "==" | tee -a $LOG
-
-PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR}
-
 if [ "${EXPORT_GIT}" = true ]
 then
     #export git repos
