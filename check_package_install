@@ -12,6 +12,9 @@
 # Assuming all global environment variables needed have
 # been set by the parent process
 #
+# DIR_CHECK and FILE_CHECK are a list of directories and files 
+# as specified in each tool's dependencies.cfg filw
+#
 
 echo "Checking the package install under ${PACKAGE_BASE}" | tee -a ${LOG_FILE}
 #Check the install
