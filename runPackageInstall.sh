@@ -117,32 +117,28 @@ else
    #Check if this release directory was created
 fi
 
-if [ ! -d ${RELEASE_DIR} ]
+if [ ! -d ${PACKAGE_BASE} ]
 then
-   echo "Download failed: missing ${RELEASE_DIR}"
+   echo "Download failed: missing ${PACKAGE_BASE}" | tee -a $LOG
    exit 1
 fi
+cd ${PACKAGE_DOWNLOADS_BASE}
 # Update symbolic link of this package to point to
 # the downloaded version
 #
 rm -f ${TOOL_NAME}
 ln -s ${RELEASE_DIR} ${TOOL_NAME}
 [ -f $REMOTE_FILES ] && rm -f $REMOTE_FILES 
-####
-cd $WORKING_DIR
-#Check the install
-if [ -f ${TOOL_NAME}/Install ]
+#
+#Now run the install_package script
+.${INSTALL_PACKAGE_SCRIPT} ${TOOL_NAME} 2>&1 
+
+if [ $? -ne 0 ]
 then
-   cd ${TOOL_NAME}
-   echo "Running the install script from:"`pwd` | tee -a $LOG
-   ./Install
-   if [ $? -ne 0 ]
-   then
-      echo "Status: FAILED" | tee -a $LOG
-      exit 1
-   fi
-   echo "Status: SUCCESS" | tee -a $LOG
+    echo "Status: FAILED" | tee -a $LOG
+    exit 1
 fi
+echo "Status: SUCCESS" | tee -a $LOG
 echo "=="
 echo "End Date:"`date` | tee -a $LOG
 echo ""
