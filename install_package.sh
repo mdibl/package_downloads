@@ -13,8 +13,9 @@
 #
 # Example : ./install_package bamtools 
 # Different versions of bamtools will be installed under 
-# EXTERNAL_SOFTWARE_BASE/bamtools and the current version 
-# installed is stored in  EXTERNAL_SOFTWARE_BASE/bamtools/current_release_NUMBER
+# EXTERNAL_SOFTWARE_BASE/bamtools  
+# the file EXTERNAL_SOFTWARE_BASE/bamtools/current_release_NUMBER stores
+# the latest release number for this tool
 #
 # What it does:
 # ----------------
