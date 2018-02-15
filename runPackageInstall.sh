@@ -68,6 +68,7 @@ source ./${PACKAGE_CONFIG_FILE}
 [ -f ${PACKAGE_DEPENDS} ] && source ./${PACKAGE_DEPENDS}
 PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR}
 export GLOBAL_CONFIG PACKAGE_DOWNLOADS_BASE  RELEASE_NUMBER PACKAGE_BASE PACKAGE_CONFIG_FILE 
+export PACKAGE_DEPENDS
 echo " "
 echo "************* Package Install ****************"
 echo ""
@@ -92,6 +93,7 @@ echo " "
 LOG=${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${TOOL_NAME}.${RELEASE_NUMBER}.log
 rm -f ${LOG}
 touch ${LOG}
+export LOG
 echo "==" | tee -a ${LOG}
 echo "Package: ${TOOL_NAME}"  | tee -a ${LOG}
 echo "Version: ${RELEASE_NUMBER}"  | tee -a ${LOG}
