@@ -129,13 +129,15 @@ else
       [ -f ${REMOTE_FILES} ] && ${untar_prog} ${REMOTE_FILES} ${local_untar_dir}
       [ -f $REMOTE_FILES ] && rm -f ${REMOTE_FILES} 
    fi
-   #Check if this release directory was created
-   if [ ! -d ${PACKAGE_BASE} ]
-   then
-        echo "Download failed: missing ${PACKAGE_BASE}" | tee -a $LOG
-        exit 1
-   fi
 fi
+#Check if this release directory was created
+if [ ! -d ${PACKAGE_BASE} ]
+then
+    echo "Download failed: missing ${PACKAGE_BASE}" | tee -a $LOG
+    exit 1
+fi
+
+cd ${WORKING_DIR}
 #
 #Now run the install_package script
 ./${INSTALL_PACKAGE_SCRIPT} ${TOOL_NAME}
