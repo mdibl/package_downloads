@@ -8,8 +8,8 @@ For each package installed,the automation creates a root directory that is the n
 
 Under the tool root directory, you will find:
 
-A file (current_release_NUMBER) that stores the latest version of this tool
-A directory for each version of this tool installed
-A symbolic with this tool name that points to the latest version installed
+  A file (current_release_NUMBER) that stores the latest version of this tool
+  A directory for each version of this tool installed
+  A symbolic with this tool name that points to the latest version installed
 
 Check [[Package Documentation]]
