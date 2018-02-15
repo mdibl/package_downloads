@@ -17,7 +17,7 @@ SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
 rstatus=""
 
-if [ "${PACKAGE_DEPENDS}"=""]
+if [ "${PACKAGE_DEPENDS}" = "" ]
 then
     echo "ERROR: global environment PACKAGE_DEPENDS not set " 
     exit 1

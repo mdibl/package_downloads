@@ -16,7 +16,7 @@
 # as specified in each tool's dependencies.cfg filw
 #
 
-if [ "${PACKAGE_DEPENDS}"=""]
+if [ "${PACKAGE_DEPENDS}" = "" ]
 then
     echo "ERROR: global environment PACKAGE_DEPENDS not set " 
     exit 1
