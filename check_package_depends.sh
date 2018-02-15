@@ -16,14 +16,24 @@ cd `dirname $0`
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
 rstatus=""
-echo "==" | tee -a ${LOG_FILE}
-echo "Running the dependency test" | tee -a ${LOG_FILE}
+
+if [ "${PACKAGE_DEPENDS}"=""]
+then
+    echo "ERROR: global environment PACKAGE_DEPENDS not set " 
+    exit 1
+fi
+if [ ! -f ${PACKAGE_DEPENDS} ]
+then
+    echo "ERROR: ${PACKAGE_DEPENDS} missing from `pwd`"
+    exit 1
+fi
+echo "Running the dependency test" 
 for dependency in $BIN_DEPENDENCIES
 do
     token=`which ${dependency}`
     if [ ! -f "${token}" ]
     then
-       echo "ERROR: Dependency ${dependency} missing" | tee -a ${LOG_FILE}
+       echo "ERROR: Dependency ${dependency} missing"
        rstatus="Failed"
     fi
 done
@@ -35,15 +45,15 @@ do
   do
     if [ ! -f ${lib_path} ]
     then
-      echo "ERROR: Dependency  ${lib_path} missing" | tee -a $LOG_FILE
+      echo "ERROR: Dependency  ${lib_path} missing" 
       rstatus="Failed"
     fi
   done
 done
-echo "==" | tee -a ${LOG_FILE}
+echo "==" 
 if [ "$rstatus" == Failed ]
 then
-  echo "Dependency test Failed" | tee -a ${LOG_FILE}
+  echo "Dependency test Failed" 
   exit 1
 fi
 exit 0
