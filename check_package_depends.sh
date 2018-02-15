@@ -27,6 +27,9 @@ then
     echo "ERROR: ${PACKAGE_DEPENDS} missing from `pwd`"
     exit 1
 fi
+
+source ./${PACKAGE_DEPENDS}
+
 echo "Running the dependency test" 
 for dependency in $BIN_DEPENDENCIES
 do
