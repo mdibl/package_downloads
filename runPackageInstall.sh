@@ -114,7 +114,7 @@ else
    #
    ./${DOWNLOAD_SCRIPT}  2>&1 | tee -a $LOG
    echo "=="
-   cd ${PACKAGE_DOWNLOADS_BASE}
+   cd ${PACKAGE_BASE}
    ## The zip file was downloaded under $EXTERNAL_SOFTWARE_BASE/$SHORT_NAME
    [ "${NO_LOCAL_PARENT_DIR}" = true ] && REMOTE_FILES=`basename ${REMOTE_FILES}`
    [ "${local_untar_dir}" != "" ] && [ "${is_tar}" = true ] && mkdir --parent ${untar_dir}
@@ -129,8 +129,6 @@ else
         echo "Download failed: missing ${PACKAGE_BASE}" | tee -a $LOG
         exit 1
    fi
-   # Update symbolic link of this package to point to
-   # the downloaded version
    #
    [ -f $REMOTE_FILES ] && rm -f ${REMOTE_FILES} 
 fi
