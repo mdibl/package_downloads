@@ -11,14 +11,16 @@ SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
 
 echo "==" 
-echo "Install on Server Name: `uname -n`" 
+echo "Install Directory: ${PACKAGE_BASE} "
+echo "Server Name: `uname -n`" 
+echo "Install Date: `date`" 
 echo "=="
 if [ ! -d ${PACKAGE_BASE} ]
 then
    echo "ERROR:Install directory does not exist. See ${PACKAGE_BASE}" 
    exit 1
 fi
-if [ "${SOFTWARE_BASE} = "" ]
+if [ "${SOFTWARE_BASE}" = "" ]
 then
    echo "ERROR: global variable SOFTWARE_BASE not set" 
    exit 1
@@ -33,7 +35,7 @@ source ./${dependency_file}
 rstatus="SUCCESS"
 #Copy the binaries to /opt/software/bin
 #
-for bin_file on ${FILE_CHECK}
+for bin_file in ${FILE_CHECK}
 do
     if [ ! -f ${PACKAGE_BASE}/${bin_file} ]
     then
@@ -41,7 +43,7 @@ do
         rstatus="FAILED"
     else
         chmod 755 ${PACKAGE_BASE}/${bin_file}
-        cp  ${PACKAGE_BASE}/${bin_file} ${SOFTWARE_BASE}/bin/
+        cp -p  ${PACKAGE_BASE}/${bin_file} ${SOFTWARE_BASE}/bin/
     fi
 done
 echo "${rstatus}" 
