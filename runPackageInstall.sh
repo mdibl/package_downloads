@@ -132,9 +132,6 @@ else
    # Update symbolic link of this package to point to
    # the downloaded version
    #
-   cd ${PACKAGE_DOWNLOADS_BASE}
-   rm -f ${TOOL_NAME}
-   ln -s ${RELEASE_DIR} ${TOOL_NAME}
    [ -f $REMOTE_FILES ] && rm -f ${REMOTE_FILES} 
 fi
 #
@@ -145,6 +142,10 @@ then
     echo "Status: FAILED" | tee -a ${LOG}
     exit 1
 fi
+cd ${PACKAGE_DOWNLOADS_BASE}
+rm -f ${TOOL_NAME}
+ln -s ${RELEASE_DIR} ${TOOL_NAME}
+
 echo "Status: SUCCESS" | tee -a ${LOG}
 echo "=="
 echo "End Date:"`date` | tee -a ${LOG}
