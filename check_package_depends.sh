@@ -24,8 +24,8 @@ then
 fi
 if [ ! -f ${PACKAGE_DEPENDS} ]
 then
-    echo "ERROR: ${PACKAGE_DEPENDS} missing from `pwd`"
-    exit 1
+    echo "WARNING: ${PACKAGE_DEPENDS} missing from `pwd`"
+    exit 0
 fi
 
 source ./${PACKAGE_DEPENDS}
