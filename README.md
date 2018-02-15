@@ -12,4 +12,4 @@ Under the tool root directory, you will find:
   * A directory for each version of this tool installed
   * A symbolic with this tool name that points to the latest version installed
 
-Check [Package Documentation | https://github.com/mdibl/package_downloads/wiki]
+Package Documentation:  https://github.com/mdibl/package_downloads/wiki
