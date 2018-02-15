@@ -112,12 +112,7 @@ then
 else
    # Download the executable
    #
-   if [ "${NO_DOWNLOAD}" = true ]
-   then
-       mkdir -p ${PACKAGE_BASE}
-   else
-       ./${DOWNLOAD_SCRIPT} ${PACKAGE_CONFIG_FILE}   2>&1 | tee -a $LOG
-   fi
+   ./${DOWNLOAD_SCRIPT}  2>&1 | tee -a $LOG
    echo "=="
    cd ${PACKAGE_DOWNLOADS_BASE}
    ## The zip file was downloaded under $EXTERNAL_SOFTWARE_BASE/$SHORT_NAME
