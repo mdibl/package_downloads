@@ -105,18 +105,6 @@ $TAR -xzvf $TAG_TAR_FILE -C $TAG_DIR --strip-components 1
 
 #Remove the tar file
 rm -f $TAG_TAR_FILE
-
-#create/update symbolic link
-rm -f $REPO
-ln -s $TAG_DIR $REPO
-
-# Check if the repos has an install script
-if [ -f $REPO/Install ]
-then 
-     cd $REPO
-     ./Install
-fi
-
 date
 echo "Program complete"
 exit 0
