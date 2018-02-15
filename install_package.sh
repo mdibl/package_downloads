@@ -33,6 +33,31 @@ then
   echo "Example: ./${SCRIPT_NAME} bamtools 
   exit 1
 fi
+if [ "${GLOBAL_CONFIG}" = "" ]
+then
+    echo "ERROR: global environment GLOBAL_CONFIG not set " 
+    exit 1
+fi
+source ./${GLOBAL_CONFIG}
+
+if [ "${CHECK_DEPENDS_SCRIPT}" = "" ]
+then
+    echo "ERROR: global environment CHECK_DEPENDS_SCRIPT not set " 
+    exit 1
+fi
+if [ "${CHECK_INSTALL_SCRIPT}" = "" ]
+then
+    echo "ERROR: global environment CHECK_INSTALL_SCRIPT not set " 
+    exit 1
+fi
+if [ "${TOOL_NAME}/Install" = "" ]
+then
+    echo "ERROR: Missing ${TOOL_NAME} install script `pwd`/${TOOL_NAME}/Install " 
+    exit 1
+fi
+
+export GLOBAL_CONFIG  RELEASE_NUMBER PACKAGE_BASE PACKAGE_CONFIG_FILE 
+export PACKAGE_DEPENDS
 
 TOOL_NAME=$1
 source ./${CHECK_DEPENDS_SCRIPT}
