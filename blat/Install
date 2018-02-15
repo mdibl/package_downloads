@@ -10,56 +10,30 @@ cd `dirname $0`
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
 
-
-LOG_FILE="${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${SHORT_NAME}.${RELEASE_NUMBER}.log"
-
-rm -rf ${LOG_FILE}
-touch ${LOG_FILE}
-
-rstatus=""
-echo "==" | tee -a ${LOG_FILE}
-echo "Product: $SHORT_NAME" | tee -a ${LOG_FILE}
-echo "Install directory: $PACKAGE_BASE" | tee -a ${LOG_FILE}
-echo "Release version: $RELEASE_NUMBER" | tee -a ${LOG_FILE}
-echo "Install on Server Name: `uname -n`" | tee -a ${LOG_FILE}
-echo "==" | tee -a ${LOG_FILE}
+echo "==" 
+echo "Install on Server Name: `uname -n`" 
+echo "=="
 if [ ! -d $PACKAGE_BASE ]
 then
-   echo "Path to install directory not correct. See $PACKAGE_BASE" | tee -a ${LOG_FILE}
+   echo "Install directory does not exist. See $PACKAGE_BASE" 
    exit 1
 fi
-
-#Check the install
 rstatus="SUCCESS"
-for bin_file in $REMOTE_FILES
-do
-    if [ ! -f $PACKAGE_BASE/$bin_file ]
-    then
-       echo "$PACKAGE_BASE/$bin_file missing" | tee -a ${LOG_FILE}
-       rstatus="FAILED"
-     fi
-done
-if [ "$rstatus" == FAILED ]
-then
-   echo "$rstatus" | tee -a ${LOG_FILE}
-   exit 1
-fi
-echo $rstatus | tee -a ${LOG_FILE}
-#
 #Copy the binaries to /opt/software/bin
 #
-for bin_file in $REMOTE_FILES
+for bin_file on ${FILE_CHECK}
 do
-   chmod 755 $bin_file
-   cp  $bin_file $SOFTWARE_BASE/bin
+    if [ ! -f ${PACKAGE_BASE}/${bin_file} ]
+    then
+        echo "${PACKAGE_BASE}/${bin_file} missing"
+        rstatus="FAILED"
+    else
+        chmod 755 ${PACKAGE_BASE}/${bin_file}
+        cp  ${PACKAGE_BASE}/${bin_file} $SOFTWARE_BASE/bin/
+    fi
 done
-#
-# Update symbolic link of this package to point to
-# the downloaded version
-#
-cd $PACKAGE_DOWNLOADS_BASE
-rm -f $SHORT_NAME
-ln -s ${RELEASE_DIR} $SHORT_NAME
+echo "${rstatus}" 
+[ "${rstatus}" == FAILED ] && exit 1
 
 exit 0
 
