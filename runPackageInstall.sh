@@ -67,13 +67,13 @@ fi
 source ./${PACKAGE_CONFIG_FILE}
 [ -f ${PACKAGE_DEPENDS} ] && source ./${PACKAGE_DEPENDS}
 PACKAGE_BASE=${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR}
+echo " "
+echo "************* Package Install ****************"
+echo ""
 #If this version is already installed, skipp the install
 #
 if [ -d ${PACKAGE_BASE} ]
 then
-    echo " "
-    echo "************* Package Install ****************"
-    echo ""
     echo "${TOOL_NAME} Version: ${RELEASE_NUMBER} is already installed"
     echo ""
     echo "***********************************************"
@@ -84,6 +84,10 @@ then
     echo " " 
     exit 0
 fi
+echo "Installing ${TOOL_NAME} Version: ${RELEASE_NUMBER} "
+echo ""
+echo "***********************************************"
+echo " "
 LOG=${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${TOOL_NAME}.${RELEASE_NUMBER}.log
 rm -f ${LOG}
 touch ${LOG}
@@ -107,21 +111,20 @@ echo "==" | tee -a $LOG
 if [ "${EXPORT_GIT}" = true ]
 then
     #export git repos
-    #
    ./${EXPORT_REPOS_SCRIPT} ${GIT_ORG} ${GIT_REPOS} ${RELEASE_NUMBER} ${PACKAGE_DOWNLOADS_BASE} 2>&1 | tee -a $LOG
 else
    # Download the executable
-   #
    ./${DOWNLOAD_SCRIPT}  2>&1 | tee -a $LOG
    echo "=="
    cd ${PACKAGE_BASE}
-   ## The zip file was downloaded under $EXTERNAL_SOFTWARE_BASE/$SHORT_NAME
+   ## The files are downloaded under ${PACKAGE_BASE}
    [ "${NO_LOCAL_PARENT_DIR}" = true ] && REMOTE_FILES=`basename ${REMOTE_FILES}`
    [ "${local_untar_dir}" != "" ] && [ "${is_tar}" = true ] && mkdir --parent ${untar_dir}
    if [ "${untar_flag}" = true ]
    then
       echo "Untar: ${untar_prog} ${REMOTE_FILES} ${local_untar_dir} From: "`pwd`
       [ -f ${REMOTE_FILES} ] && ${untar_prog} ${REMOTE_FILES} ${local_untar_dir}
+      [ -f $REMOTE_FILES ] && rm -f ${REMOTE_FILES} 
    fi
    #Check if this release directory was created
    if [ ! -d ${PACKAGE_BASE} ]
@@ -129,8 +132,6 @@ else
         echo "Download failed: missing ${PACKAGE_BASE}" | tee -a $LOG
         exit 1
    fi
-   #
-   [ -f $REMOTE_FILES ] && rm -f ${REMOTE_FILES} 
 fi
 #
 #Now run the install_package script
