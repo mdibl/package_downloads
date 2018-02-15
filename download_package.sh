@@ -21,9 +21,9 @@ WGET=`which wget`
 #
 # Set path of files on local server
 #
-if [ "${PACKAGE_DOWNLOADS_BASE}" = "" ]
+if [ "${PACKAGE_BASE}" = "" ]
 then
-    echo "ERROR: global environment PACKAGE_DOWNLOADS_BASE not set " 
+    echo "ERROR: global environment PACKAGE_BASE not set " 
     exit 1
 fi
 
@@ -50,17 +50,17 @@ echo "Remote directory: ${REMOTE_DIR}"  | tee -a ${LOG}
 echo "Remote files: ${REMOTE_FILES}"  | tee -a ${LOG}  
 echo "Remote url: ${REMOTE_URL}" | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
-echo "Local directory: ${PACKAGE_DOWNLOADS_BASE}" | tee -a ${LOG}  
+echo "Local directory: ${PACKAGE_BASE}" | tee -a ${LOG}  
 echo "==" | tee -a ${LOG}  
 echo "Running $SCRIPT_NAME from: ${WORKING_DIR}"| tee -a ${LOG}  
 
-[ ! -d ${PACKAGE_DOWNLOADS_BASE} ] && mkdir --parents ${PACKAGE_DOWNLOADS_BASE}
+[ ! -d ${PACKAGE_BASE} ] && mkdir --parents ${PACKAGE_BASE}
 if [ ${is_xml_query} ]
 then
    ##don't do the loop if this is a xml query string
    target_file="${REMOTE_URL}/${REMOTE_FILES}"
    echo "---- ${WGET} ${WGET_OPTIONS} $target_file" | tee -a  ${LOG}  
-   cd ${PACKAGE_DOWNLOADS_BASE}
+   cd ${PACKAGE_BASE}
    ${WGET} -a ${LOG} ${WGET_OPTIONS} "${target_file}"
 else
 (
@@ -79,12 +79,12 @@ do
        then 
            target_local_dir=""
        else
-           echo "Creating ${PACKAGE_DOWNLOADS_BASE}/${target_local_dir}"
-           mkdir -p ${PACKAGE_DOWNLOADS_BASE}/${target_local_dir}
+           echo "Creating ${PACKAGE_BASE}/${target_local_dir}"
+           mkdir -p ${PACKAGE_BASE}/${target_local_dir}
        fi
    fi
    #cd to LOCAL_DOWNLOAD_BASE and run wget command 
-   cd ${PACKAGE_DOWNLOADS_BASE}/${target_local_dir} 
+   cd ${PACKAGE_BASE}/${target_local_dir} 
    # delete local files as needed
    if [ "${do_deletes}" = true ]
    then
