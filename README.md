@@ -1,6 +1,8 @@
 # Biocore Package Downloads Repos
 
-A repository to create automations that download and Install external bioinformatics packages. For each installed package, this tool can be setup to run an automation that checks if a new version of the tool is available. As soon as it detects a new release of the tool, the automation will download and install it locally.
+A repository to create automations that download and Install external bioinformatics packages.
+
+For each installed package, this tool can be setup to run an automation that checks if a new version of the tool is available. As soon as it detects a new release of the tool, the automation will download and install it locally.
 
 ## What It Does
 
