@@ -35,7 +35,7 @@ then
 fi
 
 TOOL_NAME=$1
-source ./${CHECK_DEPENDS_SCRIPT} ${TOOL_NAME}
+source ./${CHECK_DEPENDS_SCRIPT}
 [ $? -ne 0 ] && exit 1
 source ./${TOOL_NAME}/Install
 source ./${CHECK_INSTALL_SCRIPT}
