@@ -16,14 +16,32 @@
 # as specified in each tool's dependencies.cfg filw
 #
 
-echo "Checking the package install under ${PACKAGE_BASE}" | tee -a ${LOG_FILE}
+if [ "${PACKAGE_DEPENDS}"=""]
+then
+    echo "ERROR: global environment PACKAGE_DEPENDS not set " 
+    exit 1
+fi
+if [ "${PACKAGE_BASE}" = "" ]
+then
+    echo "ERROR: global environment PACKAGE_BASE not set " 
+    exit 1
+fi
+if [ ! -f ${PACKAGE_DEPENDS} ]
+then
+    echo "ERROR: ${PACKAGE_DEPENDS} missing from `pwd`"
+    exit 1
+fi
+
+source ./${PACKAGE_DEPENDS}
+
+echo "Checking the package install under ${PACKAGE_BASE}"
 #Check the install
 rstatus="SUCCESS"
 for folder in ${DIR_CHECK}
 do
     if [ ! -d ${PACKAGE_BASE}/${folder} ]
     then
-       echo "${PACKAGE_BASE}/${folder} missing" | tee -a ${LOG_FILE}
+       echo "${PACKAGE_BASE}/${folder} missing"
        rstatus="FAILED"
      fi
 done
@@ -31,14 +49,14 @@ for file_to_check on ${FILE_CHECK}
 do
     if [ ! -f ${PACKAGE_BASE}/${file_to_check} ]
     then
-        echo "${PACKAGE_BASE}/${file_to_check} missing" | tee -a ${LOG_FILE}
+        echo "${PACKAGE_BASE}/${file_to_check} missing"
         rstatus="FAILED"
     fi
 done
 if [ "${rstatus}" == FAILED ]
 then
-   echo "${rstatus}" | tee -a ${LOG_FILE}
+   echo "${rstatus}" 
    exit 1
 fi
-echo "Install's Status: ${rstatus} " | tee -a ${LOG_FILE}
+echo "Install's Status: ${rstatus} " 
 exit 0
