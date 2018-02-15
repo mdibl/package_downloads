@@ -45,7 +45,7 @@ do
        rstatus="FAILED"
      fi
 done
-for file_to_check on ${FILE_CHECK}
+for file_to_check in ${FILE_CHECK}
 do
     if [ ! -f ${PACKAGE_BASE}/${file_to_check} ]
     then
