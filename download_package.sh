@@ -20,12 +20,24 @@ DATE=`echo $DATE | sed -e 's/[[:space:]]/-/g'`
 WGET=`which wget`
 #
 # Set path of files on local server
-#
+#export GLOBAL_CONFIG PACKAGE_BASE  RELEASE_NUMBER PACKAGE_CONFIG_FILE
+if [ "${GLOBAL_CONFIG}" = "" ]
+then
+    echo "ERROR: global environment GLOBAL_CONFIG not set " 
+    exit 1
+fi
+if [ "${PACKAGE_CONFIG_FILE}" = "" ]
+then
+    echo "ERROR: global environment PACKAGE_CONFIG_FILE not set " 
+    exit 1
+fi
 if [ "${PACKAGE_BASE}" = "" ]
 then
     echo "ERROR: global environment PACKAGE_BASE not set " 
     exit 1
 fi
+source ./${GLOBAL_CONFIG}
+source ./${PACKAGE_CONFIG_FILE}
 
 LOG=${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${RELEASE_DIR}.log
 WGET_COMMAND="${WGET_OPTIONS} '${REMOTE_URL}'"
