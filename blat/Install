@@ -13,11 +13,23 @@ WORKING_DIR=`pwd`
 echo "==" 
 echo "Install on Server Name: `uname -n`" 
 echo "=="
-if [ ! -d $PACKAGE_BASE ]
+if [ ! -d ${PACKAGE_BASE} ]
 then
-   echo "Install directory does not exist. See $PACKAGE_BASE" 
+   echo "ERROR:Install directory does not exist. See ${PACKAGE_BASE}" 
    exit 1
 fi
+if [ "${SOFTWARE_BASE} = "" ]
+then
+   echo "ERROR: global variable SOFTWARE_BASE not set" 
+   exit 1
+fi
+dependency_file=`basename ${PACKAGE_DEPENDS}`
+if [ ! -f ${dependency_file} ]
+then
+    echo "ERROR: ${dependency_file} missing from `pwd`"
+    exit 1
+fi
+source ./${dependency_file}
 rstatus="SUCCESS"
 #Copy the binaries to /opt/software/bin
 #
@@ -29,7 +41,7 @@ do
         rstatus="FAILED"
     else
         chmod 755 ${PACKAGE_BASE}/${bin_file}
-        cp  ${PACKAGE_BASE}/${bin_file} $SOFTWARE_BASE/bin/
+        cp  ${PACKAGE_BASE}/${bin_file} ${SOFTWARE_BASE}/bin/
     fi
 done
 echo "${rstatus}" 
