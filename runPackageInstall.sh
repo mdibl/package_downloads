@@ -35,11 +35,13 @@ echo "
 ***************************************
  BIOCORE PACKAGE INSTALL AUTOMATION 
 ***************************************
+A package to create automations that download and Install
+commonly used bioinformatics tools and libraries. 
+
 "
 
 if [ $# -lt 1 ]
 then
-  echo "" 
   echo "Usage: ./${SCRIPT_NAME} tool_name"
   echo "Example: ./${SCRIPT_NAME} bamtools"
   displayTools
