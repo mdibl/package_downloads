@@ -123,7 +123,6 @@ then
     ${GIT} pull 2>&1 | tee -a ${LOG_FILE}
     RELEASE_TOKEN=`${GIT} rev-list --tags --max-count=1`
     RELEASE_NUMBER=`${GIT} describe --tags ${RELEASE_TOKEN}`
-    RELEASE_NUMBER=`echo $RELEASE_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`    
 
 else
     FILE_TOKEN=`basename ${REMOTE_VERSION_FILE}`
@@ -139,16 +138,16 @@ else
     fi
     EXPRESSION="$EXP_PREFIX ${LOCAL_VERSION_FILE}"
     RELEASE_NUMBER=`${EXPRESSION} | grep "${VERSION_PREFIX}" |sed "s/${VERSION_PREFIX}//" `
-    [ "${VERSION_SUFFIX}" != "" ] && RELEASE_NUMBER=`sed "s/${VERSION_SUFFIX}//"`
-    RELEASE_NUMBER=`echo $RELEASE_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
+    [ "${VERSION_SUFFIX}" != "" ] && RELEASE_NUMBER=`echo ${RELEASE_NUMBER} | sed "s/${VERSION_SUFFIX}//"`
 fi
+RELEASE_NUMBER=`echo $RELEASE_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
 
 ## Create the current release Number file
+echo "Updating ${RELEASE_FILE} -- file"
 if [[ ${RELEASE_NUMBER} =~ ${REPOS_TAG_PATTERN} ]]
 then
    rm -f ${RELEASE_FILE}
    touch ${RELEASE_FILE}
-   echo "Current pattern match:${RELEASE_NUMBER}" | tee -a ${LOG_FILE}
    echo "${RELEASE_NUMBER}" > ${RELEASE_FILE}
 fi
 if [ -f ${RELEASE_FILE} ]
