@@ -19,43 +19,38 @@ WORKING_DIR=`pwd`
 SCRIPT_NAME=`basename $0`
 GLOBAL_CONFIG=Configuration
 
+function displayTools() {
+    echo ""
+    echo " List of available tools"
+    echo "----------------------------"
+    tools="`ls`"
+    for tool in ${tools}
+    do
+       [ -d ${tool} ] && echo " ${tool}"
+    done
+    echo ""
+}
+
+echo "
+***************************************
+ BIOCORE PACKAGE INSTALL AUTOMATION 
+***************************************
+"
+
 if [ $# -lt 1 ]
 then
-  echo ""
-  echo "***************************************"
-  echo " BIOCORE PACKAGE INSTALL AUTOMATION "
-  echo "***************************************"
   echo "" 
   echo "Usage: ./${SCRIPT_NAME} tool_name"
   echo "Example: ./${SCRIPT_NAME} bamtools"
-  echo ""
-  echo ""
-  echo " List of  available tools"
-  echo "---------------------------------------"
-  tools="`ls`"
-  for tool in ${tools}
-  do
-       [ -d ${tool} ] && echo " ${tool}"
-  done
-  echo ""
+  displayTools
   exit 1
 fi
 TOOL_NAME=$1
 if [ ! -d ${TOOL_NAME} ]
 then
    echo "ERROR: No automation found for ${TOOL_NAME}"
-   echo "Check list of available tools for automation under:${WORKING_DIR}"
-   echo "Also check the spelling or the case sensitive"
-   echo ""
-   echo "*****************************"
-   echo " List of available tools"
-   echo "*****************************"
-   tools="`ls`"
-   for tool in ${tools}
-   do
-       [ -d ${tool} ] && echo " ${tool}"
-   done
-   echo ""
+   echo "Check the spelling or the case sensitive"
+   displayTools
    exit 1
 fi
 ##The config file is relative to
