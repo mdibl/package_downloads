@@ -21,12 +21,17 @@ GLOBAL_CONFIG=Configuration
 
 if [ $# -lt 1 ]
 then
+  echo ""
+  echo "***************************************"
+  echo " BIOCORE PACKAGE INSTALL AUTOMATION "
+  echo "***************************************"
+  echo "" 
   echo "Usage: ./${SCRIPT_NAME} tool_name"
   echo "Example: ./${SCRIPT_NAME} bamtools"
   echo ""
-  echo "*****************************"
+  echo ""
   echo " List of  available tools"
-  echo "*****************************"
+  echo "---------------------------------------"
   tools="`ls`"
   for tool in ${tools}
   do
