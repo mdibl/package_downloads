@@ -81,8 +81,15 @@ RELEASE_FILE=${PACKAGE_DOWNLOADS_BASE}/${CURRENT_FLAG_FILE}
 ## Check if wget is installed 
 if [ ! -f ${WGET} ]
 then
-  echo "Can't use 'wget' command to download ${REMOTE_FILE} "
+  echo "Can't use 'wget' command to download some of our packages "
   echo "Wget not installed on `uname -n`"
+  exit 1 	
+fi
+## Check if wget is installed 
+if [ ! -f ${GIT} ]
+then
+  echo "Can't use 'git' command to download some of our packages"
+  echo "Git not installed on `uname -n`"
   exit 1 	
 fi
 
