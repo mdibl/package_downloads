@@ -123,7 +123,6 @@ then
     ${GIT} pull 2>&1 | tee -a ${LOG_FILE}
     RELEASE_TOKEN=`${GIT} rev-list --tags --max-count=1`
     RELEASE_NUMBER=`${GIT} describe --tags ${RELEASE_TOKEN}`
-
 else
     FILE_TOKEN=`basename ${REMOTE_VERSION_FILE}`
     LOCAL_VERSION_FILE=${PACKAGE_DOWNLOADS_BASE}/${FILE_TOKEN}
