@@ -15,7 +15,7 @@ EXTERNAL_SOFTWARE_BASE=/opt/software/external
 LOGS_BASE=/data/logs
 WGET=`which wget`
 
-#Path where the repos package_downloads is installed
+#Path to where the repos package_downloads is installed
 #
 PACKAGE_DOWNLOADS_BASE=/home/bioadmin/package_downloads
 #relative to this package base (package_downloads)
