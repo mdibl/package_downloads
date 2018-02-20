@@ -21,17 +21,37 @@ GLOBAL_CONFIG=Configuration
 
 if [ $# -lt 1 ]
 then
-  echo "Usage: ./${SCRIPT_NAME} tool_name
-  echo "Example: ./${SCRIPT_NAME} bamtools 
+  echo "Usage: ./${SCRIPT_NAME} tool_name"
+  echo "Example: ./${SCRIPT_NAME} bamtools"
+  echo ""
+  echo "*****************************"
+  echo " List of  available tools"
+  echo "*****************************"
+  tools="`ls`"
+  for tool in ${tools}
+  do
+       [ -d ${tool} ] && echo " ${tool}"
+  done
+  echo ""
   exit 1
 fi
 TOOL_NAME=$1
 if [ ! -d ${TOOL_NAME} ]
 then
-  echo "ERROR: No automation found for ${TOOL_NAME}"
-  echo "Check list of available automations under `pwd`"
-  echo "Also check the spelling or the case sensitive"
-  exit 1
+   echo "ERROR: No automation found for ${TOOL_NAME}"
+   echo "Check list of available tools for automation under:${WORKING_DIR}"
+   echo "Also check the spelling or the case sensitive"
+   echo ""
+   echo "*****************************"
+   echo " List of available tools"
+   echo "*****************************"
+   tools="`ls`"
+   for tool in ${tools}
+   do
+       [ -d ${tool} ] && echo " ${tool}"
+   done
+   echo ""
+   exit 1
 fi
 ##The config file is relative to
 # the root directory of pacakage download 
