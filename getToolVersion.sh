@@ -137,7 +137,8 @@ else
         exit 1
     fi
     EXPRESSION="$EXP_PREFIX ${LOCAL_VERSION_FILE}"
-    RELEASE_NUMBER=`${EXPRESSION} | grep "${VERSION_PREFIX}" |sed "s/${VERSION_PREFIX}//" | sed "s/${VERSION_SUFFIX}//"`
+    RELEASE_NUMBER=`${EXPRESSION} | grep "${VERSION_PREFIX}" |sed "s/${VERSION_PREFIX}//" `
+    [ "${VERSION_SUFFIX}" != "" ] && RELEASE_NUMBER=`sed "s/${VERSION_SUFFIX}//"`
     RELEASE_NUMBER=`echo $RELEASE_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
 fi
 
