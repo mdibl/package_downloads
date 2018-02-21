@@ -49,40 +49,38 @@ then
     exit 1
 fi
 rstatus=""
-function check_depends(){
-    echo "Running the dependency test" 
-    for dependency in $BIN_DEPENDENCIES
-    do
-        token=`which ${dependency}`
-        if [ ! -f "${token}" ]
-        then
-           echo "ERROR: Dependency ${dependency} missing"
-           rstatus="Failed"
-        fi
-    done
-    # Check LIBRARY dependencies
-    for dependency in $LIB_DEPENDENCIES
-    do
-        tokens=`locate $dependency`
-        for lib_path in $tokens
-        do
-          if [ ! -f ${lib_path} ]
-          then
-             echo "ERROR: Dependency  ${lib_path} missing" 
-             rstatus="Failed"
-          fi
-        done
-    done
-    echo "$rstatus"
-}
-
+echo "Running the dependency test" 
+for dependency in $BIN_DEPENDENCIES
+do
+   token=`which ${dependency}`
+   if [ ! -f "${token}" ]
+   then
+      echo "ERROR: Dependency ${dependency} missing"
+      rstatus="Failed"
+   fi
+done
+# Check LIBRARY dependencies
+for dependency in $LIB_DEPENDENCIES
+do
+  tokens=`locate $dependency`
+  for lib_path in $tokens
+  do
+    if [ ! -f ${lib_path} ]
+    then
+       echo "ERROR: Dependency  ${lib_path} missing" 
+       rstatus="Failed"
+    fi
+  done
+done
+echo "$rstatus"
+if [ "$rstatus" == Failed ]
+then
+  echo "Dependency test Failed" 
+  exit 1
+fi
 export GLOBAL_CONFIG  RELEASE_NUMBER PACKAGE_BASE PACKAGE_CONFIG_FILE 
 export PACKAGE_DEPENDS SOFTWARE_BASE
-
-
-./${CHECK_DEPENDS_SCRIPT}
-[ $? -ne 0 ] && exit 1
-./${TOOL_NAME}/Install
+#./${TOOL_NAME}/Install
 ./${CHECK_INSTALL_SCRIPT}
 [ $? -ne 0 ] && exit 1
 exit 0
