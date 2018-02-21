@@ -4,125 +4,59 @@
 # Author: Lucie Hutchins
 # Date: October 2017
 ## Script to build and install a new package
-
 cd `dirname $0`
-
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
 TAR=`which tar`
-##These config files are relative to
-# the Install script working directory
-dependents_file=dependencies.cfg
-pack_config_file=R_package.cfg
 
-if [ ! -f ../Configuration ]
+if [ ! -f ../${GLOBAL_CONFIG} ]
 then
-  echo "'../Configuration' file missing "     
+  echo "'../${GLOBAL_CONFIG}' file missing "     
   exit 1
 fi
-source ./../Configuration
-source ./$pack_config_file
-source ./$dependents_file
-
-if [ ! -f ${RELEASE_FILE} ]
+source ./../${GLOBAL_CONFIG}
+PACKAGE_CONFIG_FILE=R${PACKAGE_CONFIGFILE_SUFFIX}
+source ./${PACKAGE_CONFIG_FILE}
+PACKAGE_BASE=${EXTERNAL_SOFTWARE_BASE}/${SHORT_NAME}
+if [ ! -d ${PACKAGE_BASE} ]
 then
-   echo "File ${RELEASE_FILE} does not exists"
+   echo "ERROR: Missing the install directory ${PACKAGE_BASE} "
    exit 1
 fi
+LOG_FILE="${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${SHORT_NAME}.${RELEASE_NUMBER}.log"
 
-RELEASE_NUMBER=`cat ${RELEASE_FILE}`
-LOG_FILE="${DOWNLOADS_LOG_DIR}/$SCRIPT_NAME.$SHORT_NAME.$RELEASE_NUMBER.log"
-PACKAGE_BASE=$LOCAL_DIR
-
-rm -rf $LOG_FILE
-touch $LOG_FILE
-
+rm -rf ${LOG_FILE}
+touch ${LOG_FILE}
 rstatus=""
-echo "==" | tee -a $LOG_FILE
-echo "Product: $SHORT_NAME" | tee -a $LOG_FILE
-echo "Install directory: $PACKAGE_BASE" | tee -a $LOG_FILE
-echo "Release version: $RELEASE_NUMBER" | tee -a $LOG_FILE
-echo "Install on Server Name: `uname -n`" | tee -a $LOG_FILE
-echo "==" | tee -a $LOG_FILE
+echo "==" | tee -a ${LOG_FILE}
+echo "Product: ${SHORT_NAME}" | tee -a ${LOG_FILE}
+echo "Install directory: ${PACKAGE_BASE}" | tee -a ${LOG_FILE}
+echo "Release version: ${RELEASE_NUMBER}" | tee -a ${LOG_FILE}
+echo "Install on Server Name: `uname -n`" | tee -a ${LOG_FILE}
+echo "==" | tee -a ${LOG_FILE}
+cd ${PACKAGE_BASE}
 
-echo "Running the dependency test" | tee -a $LOG_FILE
-echo "Missing dependencies:" | tee -a $LOG_FILE
-for dependency in $DEPENDENCIES
-do
-    token=`which $dependency`
-    if [ ! -f "$token" ]
-    then
-       echo "Dependency: $dependency" | tee -a $LOG_FILE
-       rstatus="Failed"
-    fi
-done
-# Check zLib dependency
-for dependency in $LIB_DEPENDENCIES
-do
-  tokens=`locate $dependency`
-  for lib_path in $tokens
-  do
-    if [ ! -f $lib_path ]
-    then
-      echo "Dependency: $dependency" | tee -a $LOG_FILE
-      rstatus="Failed"
-    fi
-  done
-done
-
-echo "==" | tee -a $LOG_FILE
-if [ "$rstatus" == Failed ]
+if [ ! -f ${REMOTE_FILES} ]
 then
-  echo "Dependency test Failed" | tee -a $LOG_FILE
-  exit 1
-fi
-echo "Dependency test passed" | tee -a $LOG_FILE
-
-cd $PACKAGE_BASE
-echo "Running $TAR -xvf $REMOTE_FILES command from "`pwd` | tee -a $LOG_FILE
-if [ ! -f $REMOTE_FILES ]
-then
-   echo "ERROR - Missing the tar file:$REMOTE_FILES"
+   echo "ERROR - tar file:${REMOTE_FILES} missing under `pwd`"
    exit 1 
 fi
-
-$TAR -xvf $REMOTE_FILES 2>&1 | tee -a $LOG_FILE
-if [ ! -d $SHORT_NAME-$RELEASE_NUMBER ]
+echo "Running ${TAR} -xvf ${REMOTE_FILES} command from "`pwd` | tee -a ${LOG_FILE}
+${TAR} -xvf ${REMOTE_FILES} 2>&1 | tee -a $LOG_FILE
+if [ ! -d ${RELEASE_DIR} ]
 then
    rstatus="FAILED"
-   echo "Command $TAR -xvf $REMOTE_FILES failed - missing directory $SHORT_NAME-$RELEASE_NUMBER"
+   echo "Command $TAR -xvf $REMOTE_FILES failed - missing directory ${RELEASE_DIR}"
    exit 1
 fi
 #cleanup the tar file
 rm -f $REMOTE_FILES
-#create the symbolic link
-rm -f $SHORT_NAME
-ln -s $SHORT_NAME-$RELEASE_NUMBER $SHORT_NAME
-
-cd $SHORT_NAME
+cd ${RELEASE_DIR}
 echo "Running the install from "`pwd` | tee -a $LOG_FILE
 ./configure --prefix=$SOFTWARE_BASE --with-x=no
 make
 make install
 #make install-info
 #make install-pdf
-#Check the install
-rstatus="SUCCESS"
-for bin_file in $FILE_CHECK
-do
-    if [ ! -f $bin_file ]
-    then
-       echo "$bin_file missing" | tee -a $LOG_FILE
-       rstatus="FAILED"
-     fi
-done
-
-if [ "$rstatus" == FAILED ]
-then
-   echo "$rstatus" | tee -a $LOG_FILE
-   exit 1
-fi
-echo $rstatus | tee -a $LOG_FILE
-
 exit 0
 
