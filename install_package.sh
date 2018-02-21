@@ -27,40 +27,63 @@ cd `dirname $0`
 
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
-
+GLOBAL_CONFIG=Configuration
 if [ $# -lt 1 ]
 then
   echo "Usage: ./${SCRIPT_NAME} tool_name
   echo "Example: ./${SCRIPT_NAME} bamtools 
   exit 1
 fi
-if [ "${GLOBAL_CONFIG}" = "" ]
+TOOL_NAME=$1
+if [ -f ${GLOBAL_CONFIG} ]
 then
-    echo "ERROR: global environment GLOBAL_CONFIG not set " 
-    exit 1
+  echo "ERROR: Missing ${GLOBAL_CONFIG} file `pwd` " 
 fi
-source ./${GLOBAL_CONFIG}
 
-if [ "${CHECK_DEPENDS_SCRIPT}" = "" ]
-then
-    echo "ERROR: global environment CHECK_DEPENDS_SCRIPT not set " 
-    exit 1
-fi
-if [ "${CHECK_INSTALL_SCRIPT}" = "" ]
-then
-    echo "ERROR: global environment CHECK_INSTALL_SCRIPT not set " 
-    exit 1
-fi
+source ./${GLOBAL_CONFIG}
+## 
+PACKAGE_DEPENDS=${TOOL_NAME}/${PACKAGE_DEPENDENCIES_FILE}
 if [ "${TOOL_NAME}/Install" = "" ]
 then
     echo "ERROR: Missing ${TOOL_NAME} install script `pwd`/${TOOL_NAME}/Install " 
     exit 1
 fi
+function check_depends(){
+    echo "Running the dependency test" 
+    for dependency in $BIN_DEPENDENCIES
+    do
+        token=`which ${dependency}`
+        if [ ! -f "${token}" ]
+        then
+           echo "ERROR: Dependency ${dependency} missing"
+           rstatus="Failed"
+        fi
+    done
+    # Check LIBRARY dependencies
+    for dependency in $LIB_DEPENDENCIES
+    do
+        tokens=`locate $dependency`
+        for lib_path in $tokens
+        do
+          if [ ! -f ${lib_path} ]
+          then
+             echo "ERROR: Dependency  ${lib_path} missing" 
+             rstatus="Failed"
+          fi
+        done
+    done
+    if [ "$rstatus" == Failed ]
+    then
+        echo "Dependency test Failed" 
+        exit 1
+    fi
+    exit 0
+}
 
 export GLOBAL_CONFIG  RELEASE_NUMBER PACKAGE_BASE PACKAGE_CONFIG_FILE 
 export PACKAGE_DEPENDS SOFTWARE_BASE
 
-TOOL_NAME=$1
+
 ./${CHECK_DEPENDS_SCRIPT}
 [ $? -ne 0 ] && exit 1
 ./${TOOL_NAME}/Install
