@@ -48,6 +48,7 @@ then
     echo "ERROR: Missing ${TOOL_NAME} install script `pwd`/${TOOL_NAME}/Install " 
     exit 1
 fi
+rstatus=""
 function check_depends(){
     echo "Running the dependency test" 
     for dependency in $BIN_DEPENDENCIES
@@ -72,12 +73,7 @@ function check_depends(){
           fi
         done
     done
-    if [ "$rstatus" == Failed ]
-    then
-        echo "Dependency test Failed" 
-        exit 1
-    fi
-    exit 0
+    echo "$rstatus"
 }
 
 export GLOBAL_CONFIG  RELEASE_NUMBER PACKAGE_BASE PACKAGE_CONFIG_FILE 
