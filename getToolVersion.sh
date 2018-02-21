@@ -129,7 +129,7 @@ else
     echo "Downloaded files are under ${PACKAGE_DOWNLOADS_BASE}"| tee -a ${LOG_FILE}
     echo "File to download:${REMOTE_VERSION_FILE}"| tee -a ${LOG_FILE}
     echo "Script :$DOWNLOAD_SCRIPT"| tee -a ${LOG_FILE}
-    ${WGET}  -t 5 -nd -m -O ${LOCAL_VERSION_FILE} "${REMOTE_VERSION_FILE}" 2>&1 | tee -a ${LOG_FILE}
+    ${WGET}  -O ${LOCAL_VERSION_FILE} ${REMOTE_VERSION_FILE} 2>&1 | tee -a ${LOG_FILE}
     if [ ! -f ${LOCAL_VERSION_FILE} ]
     then
         echo "Download failed: ${LOCAL_VERSION_FILE} is missing" 
@@ -142,7 +142,8 @@ fi
 RELEASE_NUMBER=`echo $RELEASE_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
 
 ## Create the current release Number file
-echo "Updating ${RELEASE_FILE} -- file"
+echo "${TOOL_NAME} release: ${RELEASE_NUMBER} "
+echo "Updating ${RELEASE_FILE} with version:${RELEASE_NUMBER}"
 if [[ ${RELEASE_NUMBER} =~ ${REPOS_TAG_PATTERN} ]]
 then
    rm -f ${RELEASE_FILE}
