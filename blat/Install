@@ -3,11 +3,11 @@
 # Organization: MDIBL
 # Author: Lucie Hutchins
 # Date: October 2017
-## Script to build and install a new R package
+## Script to build and install a new blat package
 # What it does:
 # 1) source the main config file to set gloabl path
-# 2) untar the downloaded tar file
-# 3) builds and install R
+# 2) source the dependencies config file
+# 3) copy the new blat executables to /opt/software/bin
 #
 # Note: the following environment variables are expected to be set
 #       by the caller
