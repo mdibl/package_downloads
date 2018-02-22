@@ -29,9 +29,9 @@ PACKAGE_CONFIG_FILE=R${PACKAGE_CONFIGFILE_SUFFIX}
 source ./${PACKAGE_CONFIG_FILE}
 
 PACKAGE_BASE=${EXTERNAL_SOFTWARE_BASE}/${SHORT_NAME}
-if [ ! -d ${PACKAGE_BASE} ]
+if [ ! -d ${PACKAGE_BASE}/${RELEASE_DIR} ]
 then
-   echo "ERROR: Missing the install directory ${PACKAGE_BASE} "
+   echo "ERROR: Missing the install directory ${PACKAGE_BASE}/${RELEASE_DIR} "
    exit 1
 fi
 LOG_FILE="${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${SHORT_NAME}.${RELEASE_NUMBER}.log"
@@ -45,7 +45,7 @@ echo "Install directory: ${PACKAGE_BASE}" | tee -a ${LOG_FILE}
 echo "Release version: ${RELEASE_NUMBER}" | tee -a ${LOG_FILE}
 echo "Install on Server Name: `uname -n`" | tee -a ${LOG_FILE}
 echo "==" | tee -a ${LOG_FILE}
-cd ${PACKAGE_BASE}
+cd ${PACKAGE_BASE}/${RELEASE_DIR}
 #
 # as defined in the package config file
 if [ ! -f ${REMOTE_FILES} ]
@@ -61,13 +61,16 @@ then
    echo "Command $TAR -xvf $REMOTE_FILES failed - missing directory ${RELEASE_DIR}"
    exit 1
 fi
+mv ${RELEASE_DIR}/* .
+rm -rf ${RELEASE_DIR}/
 #cleanup the tar file
 rm -f $REMOTE_FILES
-cd ${RELEASE_DIR}
 echo "Running the install from "`pwd` | tee -a $LOG_FILE
 ./configure --prefix=$SOFTWARE_BASE --with-x=no
 make
 make install
+
+echo "Install Done" | tee -a $LOG_FILE
 #make install-info
 #make install-pdf
 exit 0
