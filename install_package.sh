@@ -92,7 +92,7 @@ then
   echo "Dependency test Failed" | tee -a ${LOG_FILE}
   exit 1
 fi
-export GLOBAL_CONFIG  RELEASE_NUMBER PACKAGE_DEPENDS TOOL_NAME PACKAGE_BASE
+export GLOBAL_CONFIG  PACKAGE_DEPENDS PACKAGE_BASE
 ./${TOOL_NAME}/Install
 ./${CHECK_INSTALL_SCRIPT}
 [ $? -ne 0 ] && exit 1
