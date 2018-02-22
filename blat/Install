@@ -65,6 +65,7 @@ do
         rstatus="FAILED"
     else
         chmod 755 ${PACKAGE_BASE}/${RELEASE_DIR}/${bin_file}
+        echo "cp -p  ${PACKAGE_BASE}/${RELEASE_DIR}/${bin_file} ${SOFTWARE_BASE}/bin/"
         cp -p  ${PACKAGE_BASE}/${RELEASE_DIR}/${bin_file} ${SOFTWARE_BASE}/bin/
     fi
 done
