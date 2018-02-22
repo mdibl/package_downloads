@@ -3,7 +3,17 @@
 # Organization: MDIBL
 # Author: Lucie Hutchins
 # Date: October 2017
-## Script to build and install a new package
+## Script to build and install a new R package
+# What it does:
+# 1) source the main config file to set gloabl path
+# 2) untar the downloaded tar file
+# 3) builds and install R
+#
+# Note: the following environment variables are expected to be set
+#       by the caller
+# 1) GLOBAL_CONFIG
+# 2) RELEASE_NUMBER
+#
 cd `dirname $0`
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
@@ -17,6 +27,7 @@ fi
 source ./../${GLOBAL_CONFIG}
 PACKAGE_CONFIG_FILE=R${PACKAGE_CONFIGFILE_SUFFIX}
 source ./${PACKAGE_CONFIG_FILE}
+
 PACKAGE_BASE=${EXTERNAL_SOFTWARE_BASE}/${SHORT_NAME}
 if [ ! -d ${PACKAGE_BASE} ]
 then
@@ -35,7 +46,8 @@ echo "Release version: ${RELEASE_NUMBER}" | tee -a ${LOG_FILE}
 echo "Install on Server Name: `uname -n`" | tee -a ${LOG_FILE}
 echo "==" | tee -a ${LOG_FILE}
 cd ${PACKAGE_BASE}
-
+#
+# as defined in the package config file
 if [ ! -f ${REMOTE_FILES} ]
 then
    echo "ERROR - tar file:${REMOTE_FILES} missing under `pwd`"
