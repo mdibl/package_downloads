@@ -6,19 +6,25 @@
 #
 #
 # Note:
-#  If for some reasons you want the downloads to
-#  be sotered somewhere else than EXTERNAL_SOFTWARE_BASE,
-#  then change the following base directories as needed
-#
+#  Make sure you change the following base directories as needed
+#  You should have full permissions to create/delete on those base directories 
+#  
+## SOFTWARE_BASE/bin, SOFTWARE_BASE/lib, SOFTWARE_BASE/lib64 ,...
 SOFTWARE_BASE=/opt/software
 EXTERNAL_SOFTWARE_BASE=/opt/software/external
+#Path to where the repos package_downloads is installed
+PACKAGE_DOWNLOADS_BASE=/home/bioadmin/package_downloads
+## Specifies the path where to clone git repos locally
+PACKAGE_GIT_CLONE_BASE=/home/bioadmin/github_repos
+# Logs setting
+# Log directory base for this product
+# Log files associated with scripts included in this product
+# will be stored here
 LOGS_BASE=/data/logs
+DOWNLOADS_LOG_DIR=${LOGS_BASE}/package_downloads
+
 WGET=`which wget`
 GIT=`which git`
-
-#Path to where the repos package_downloads is installed
-#
-PACKAGE_DOWNLOADS_BASE=/home/bioadmin/package_downloads
 #relative to this package base (package_downloads)
 GLOBAL_CONFIG=Configuration
 DOWNLOAD_SCRIPT=download_package.sh
@@ -36,18 +42,8 @@ PACKAGE_DEPENDENCIES_FILE=dependencies.cfg
 CURRENT_FLAG_FILE=current_release_NUMBER
 
 ## Git setting 
-## Specifies the path where to clone git repos locally
-PACKAGE_GIT_CLONE_BASE=/home/bioadmin/github_repos
 GIT_CLONE_URL_BASE=https://github.com
 GIT_DOWNLOADS_URL_BASE=https://api.github.com
-
-
-# Logs setting
-# Log directory base for this product
-# Log files associated with scripts included in this product
-# will be stored here
-#
-DOWNLOADS_LOG_DIR=${LOGS_BASE}/package_downloads
 
 export SOFTWARE_BASE EXTERNAL_SOFTWARE_BASE LOGS_BASE 
 export PACKAGE_DOWNLOADS_BASE GLOBAL_CONFIG DOWNLOAD_SCRIPT 
