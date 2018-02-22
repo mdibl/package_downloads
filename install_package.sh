@@ -96,5 +96,7 @@ export GLOBAL_CONFIG  PACKAGE_DEPENDS PACKAGE_BASE
 ./${TOOL_NAME}/Install
 ./${CHECK_INSTALL_SCRIPT}
 [ $? -ne 0 ] && exit 1
+
+echo "Install Done" | tee -a $LOG_FILE
 exit 0
 
