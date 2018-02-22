@@ -13,7 +13,7 @@
 #       by the caller
 # 1) GLOBAL_CONFIG
 # 2) RELEASE_NUMBER
-# 3) PACKAGE_DEPENDS
+# 3) FILE_CHECK
 #
 cd `dirname $0`
 
@@ -49,13 +49,6 @@ echo "Release version: ${RELEASE_NUMBER}" | tee -a ${LOG_FILE}
 echo "Install on Server Name: `uname -n`" | tee -a ${LOG_FILE}
 echo "==" | tee -a ${LOG_FILE}
 cd ${PACKAGE_BASE}/${RELEASE_DIR}
-dependencies=`basename ${PACKAGE_DEPENDS}`
-if [ ! -f ${dependencies} ]
-then
-    echo "ERROR: Missing dependency file ${dependencies} under `pwd`"
-    exit 1
-fi
-source ./${dependencies}
 #Copy the binaries to /opt/software/bin
 #
 for bin_file in ${FILE_CHECK}
