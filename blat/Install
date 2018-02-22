@@ -53,6 +53,8 @@ then
    echo "ERROR: dependencies.cfg file missing"
    exit 1
 fi
+
+source ./${depends}
 #Copy the binaries to /opt/software/bin
 #
 for bin_file in ${FILE_CHECK}
