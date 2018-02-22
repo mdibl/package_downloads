@@ -56,7 +56,7 @@ rm -rf ${LOG_FILE}
 touch ${LOG_FILE}
 rstatus=""
 echo "==" | tee -a ${TOOL_NAME}
-echo "Product: ${SHORT_NAME}" | tee -a ${LOG_FILE}
+echo "Product: ${TOOL_NAME}" | tee -a ${LOG_FILE}
 echo "Install directory: ${PACKAGE_BASE}" | tee -a ${LOG_FILE}
 echo "Release version: ${RELEASE_NUMBER}" | tee -a ${LOG_FILE}
 echo "Install on Server Name: `uname -n`" | tee -a ${LOG_FILE}
