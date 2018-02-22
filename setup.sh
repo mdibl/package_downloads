@@ -32,8 +32,9 @@ do
 done
 
 echo "Next: Update the file 'Configuration' and set the following environment variables"
-echo "SOFTWARE_BASE : full path to where you store external executrables and libraries"
-echo "EXTERNAL_SOFTWARE_BASE : full path to where packages will be installed "
-echo "PACKAGE_DOWNLOADS_BASE: full path to where this package is installed"
-echo "PACKAGE_GIT_CLONE_BASE : full path to where to clone git repos locally "
-echo "LOGS_BASE : full path to the logs base"
+echo "  SOFTWARE_BASE : full path to where to store external executables and libraries"
+echo "  EXTERNAL_SOFTWARE_BASE : full path to where packages will be installed "
+echo "  PACKAGE_DOWNLOADS_BASE: full path to where this package is installed"
+echo "  PACKAGE_GIT_CLONE_BASE : full path to where to clone git repos locally "
+echo "  LOGS_BASE : full path to the logs base"
+echo ""
