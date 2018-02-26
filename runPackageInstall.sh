@@ -11,9 +11,9 @@
 # What it does:
 # 1) sources global configs
 # 2) Downloads the specified version of this package 
-# 3) Updates the symbolic link
-# 4) Calls the install_package script
-#
+# 3) Calls the install_package script
+# 4) Updates the tool symbolic link un success 
+
 cd `dirname $0`
 WORKING_DIR=`pwd`
 SCRIPT_NAME=`basename $0`
