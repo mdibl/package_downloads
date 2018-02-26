@@ -12,7 +12,7 @@
 # 1) sources global configs
 # 2) Downloads the specified version of this package 
 # 3) Calls the install_package script
-# 4) Updates the tool symbolic link un success 
+# 4) Updates the tool symbolic link on success 
 
 cd `dirname $0`
 WORKING_DIR=`pwd`
