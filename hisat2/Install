@@ -4,7 +4,7 @@
 # Author: Lucie Hutchins
 #
 # What it does:
-# 1) source the main config file to set gloabl path
+# 1) source the main config file to set global path
 # 2) source the dependencies config file
 # 3) runs the build and copy  the executables to /opt/software/bin
 #
