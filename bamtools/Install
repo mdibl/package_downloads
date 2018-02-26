@@ -5,21 +5,42 @@
 # Date: September 2017
 # Modified: February 2018
 #
-# Script is called by the install_package script 
-#  to install Bamtools package
+# What it does:
+# 1) source the main config file to set global path
+# 2) source the dependencies config file
+# 3) runs the build and copy  the executables to /opt/software/bin
 #
-# Usage: ./Install 
-#
-# Assumption: All the global variables have been set
-# by the install_packge script
+# Note: the following environment variables are expected to be set
+#       by the caller
+# 1) GLOBAL_CONFIG
+# 2) PACKAGE_BASE
 
 cd `dirname $0`
 
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
+echo "==" 
+echo "Server Name: `uname -n`" 
+echo "Install Date: `date`" 
+if [ ! -f ../${GLOBAL_CONFIG} ]
+then
+  echo "'../${GLOBAL_CONFIG}' file missing "     
+  exit 1
+fi
+source ./../${GLOBAL_CONFIG}
+if [ ! -f ${PACKAGE_DEPENDENCIES_FILE} ]
+then
+   echo "ERROR: ${PACKAGE_DEPENDENCIES_FILE} file missing"
+   exit 1
+fi
+source ./${PACKAGE_DEPENDENCIES_FILE}
+if [ ! -d ${PACKAGE_BASE} ]
+then
+   echo "ERROR: Missing the install directory ${PACKAGE_BASE} "
+   exit 1
+fi
+cd $PACKAGE_BASE
 
-# Execute the Install command for this package
-cd ${PACKAGE_BASE}
 mkdir build 
 if [ ! -d build ]
 then
@@ -31,14 +52,33 @@ cd build
 cmake -DCMAKE_INSTALL_PREFIX=${PACKAGE_BASE} .. 2>&1 | tee -a ${LOG_FILE}
 make 2>&1 | tee -a ${LOG_FILE}
 make install 2>&1 | tee -a ${LOG_FILE}
+#Check the install
+rstatus="SUCCESS"
+for pkg_dir in ${DIR_CHECK}
+do
+    if [ ! -f ${pkg_dir} ]
+    then
+       echo "$pkg_dir missing under ${PACKAGE_BASE} "
+       rstatus="FAILED"
+     fi
+done
 
-# Check the install #
+for pkg_file in ${FILE_CHECK}
+do
+    if [ ! -f ${pkg_file} ]
+    then
+       echo "$pkg_file missing under ${PACKAGE_BASE} "
+       rstatus="FAILED"
+     fi
+done
 
-[ -f {INSTALL_CHECK_SCRIPT} ] && source ${INSTALL_CHECK_SCRIPT}
+if [ "${rstatus}" == FAILED ]
 then
-   echo "ERROR: ${INSTALL_CHECK_SCRIPT} failed check the logs - ${LOG_FILE} " | tee -a ${LOG_FILE}
+   echo "${rstatus}" 
    exit 1
 fi
+echo ${rstatus}
+
 ## Copy the excutable to the path  -- specific to bamtools install ## 
 RELEASE_NUMBER=`echo ${RELEASE_NUMBER}| sed -e 's/^v//'`
 cd ${PACKAGE_BASE}/${BIN_DIR}
