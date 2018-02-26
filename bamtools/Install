@@ -44,14 +44,14 @@ cd $PACKAGE_BASE
 mkdir build 
 if [ ! -d build ]
 then
-   echo "Could not create the 'build' directory under `pwd`" | tee -a ${LOG_FILE}
+   echo "Could not create the 'build' directory under `pwd`" 
    exit 1
 fi
 # Run the install commands
 cd build
-cmake -DCMAKE_INSTALL_PREFIX=${PACKAGE_BASE} .. 2>&1 | tee -a ${LOG_FILE}
-make 2>&1 | tee -a ${LOG_FILE}
-make install 2>&1 | tee -a ${LOG_FILE}
+cmake -DCMAKE_INSTALL_PREFIX=${PACKAGE_BASE} .. 2>&1 
+make 2>&1 
+make install 2>&1 
 #Check the install
 rstatus="SUCCESS"
 for pkg_dir in ${DIR_CHECK}
@@ -89,7 +89,7 @@ then
    rm -f ${BIN_FILE}
    ln -s ${BIN_FILE}-${RELEASE_NUMBER} ${BIN_FILE}
 fi
-echo "${BIN_FILE} copied to ${SOFTWARE_BASE}/${BIN_DIR}" | tee -a ${LOG_FILE}
+echo "${BIN_FILE} copied to ${SOFTWARE_BASE}/${BIN_DIR}"
 ## Copy the include to the path 
 cd ${PACKAGE_BASE}/${INCLUDE_DIR}
 if [ -d ${INCLUDE_DIR_NAME} ]
@@ -99,7 +99,7 @@ then
    [ -f ${INCLUDE_DIR_NAME} ] && rm -f ${INCLUDE_DIR_NAME}
    ln -s ${INCLUDE_DIR_NAME}-${RELEASE_NUMBER} ${INCLUDE_DIR_NAME}
 fi
-echo "${INCLUDE_DIR_NAME} copied to ${SOFTWARE_BASE}/${INCLUDE_DIR}" | tee -a $LOG_FILE} 
+echo "${INCLUDE_DIR_NAME} copied to ${SOFTWARE_BASE}/${INCLUDE_DIR}"
 ## Copy libs to the path 
 cd ${PACKAGE_BASE}/${LIB_DIR}
 if [ -d ${LIB_PACKG_CFG} ]
@@ -109,7 +109,7 @@ then
    [ -f ${LIB_PACKG_CFG} ] && rm -f  ${SOFTWARE_BASE}/${LIB_DIR}/$LIB_PACKG_CFG
    ln -s ${GIT_REPOS}-${LIB_PACKG_CFG}-${RELEASE_NUMBER} ${LIB_PACKG_CFG}
 fi
-echo "${LIB_PACKG_CFG} copied to ${SOFTWARE_BASE}/${LIB_DIR}" | tee -a ${LOG_FILE}
+echo "${LIB_PACKG_CFG} copied to ${SOFTWARE_BASE}/${LIB_DIR}" 
 
 cd ${PACKAGE_BASE}/${LIB_DIR}
 if [ -f ${LIB_FILE} ]
@@ -119,6 +119,6 @@ then
    cd  ${SOFTWARE_BASE}/${LIB_DIR}
    ln -s ${LIB_FILE}-${RELEASE_NUMBER} ${LIB_FILE}
 fi
-echo "${LIB_FILE} copied to  ${SOFTWARE_BASE}/${LIB_DIR}" | tee -a ${LOG_FILE}
+echo "${LIB_FILE} copied to  ${SOFTWARE_BASE}/${LIB_DIR}" 
 exit 0
 
