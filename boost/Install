@@ -3,8 +3,17 @@
 # Organization: MDIBL
 # Author: Lucie Hutchins
 # Date: October 2017
-# Source : https://github.com/BenLangmead/bowtie
-## Script to build and install a new package
+# Modified: February 2018
+#
+# What it does:
+# 1) source the main config file to set global path
+# 2) source the dependencies config file
+# 3) runs the build and copy  the executables to /opt/software/bin
+#
+# Note: the following environment variables are expected to be set
+#       by the caller
+# 1) GLOBAL_CONFIG
+# 2) PACKAGE_BASE
 
 cd `dirname $0`
 
