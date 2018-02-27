@@ -85,7 +85,7 @@ then
   echo "Wget not installed on `uname -n`"
   exit 1 	
 fi
-## Check if wget is installed 
+## Check if git is installed 
 if [ ! -f ${GIT} ]
 then
   echo "Can't use 'git' command to download some of our packages"
