@@ -2,8 +2,8 @@
  
 This sub-directory contains:
  - [The Install Script](#the-install-script)(Install)
- - [The Package Config File](#the-package-config-file)(bamttols_package.cfg)
- - [The Package Dependencies File](#the-package-dependencies-file)(bamttols_dependencies.cfg)
+ - [The Package Config File](#the-package-config-file)(bedtools_package.cfg)
+ - [The Package Dependencies File](#the-package-dependencies-file)(bedtools_dependencies.cfg)
 
 ## The Install Script
  This script is called by the main install script 
@@ -13,6 +13,7 @@ This sub-directory contains:
   1) sources the main config file to set global path
   2) sources the dependencies config file
   3) runs the build and 
+  
      a. copy  the executables to /opt/software/bin
      b. copy  the libraries to /opt/software/lib[64]
      c. copy  the include to /opt/software/include
