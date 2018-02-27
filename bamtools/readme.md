@@ -10,8 +10,8 @@ This sub-directory contains:
 (install_package.sh)  to build and install  a new version of the package 
 
 ### What it does:
-  1) source the main config file to set global path
-  2) source the dependencies config file
+  1) sources the main config file to set global path
+  2) sources the dependencies config file
   3) runs the build and 
      a. copy  the executables to /opt/software/bin
      b. copy  the libraries to /opt/software/lib[64]
@@ -21,9 +21,9 @@ This sub-directory contains:
 ### Note:
 The following environment variables are expected to be set by the caller:
 
- 1) GLOBAL_CONFIG
- 2) PACKAGE_BASE
- 3) PACKAGE_DEPENDENCIES_FILE
+ 1) GLOBAL_CONFIG  (Path to the main Configuration file ${PACKAGE_DOWNLOADS_BASE}/Configuration )
+ 2) PACKAGE_BASE   (Path to the new release install directory  ${EXTERNAL_SOFTWARE_BASE}/${SHORT_NAME}/${RELEASE_DIR})
+ 3) PACKAGE_DEPENDENCIES_FILE (The dependencies file for this tool  PACKAGE_DOWNLOADS_BASE/SHORT_NAME/
 
 
 ## The Package Config File 
