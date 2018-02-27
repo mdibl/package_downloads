@@ -13,7 +13,10 @@
 SOFTWARE_BASE=/opt/software
 EXTERNAL_SOFTWARE_BASE=/opt/software/external
 #Path to where the repos package_downloads is installed
-PACKAGE_DOWNLOADS_BASE=/home/bioadmin/package_downloads
+CURRENT_BASE=`pwd`
+cd `dirname $0`
+PACKAGE_DOWNLOADS_BASE=`pwd`
+cd ${CURRENT_BASE}
 ## Specifies the path where to clone git repos locally
 PACKAGE_GIT_CLONE_BASE=/home/bioadmin/github_repos
 # Logs setting
