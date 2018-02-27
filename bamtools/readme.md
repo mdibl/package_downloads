@@ -29,6 +29,7 @@ The following environment variables are expected to be set by the caller:
 ## The Package Config File 
 The config file sets environment variables specific to this tool.
 Some key variables include:
+
   - SHORT_NAME  (same as the name of the tool local directory name)
   - GIT_ORG
   - GIT_REPOS
