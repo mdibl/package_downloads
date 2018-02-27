@@ -3,9 +3,13 @@
 # Organization: MDIBL
 # Author: Lucie Hutchins
 # Date: October 2017
-## Script to build and install a new R package
+# Modified: February 2018
+#
+# This script is called by the main install script 
+# (install_package.sh)  to build and install a new R package
+#
 # What it does:
-# 1) source the main config file to set gloabl path
+# 1) source the main config file to set global path
 # 2) untar the downloaded tar file
 # 3) builds and install R
 #
