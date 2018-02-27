@@ -6,7 +6,8 @@
 # Modified: February 2018
 #
 # This script is called by the main install script 
-# (install_package.sh)  to build and install a new R package
+# (install_package.sh)  to build and install 
+# a new version of the package 
 #
 # What it does:
 # 1) source the main config file to set global path
@@ -17,6 +18,7 @@
 # by the caller
 # 1) GLOBAL_CONFIG
 # 2) PACKAGE_BASE
+# 3) PACKAGE_DEPENDENCIES_FILE
 #
 cd `dirname $0`
 SCRIPT_NAME=`basename $0`
