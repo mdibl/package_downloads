@@ -10,8 +10,8 @@
 #
 # What it does:
 # 1) sources global configs
-# 2) Downloads the specified version of this package 
-# 3) Calls the install_package script
+# 2) Call the appropriate download script to download the specified version of this package 
+# 3) Calls the install_package script to run the install 
 # 4) Updates the tool symbolic link on success 
 
 cd `dirname $0`
