@@ -1,8 +1,15 @@
- # The Install Script: Install
+# Bamtools
+ 
+This sub-directory contains:
+ - [The Install Script](#the-install-script)(Install)
+ - [The Package Config File](#the-package-config-file)(bamttols_package.cfg)
+ - [The Package Dependencies File](#the-package-dependencies-file)(bamttols_dependencies.cfg)
+
+## The Install Script
  This script is called by the main install script 
 (install_package.sh)  to build and install  a new version of the package 
 
-## What it does:
+### What it does:
   1) source the main config file to set global path
   2) source the dependencies config file
   3) runs the build and 
@@ -11,7 +18,7 @@
      c. copy  the include to /opt/software/include
  
 
-## Note:
+### Note:
 The following environment variables are expected to be set by the caller:
 
  1) GLOBAL_CONFIG
@@ -19,11 +26,15 @@ The following environment variables are expected to be set by the caller:
  3) PACKAGE_DEPENDENCIES_FILE
 
 
+## The Package Config File 
+## The Package Dependencies File
+
+## Appendix:
 ```
-# Building and installing
+
  See : https://github.com/pezmaster31/bamtools/wiki/Building-and-installing 
  
-## Dependency
+Dependencies:
 From their site, BamTools has been migrated to a CMake-based build system.
 BamTools requires CMake (version >= 2.6.4). If you are missing CMake or have an older version, 
 check your OS package manager (for Linux users) 
