@@ -21,7 +21,8 @@ This sub-directory contains:
 ### Note:
 The following environment variables are expected to be set by the caller:
 
- 1) GLOBAL_CONFIG  (Path to the main Configuration file ${PACKAGE_DOWNLOADS_BASE}/Configuration )
+ 1) GLOBAL_CONFIG  (Path to the main Configuration file
+    ``` ${PACKAGE_DOWNLOADS_BASE}/Configuration ) ```
  2) PACKAGE_BASE   (Path to the new release install directory  ${EXTERNAL_SOFTWARE_BASE}/${SHORT_NAME}/${RELEASE_DIR})
  3) PACKAGE_DEPENDENCIES_FILE (The dependencies file for this tool  PACKAGE_DOWNLOADS_BASE/SHORT_NAME/
 
