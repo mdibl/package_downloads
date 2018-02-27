@@ -9,7 +9,11 @@
 # Only used for tools with no valid git repos irelease tags
 #
 # What it does:
-#  1) downloads the current release Readme file (FOOTER.txt)
+#  1) 
+#     a. For non git repos releases - downloads the current release Readme file (*.txt, *.html, ...) 
+#       from the downloads site - parses it to extract the latest release number
+#
+#     b. For git repos releases - clones the repos - extract the latest release number
 #  2) sets the current release number flag
 #
 # This can be scheduled on Jenkins to run dailly
