@@ -31,7 +31,7 @@ The config file sets environment variables specific to this tool.
 Some key variables include:
 
   - GIT_ORG
-  - SHORT_NAME  (same as the name of the tool local directory name)
+  - SHORT_NAME  (same as the name of the tool local directory)
   - GIT_REPOS
   - REMOTE_SITE
   - REMOTE_DIR
