@@ -18,12 +18,11 @@
 # by the caller
 # 1) GLOBAL_CONFIG
 # 2) PACKAGE_BASE
-# 3) PACKAGE_DEPENDENCIES_FILE
+# 3) PACKAGE_DEPENDS
 #
 cd `dirname $0`
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
-TAR=`which tar`
 echo "==" 
 echo "Server Name: `uname -n`" 
 echo "Install Date: `date`" 
@@ -33,11 +32,12 @@ then
   exit 1
 fi
 source ./../${GLOBAL_CONFIG}
-if [ ! -f ${PACKAGE_DEPENDENCIES_FILE} ]
+if [ "${PACKAGE_DEPENDS}" = "" ]
 then
-   echo "ERROR: ${PACKAGE_DEPENDENCIES_FILE} file missing"
+   echo "ERROR: PACKAGE_DEPENDS not set"
    exit 1
 fi
+PACKAGE_DEPENDENCIES_FILE=`basename ${PACKAGE_DEPENDS}`
 source ./${PACKAGE_DEPENDENCIES_FILE}
 if [ ! -d ${PACKAGE_BASE} ]
 then
