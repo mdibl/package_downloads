@@ -11,8 +11,7 @@
 #
 # What it does:
 # 1) source the main config file to set global path
-# 2) untar the downloaded tar file
-# 3) Copy include files to SOFTWARE_INCLUDEBASE
+# 2) Copy include files to SOFTWARE_INCLUDEBASE
 #
 # Note: the following environment variables are expected to be set
 # by the caller
