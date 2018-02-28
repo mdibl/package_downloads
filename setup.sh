@@ -27,6 +27,8 @@ do
   [ "${script_name}" == "setup.sh" ] && continue
   chmod 755 $script_name
 done
+PACKAGE_DOWNLOADS_BASE=`pwd`
+[ ! -d ${PACKAGE_GIT_CLONE_BASE} ] && mkdir -p ${PACKAGE_GIT_CLONE_BASE}
 echo ""
 echo "Path to package_downloads base: `pwd`"
 echo "*****************************************************"
