@@ -54,8 +54,8 @@ do
         rstatus="FAILED"
     else
         chmod 755 ${PACKAGE_BASE}/${bin_file}
-        echo "cp -p  ${PACKAGE_BASE}/${bin_file} ${SOFTWARE_BASE}/bin/"
-        cp -p  ${PACKAGE_BASE}/${bin_file} ${SOFTWARE_BASE}/bin/
+        echo "cp -p  ${PACKAGE_BASE}/${bin_file} ${SOFTWARE_BIN_BASE}"
+        cp -p  ${PACKAGE_BASE}/${bin_file} ${SOFTWARE_BIN_BASE}
     fi
 done
 echo "${rstatus}" 
