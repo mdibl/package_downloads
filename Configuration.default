@@ -3,7 +3,7 @@
 # Organization: MDIBL
 # Author: Lucie Hutchins
 # Date: September 2017
-#
+# Modified: February 2018
 #
 # Note:
 #  Make sure you change the following base directories as needed
@@ -16,11 +16,13 @@ EXTERNAL_SOFTWARE_BASE=/opt/software/external
 PACKAGE_DOWNLOADS_BASE=/home/bioadmin/package_downloads
 ## Specifies the path where to clone git repos locally
 PACKAGE_GIT_CLONE_BASE=/home/bioadmin/github_repos
-# Logs setting
 # Log directory base for this product
 # Log files associated with scripts included in this product
 # will be stored here
 LOGS_BASE=/data/logs
+#
+# DO NOT modify the settings below 
+#
 DOWNLOADS_LOG_DIR=${LOGS_BASE}/package_downloads
 
 WGET=`which wget`
@@ -28,7 +30,6 @@ GIT=`which git`
 #relative to this package base (package_downloads)
 GLOBAL_CONFIG=Configuration
 DOWNLOAD_SCRIPT=download_package.sh
-
 CHECK_INSTALL_SCRIPT=check_package_install.sh
 CHECK_DEPENDS_SCRIPT=check_package_depends.sh
 INSTALL_PACKAGE_SCRIPT=install_package.sh
