@@ -53,7 +53,7 @@ then
   exit 1
 fi
 
-export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
+export PKG_CONFIG_PATH
 
 echo "Running ./configure from `pwd`" | tee -a $LOG_FILE
 ./configure
