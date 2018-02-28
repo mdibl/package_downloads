@@ -3,122 +3,69 @@
 # Organization: MDIBL
 # Author: Lucie Hutchins
 # Date: October 2017
-# Source : https://github.com/BenLangmead/bowtie
-## Script to build and install a new package
-
+# Modified: February 2018
+#
+# This script is called by the main install script 
+# (install_package.sh)  to build and install 
+# a new version of the package 
+#
+# What it does:
+# 1) source the main config file to set global path
+# 2) untar the downloaded tar file
+# 3) builds and install the package
+#
+# Note: the following environment variables are expected to be set
+# by the caller
+# 1) GLOBAL_CONFIG
+# 2) PACKAGE_BASE
+# 3) PACKAGE_DEPENDS
+#
 cd `dirname $0`
-
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
-##These config files are relative to
-# the Install script working directory
-dependents_file=dependencies.cfg
-pack_config_file=bowtie2_repos.cfg
-
-if [ ! -f $dependents_file ]
+echo "==" 
+echo "Server Name: `uname -n`" 
+echo "Install Date: `date`" 
+if [ ! -f ../${GLOBAL_CONFIG} ]
 then
-   echo "The dependencies file: $dependents_file is missing"
-   echo " From $WORKING_DIR"
-   exit 1
-fi
-if [ ! -f ../Configuration ]
-then
-  echo "'../Configuration' file missing "     
+  echo "'../${GLOBAL_CONFIG}' file missing "     
   exit 1
 fi
-if [ ! -f $1 ]
+source ./../${GLOBAL_CONFIG}
+if [ "${PACKAGE_DEPENDS}" = "" ]
 then
-  echo "'$1' file missing"     
-  exit 1
-fi
-
-source ./../Configuration
-source ./$dependents_file
-source ./$pack_config_file
-
-if [ ! -f ${LOCAL_DIR}/current_release_NUMBER ]
-then
-   echo "File ${LOCAL_DIR}/current_release_NUMBER does not exists"
+   echo "ERROR: PACKAGE_DEPENDS not set"
    exit 1
 fi
-
-RELEASE_NUMBER=`cat ${LOCAL_DIR}/current_release_NUMBER`
-LOG_FILE="${DOWNLOADS_LOG_DIR}/$SCRIPT_NAME.$SHORT_NAME.$RELEASE_NUMBER.log"
-PACKAGE_BASE=$LOCAL_DIR/$GIT_REPOS 
-
-rm -rf $LOG_FILE
-touch $LOG_FILE
-
-rstatus=""
-echo "==" | tee -a $LOG_FILE
-echo "Product: $GIT_REPOS" | tee -a $LOG_FILE
-echo "Install directory: $PACKAGE_BASE" | tee -a $LOG_FILE
-echo "Release version: $RELEASE_NUMBER" | tee -a $LOG_FILE
-echo "Install on Server Name: `uname -n`" | tee -a $LOG_FILE
-echo "==" | tee -a $LOG_FILE
-
-echo "Running the dependency test" | tee -a $LOG_FILE
-echo "Missing dependencies:" | tee -a $LOG_FILE
-for dependency in $DEPENDENCIES
-do
-    token=`which $dependency`
-    if [ ! -f "$token" ]
-    then
-       echo "Dependency: $dependency" | tee -a $LOG_FILE
-       rstatus="Failed"
-    fi
-done
-# Check Lib dependency
-for dependency in $LIB_DEPENDENCIES
-do
-  tokens=`locate $dependency`
-  for lib_path in $tokens
-  do
-    if [ ! -f $lib_path ]
-    then
-      echo "Dependency: $dependency" | tee -a $LOG_FILE
-      rstatus="Failed"
-    fi
-  done
-done
-
-echo "==" | tee -a $LOG_FILE
-if [ "$rstatus" == Failed ]
+PACKAGE_DEPENDENCIES_FILE=`basename ${PACKAGE_DEPENDS}`
+source ./${PACKAGE_DEPENDENCIES_FILE}
+if [ ! -d ${PACKAGE_BASE} ]
 then
-  echo "Dependency test Failed" | tee -a $LOG_FILE
-  exit 1
-fi
-echo "Dependency test passed" | tee -a $LOG_FILE
-
-# Execute the Install command for this package
-if [ ! -d $PACKAGE_BASE ]
-then
-   echo "Path to $GIT_REPOS install directory not correct. See $PACKAGE_BASE" | tee -a $LOG_FILE
+   echo "ERROR: Missing the install directory ${PACKAGE_BASE} "
    exit 1
 fi
-
-cd $PACKAGE_BASE
+cd ${PACKAGE_BASE}
 #
 #update path to binaries to /opt/software/bin
 sed -i -e 's/prefix =[[:space:]].*/prefix = \/opt\/software/' Makefile
-make allall 2>&1 | tee -a $LOG_FILE
+make allall 2>&1
 #Check the install
 rstatus="SUCCESS"
-for bin_file in $FILE_CHECK
+for bin_file in ${FILE_CHECK}
 do
-    if [ ! -f $PACKAGE_BASE/$bin_file ]
+    if [ ! -f ${PACKAGE_BASE}/${bin_file} ]
     then
-       echo "$PACKAGE_BASE/$bin_file missing" | tee -a $LOG_FILE
+       echo "${PACKAGE_BASE}/${bin_file} missing" 
        rstatus="FAILED"
      fi
 done
 
-if [ "$rstatus" == FAILED ]
+if [ "${rstatus}" == FAILED ]
 then
-   echo "$rstatus" | tee -a $LOG_FILE
+   echo "${rstatus}" 
    exit 1
 fi
-echo $rstatus | tee -a $LOG_FILE
+echo ${rstatus}
 #Copy binaries to /opt/software/bin
 make install
 #make clean
