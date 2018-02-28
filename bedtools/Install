@@ -5,6 +5,10 @@
 # Date: September 2017
 # Modified: February 2018
 #
+# This script is called by the main install script 
+# (install_package.sh)  to build and install 
+# a new version of the package 
+#
 # What it does:
 # 1) source the main config file to set global path
 # 2) source the dependencies config file
