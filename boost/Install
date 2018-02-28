@@ -7,8 +7,7 @@
 #
 # What it does:
 # 1) source the main config file to set global path
-# 2) source the dependencies config file
-# 3) runs the build and copy  the executables to /opt/software/bin
+# 2) runs the build and copy  the executables to /opt/software/bin
 #
 #
 # Note: the following environment variables are expected to be set
