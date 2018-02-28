@@ -34,6 +34,8 @@ DOWNLOADS_LOG_DIR=${LOGS_BASE}/package_downloads
 
 WGET=`which wget`
 GIT=`which git`
+TAR=`which tar`
+LOCATE=`which locate`
 #relative to this package base (package_downloads)
 GLOBAL_CONFIG=Configuration
 DOWNLOAD_SCRIPT=download_package.sh
