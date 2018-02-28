@@ -36,6 +36,7 @@ WGET=`which wget`
 GIT=`which git`
 TAR=`which tar`
 LOCATE=`which locate`
+VIRTUALENV=`which virtualenv`
 #relative to this package base (package_downloads)
 GLOBAL_CONFIG=Configuration
 DOWNLOAD_SCRIPT=download_package.sh
