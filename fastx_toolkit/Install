@@ -45,22 +45,22 @@ then
    exit 1
 fi
 #Check the install
-cd $PACKAGE_BASE 
+cd ${PACKAGE_BASE} 
 if [ ! -f configure ]
 then
-  echo "ERROR:$PACKAGE_BASE/configure file missing"| tee -a $LOG_FILE
-  echo "Status: FAILED"| tee -a $LOG_FILE
+  echo "ERROR:${PACKAGE_BASE}/configure file missing"
+  echo "Status: FAILED"
   exit 1
 fi
 
 export PKG_CONFIG_PATH
 
-echo "Running ./configure from `pwd`" | tee -a $LOG_FILE
+echo "Running ./configure from `pwd`"
 ./configure
 if [ $? -ne 0 ]
 then
   echo "ERROR:Configure failed"
-  echo "Status: FAILED"| tee -a $LOG_FILE
+  echo "Status: FAILED"
   exit 1
 fi
 echo "Running make from `pwd`" | tee -a $LOG_FILE
@@ -71,14 +71,14 @@ then
   echo "Status: FAILED"| tee -a $LOG_FILE
   exit 1
 fi
-echo "Running 'sudo make install exec_prefix=$SOFTWARE_BASE' from `pwd`" | tee -a $LOG_FILE
+echo "Running 'sudo make install exec_prefix=${SOFTWARE_BASE}' from `pwd`" 
 #sudo make install
-sudo make install exec_prefix=$SOFTWARE_BASE
+sudo make install exec_prefix=${SOFTWARE_BASE}
 
 if [ $? -ne 0 ]
 then
-  echo "ERROR:'sudo make install exec_prefix=$SOFTWARE_BASE' failed"
-  echo "Status: FAILED"| tee -a $LOG_FILE
+  echo "ERROR:'sudo make install exec_prefix=${SOFTWARE_BASE}' failed"
+  echo "Status: FAILED"
   exit 1
 fi
 echo "Status: SUCCESS"
