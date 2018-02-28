@@ -10,7 +10,7 @@
 #
 # What it does:
 # 1) sources global configs
-# 2) Call the appropriate download script to download the specified version of this package 
+# 2) Calls the appropriate download script to download the specified version of this package 
 # 3) Calls the install_package script to run the install 
 # 4) Updates the tool symbolic link on success 
 
@@ -56,7 +56,7 @@ then
    exit 1
 fi
 ##The config file is relative to
-# the root directory of pacakage download 
+# the root directory of package download 
 
 if [ ! -f ${GLOBAL_CONFIG} ]
 then
@@ -79,7 +79,7 @@ then
 fi
 RELEASE_NUMBER=`cat ${RELEASE_FILE}`
 PACKAGE_CONFIG_FILE=${TOOL_NAME}/${TOOL_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
-PACKAGE_DEPENDS=${TOOL_NAME}/${PACKAGE_DEPENDENCIES_FILE}
+PACKAGE_DEPENDS=${TOOL_NAME}/${TOOL_NAME}${PACKAGE_DEPENDENCIES_SUFFIX}
 
 if [ ! -f ${PACKAGE_CONFIG_FILE} ]
 then
