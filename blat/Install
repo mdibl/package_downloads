@@ -3,8 +3,11 @@
 # Organization: MDIBL
 # Author: Lucie Hutchins
 # Date: October 2017
-## Script to build and install a new blat package
-# 
+#
+# This script is called by the main install script 
+# (install_package.sh)  to build and install 
+# a new version of the package 
+#
 # What it does:
 # 1) source the main config file to set gloabl path
 # 2) source the dependencies config file
