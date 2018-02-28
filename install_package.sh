@@ -17,6 +17,12 @@
 # the file EXTERNAL_SOFTWARE_BASE/bamtools/current_release_NUMBER stores
 # the latest release number for this tool
 #
+# Note: This config expects the following
+# env variables set by the caller
+# GLOBAL_CONFIG
+# PACKAGE_DEPENDS
+# PACKAGE_BASE
+# 
 # What it does:
 # ----------------
 # 1) Runs the dependency test
@@ -27,7 +33,6 @@ cd `dirname $0`
 
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
-GLOBAL_CONFIG=Configuration
 
 if [ $# -lt 1 ]
 then
@@ -43,24 +48,12 @@ fi
 
 source ./${GLOBAL_CONFIG}
 ## 
-PACKAGE_DEPENDS=${TOOL_NAME}/${PACKAGE_DEPENDENCIES_FILE}
 if [ "${TOOL_NAME}/Install" = "" ]
 then
     echo "ERROR: Missing ${TOOL_NAME} install script `pwd`/${TOOL_NAME}/Install " 
     exit 1
 fi
 source ./${PACKAGE_DEPENDS}
-
-LOG_FILE="${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${TOOL_NAME}.${RELEASE_NUMBER}.log"
-rm -rf ${LOG_FILE}
-touch ${LOG_FILE}
-rstatus=""
-echo "==" | tee -a ${TOOL_NAME}
-echo "Product: ${TOOL_NAME}" | tee -a ${LOG_FILE}
-echo "Install directory: ${PACKAGE_BASE}" | tee -a ${LOG_FILE}
-echo "Release version: ${RELEASE_NUMBER}" | tee -a ${LOG_FILE}
-echo "Install on Server Name: `uname -n`" | tee -a ${LOG_FILE}
-echo "==" | tee -a ${LOG_FILE}
 
 rstatus=""
 echo "Running the dependency test" 
@@ -69,7 +62,7 @@ do
    token=`which ${dependency}`
    if [ ! -f "${token}" ]
    then
-      echo "ERROR: Dependency ${dependency} missing" | tee -a ${LOG_FILE}
+      echo "ERROR: Dependency ${dependency} missing" 
       rstatus="Failed"
    fi
 done
@@ -81,7 +74,7 @@ do
   do
     if [ ! -f ${lib_path} ]
     then
-       echo "ERROR: Dependency  ${lib_path} missing" | tee -a ${LOG_FILE}
+       echo "ERROR: Dependency  ${lib_path} missing"
        rstatus="Failed"
     fi
   done
@@ -89,7 +82,7 @@ done
 echo "$rstatus"
 if [ "$rstatus" == Failed ]
 then
-  echo "Dependency test Failed" | tee -a ${LOG_FILE}
+  echo "Dependency test Failed" 
   exit 1
 fi
 export GLOBAL_CONFIG  PACKAGE_DEPENDS PACKAGE_BASE
@@ -97,6 +90,6 @@ export GLOBAL_CONFIG  PACKAGE_DEPENDS PACKAGE_BASE
 ./${CHECK_INSTALL_SCRIPT}
 [ $? -ne 0 ] && exit 1
 
-echo "Install Done" | tee -a $LOG_FILE
+echo "Install Done" 
 exit 0
 
