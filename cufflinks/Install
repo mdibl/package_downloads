@@ -11,7 +11,7 @@
 #
 # What it does:
 # 1) source the main config file to set global path
-# 2) untar the downloaded tar file
+# 2) check if download was a success
 # 3) Copy executables to SOFTWARE_BIN_BASE
 #
 # Note: the following environment variables are expected to be set
