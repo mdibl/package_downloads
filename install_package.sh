@@ -17,7 +17,7 @@
 # the file EXTERNAL_SOFTWARE_BASE/bamtools/current_release_NUMBER stores
 # the latest release number for this tool
 #
-# Note: This config expects the following
+# Note: This script expects the following
 # env variables set by the caller
 # GLOBAL_CONFIG
 # PACKAGE_DEPENDS
