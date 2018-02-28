@@ -28,6 +28,7 @@ do
   chmod 755 $script_name
 done
 PACKAGE_DOWNLOADS_BASE=`pwd`
+PACKAGE_GIT_CLONE_BASE=${PACKAGE_DOWNLOADS_BASE}/temp/github_repos
 [ ! -d ${PACKAGE_GIT_CLONE_BASE} ] && mkdir -p ${PACKAGE_GIT_CLONE_BASE}
 echo ""
 echo "Path to package_downloads base: `pwd`"
@@ -37,7 +38,7 @@ echo "Next: Update the file 'Configuration' and set the following environment va
 echo "  SOFTWARE_BASE : full path to where to store external executables and libraries"
 echo "  EXTERNAL_SOFTWARE_BASE : full path to where packages will be installed "
 echo "  LOGS_BASE : full path to the logs base"
-echo "  PACKAGE_GIT_CLONE_BASE : full path to where to clone git repos locally "
-echo "  Set PACKAGE_DOWNLOADS_BASE=`pwd`"
+echo "  PACKAGE_GIT_CLONE_BASE=${PACKAGE_GIT_CLONE_BASE}"
+echo "  Set PACKAGE_DOWNLOADS_BASE=${PACKAGE_DOWNLOADS_BASE}"
 echo ""
 
