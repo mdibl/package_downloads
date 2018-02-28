@@ -2,19 +2,23 @@
 
 # Organization: MDIBL
 # Author: Lucie Hutchins
+# Modified: February 2018
+#
+# This script is called by the main install script 
+# (install_package.sh)  to build and install 
+# a new version of the package 
 #
 # What it does:
 # 1) source the main config file to set global path
-# 2) source the dependencies config file
-# 3) runs the build and copy  the executables to /opt/software/bin
+# 2) build the package and install the package
 #
 # Note: the following environment variables are expected to be set
-#       by the caller
+# by the caller
 # 1) GLOBAL_CONFIG
 # 2) PACKAGE_BASE
+# 3) PACKAGE_DEPENDS
 #
 cd `dirname $0`
-
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
 echo "==" 
@@ -26,18 +30,19 @@ then
   exit 1
 fi
 source ./../${GLOBAL_CONFIG}
-if [ ! -f ${PACKAGE_DEPENDENCIES_FILE} ]
+if [ "${PACKAGE_DEPENDS}" = "" ]
 then
-   echo "ERROR: ${PACKAGE_DEPENDENCIES_FILE} file missing"
+   echo "ERROR: PACKAGE_DEPENDS not set"
    exit 1
 fi
+PACKAGE_DEPENDENCIES_FILE=`basename ${PACKAGE_DEPENDS}`
 source ./${PACKAGE_DEPENDENCIES_FILE}
 if [ ! -d ${PACKAGE_BASE} ]
 then
    echo "ERROR: Missing the install directory ${PACKAGE_BASE} "
    exit 1
 fi
-cd $PACKAGE_BASE
+cd ${PACKAGE_BASE}
 #
 make  2>&1 
 #Check the install
@@ -46,7 +51,7 @@ for bin_file in ${FILE_CHECK}
 do
     if [ ! -f ${bin_file} ]
     then
-       echo "$bin_file missing" 
+       echo "${bin_file} missing" 
        rstatus="FAILED"
      fi
 done
@@ -57,11 +62,11 @@ then
 fi
 echo ${rstatus}
 #Copy binaries to /opt/software/bin
-for bin_file in $FILE_CHECK
+for bin_file in ${FILE_CHECK}
 do
     chmod 755 ${bin_file}
-    echo "cp -p  ${bin_file} ${SOFTWARE_BASE}/bin/"
-    cp -P  $bin_file $SOFTWARE_BASE/bin
+    echo "cp -p  ${bin_file} ${SOFTWARE_BIN_BASE}"
+    cp -P  $bin_file ${SOFTWARE_BIN_BASE}
 done
 #make clean
 exit 0
