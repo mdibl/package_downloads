@@ -4,11 +4,11 @@
 # Author: Lucie Hutchins
 # Date: February 2018
 #
-## Script is called by runPackageInstall.sh  main script
+## Script is called by /runGetPackage.sh  main script
 # to build and install a new package
 #
-# Usage: ./install_package tool_name
-# Where tool_name is the name of the base directory for this package
+# Usage: ./install_package TOOL_NAME
+# Where TOOL_NAME is the name of the base directory for this package
 # as defined in the variable SHORT_NAME in the tool config file
 #
 # Example : ./install_package bamtools 
