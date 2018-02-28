@@ -54,7 +54,7 @@ if [ $? -ne 0 ]; then
       echo "Consult $LOG_FILE for more details"
       exit 1
 fi
-BOOST_DIR=${SOFTWARE_BASE}/include/boost
+BOOST_DIR=${SOFTWARE_INCLUDE_BASE}/boost
 if [ ! -d ${BOOST_DIR} ]; then
    echo "Install failed: missing directory - ${BOOST_DIR}"
    exit 1
