@@ -4,8 +4,8 @@
 # Author: Lucie Hutchins
 # Date: February 2018
 #
-## Script is called by the Install script 
-#  to check whether or not the install was successful
+## Script is called by the main Install script (install_package.sh)
+#  to check whether or not a given install was successful
 #
 # Usage: ./install_check_package_install
 #
@@ -13,7 +13,7 @@
 # been set by the parent process
 #
 # DIR_CHECK and FILE_CHECK are a list of directories and files 
-# as specified in each tool's dependencies.cfg filw
+# as specified in each tool's dependencies config file
 #
 
 if [ "${PACKAGE_DEPENDS}" = "" ]
