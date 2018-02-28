@@ -94,7 +94,7 @@ export PACKAGE_DEPENDS SOFTWARE_BASE
 echo " "
 echo "************* Package Install ****************"
 echo ""
-#If this version is already installed, skipp the install
+#If this version is already installed, skip the install
 #
 if [ -d ${PACKAGE_BASE} ]
 then
