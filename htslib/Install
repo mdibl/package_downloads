@@ -45,52 +45,52 @@ then
    exit 1
 fi
 
-cd $PACKAGE_BASE
+cd ${PACKAGE_BASE}
 
 if [ ! -f configure ]
 then
-   echo "Generating 'configure' file  under `pwd`" | tee -a $LOG_FILE
+   echo "Generating 'configure' file  under `pwd`"
    autoheader
    autoconf
 fi
 # Run the install commands
 if [ ! -f  configure ]
 then
-   echo "$PACKAGE_BASE/configure missing" | tee -a $LOG_FILE
+   echo "${PACKAGE_BASE}/configure missing" 
    exit 1  
 fi
 #
 #specify that samtools is to be built and installed into bin,
 # lib, etc subdirectories under $PACKAGE_BASE.
 
-./configure  --prefix=$PACKAGE_BASE  2>&1 | tee -a $LOG_FILE
+./configure  --prefix=${PACKAGE_BASE}  2>&1 
 #
-make 2>&1 | tee -a $LOG_FILE
-make install 2>&1 | tee -a $LOG_FILE
+make 2>&1 
+make install 2>&1
 
 #Check the install
 rstatus="SUCCESS"
-for folder in $DIR_CHECK
+for folder in ${DIR_CHECK}
 do
-    if [ ! -d $PACKAGE_BASE/$folder ]
+    if [ ! -d ${PACKAGE_BASE}/${folder} ]
     then
-       echo "$PACKAGE_BASE/$folder missing" | tee -a $LOG_FILE
+       echo "${PACKAGE_BASE}/${folder} missing"
        rstatus="FAILED"
      fi
 done
 
-if [ "$rstatus" == FAILED ]
+if [ "${rstatus}" == FAILED ]
 then
-   echo "$rstatus" | tee -a $LOG_FILE
+   echo "${rstatus}"
    exit 1
 fi
 
-echo $rstatus | tee -a $LOG_FILE
+echo ${rstatus}
 #Copy binaries and libs to global path
-for folder in $DIR_CHECK
+for folder in ${DIR_CHECK}
 do
-    echo "Copying $PACKAGE_BASE/$folder/* to $SOFTWARE_BASE/$folder/" | tee -a $LOG_FILE    
-    cp -pR $PACKAGE_BASE/$folder/* $SOFTWARE_BASE/$folder/
+    echo "Copying ${PACKAGE_BASE}/${folder}/* to ${SOFTWARE_BASE}/${folder}/"   
+    cp -pR ${PACKAGE_BASE}/${folder}/* ${SOFTWARE_BASE}/${folder}/
 done
 exit 0
 
