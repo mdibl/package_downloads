@@ -5,24 +5,31 @@
 # Date: September 2017
 # Modified: February 2018
 #
-# Note:
+#****** CHANGE  - Starts *****
 #  Make sure you change the following base directories as needed
 #  You should have full permissions to create/delete on those base directories 
-#  
-## SOFTWARE_BASE/bin, SOFTWARE_BASE/lib, SOFTWARE_BASE/lib64 ,...
+#
+#Path to parent directory of software bin, include, lib  
+#Should be included in your environment PATH 
 SOFTWARE_BASE=/opt/software
+#Path to Packages install
 EXTERNAL_SOFTWARE_BASE=/opt/software/external
 #Path to where the repos package_downloads is installed
 PACKAGE_DOWNLOADS_BASE=/home/bioadmin/package_downloads
-## Specifies the path where to clone git repos locally
-PACKAGE_GIT_CLONE_BASE=/home/bioadmin/github_repos
-# Log directory base for this product
-# Log files associated with scripts included in this product
-# will be stored here
+#Path to logs -
 LOGS_BASE=/data/logs
+#
+# ***** CHANGE - Ends *****
 #
 # DO NOT modify the settings below 
 #
+SOFTWARE_BIN_BASE=${SOFTWARE_BASE}/bin
+SOFTWARE_LIB_BASE=${SOFTWARE_BASE}/lib
+SOFTWARE_LIB64_BASE=${SOFTWARE_BASE}/lib64
+SOFTWARE_INCLUDE_BASE=${SOFTWARE_BASE}/include
+## Specifies the path where to clone git repos locally
+PACKAGE_GIT_CLONE_BASE=${PACKAGE_DOWNLOADS_BASE/temp/github_repos
+#Log files associated with this product will be stored here
 DOWNLOADS_LOG_DIR=${LOGS_BASE}/package_downloads
 
 WGET=`which wget`
