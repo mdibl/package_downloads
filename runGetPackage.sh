@@ -66,9 +66,18 @@ then
   exit 1
 fi
 source ./${GLOBAL_CONFIG}
+# Create base directories if not exist 
+[ ! -d ${SOFTWARE_BASE} ] && mkdir -p ${SOFTWARE_BASE}
+[ ! -d ${EXTERNAL_SOFTWARE_BASE} ] && mkdir -p ${EXTERNAL_SOFTWARE_BASE}
+[ ! -d ${SOFTWARE_BIN_BASE} ] && mkdir -p ${SOFTWARE_BIN_BASE}
+[ ! -d ${SOFTWARE_LIB_BASE} ] && mkdir -p ${SOFTWARE_LIB_BASE}
+[ ! -d ${SOFTWARE_LIB64_BASE} ] && mkdir -p ${SOFTWARE_LIB64_BASE}
+[ ! -d ${SOFTWARE_INCLUDE_BASE} ] && mkdir -p ${SOFTWARE_INCLUDE_BASE}
+[ ! -d ${DOWNLOADS_LOG_DIR} ] && mkdir -p ${DOWNLOADS_LOG_DIR}
 #set path to packages install base
 #and get the version to install from the flag file
 #
+
 PACKAGE_DOWNLOADS_BASE=${EXTERNAL_SOFTWARE_BASE}/${TOOL_NAME}
 RELEASE_FILE=${PACKAGE_DOWNLOADS_BASE}/${CURRENT_FLAG_FILE}
 
