@@ -85,7 +85,7 @@ then
   echo "Dependency test Failed" 
   exit 1
 fi
-export GLOBAL_CONFIG  PACKAGE_DEPENDS PACKAGE_BASE PACKAGE_CONFIG
+export GLOBAL_CONFIG  PACKAGE_DEPENDS PACKAGE_BASE PACKAGE_CONFIG_FILE 
 ./${TOOL_NAME}/Install
 ./${CHECK_INSTALL_SCRIPT}
 [ $? -ne 0 ] && exit 1
