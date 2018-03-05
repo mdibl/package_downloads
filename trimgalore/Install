@@ -45,17 +45,6 @@ then
    exit 1
 fi
 
-
-       echo "${PACKAGE_BASE}/${bin_file} missing"
-       rstatus="FAILED"
-     fi
-done
-
-if [ "${rstatus}" == FAILED ]
-then
-   echo "${rstatus}"
-   exit 1
-fi
 #Check the install
 rstatus="SUCCESS"
 for bin_file in ${FILE_CHECK}
