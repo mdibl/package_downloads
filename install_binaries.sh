@@ -49,7 +49,7 @@ then
 fi
 #Check the install
 rstatus="SUCCESS"
-for bin_file in ${FILE_CHECK}
+for bin_file in ${BIN_FILES}
 do
     if [ ! -f ${PACKAGE_BASE}/${bin_file} ]
     then
@@ -61,11 +61,22 @@ echo ${rstatus}
 
 [ "$rstatus" == FAILED ] && exit 1
 #Copy binaries and libraries to /opt/software/bin and /opt/software/lib
-for bin_file in ${FILE_CHECK}
+for bin_file in ${BIN_FILES}
 do
     chmod 755 ${PACKAGE_BASE}/${bin_file}
     echo "cp -p  ${PACKAGE_BASE}/${bin_file} ${SOFTWARE_BIN_BASE}"
-    cp -P  ${PACKAGE_BASE}/${bin_file}  ${SOFTWARE_BIN_BASE}
+    cp -P  ${PACKAGE_BASE}/${bin_file}  ${SOFTWARE_BIN_BASE}/
 done
-
+for include_name in ${INCLUDE_DIR} 
+do
+   cp -Rp ${PACKAGE_BASE}/${include_name} $SOFTWARE_INCLUDE_BASE/
+done
+for lib_name in ${LIB_DIR} 
+do
+   cp -Rp ${PACKAGE_BASE}/${lib_name} ${SOFTWARE_LIB_BASE}/
+done
+for lib_name in ${LIB64_DIR} 
+do
+   cp -Rp ${PACKAGE_BASE}/${lib_name} ${SOFTWARE_LIB64_BASE}/
+done
 exit 0
