@@ -28,34 +28,23 @@ WORKING_DIR=`pwd`
 echo "==" 
 echo "Server Name: `uname -n`" 
 echo "Install Date: `date`" 
-if [ ! -f ../${GLOBAL_CONFIG} ]
+if [ ! -f ${GLOBAL_CONFIG} ]
 then
-  echo "'../${GLOBAL_CONFIG}' file missing "     
+  echo "'${GLOBAL_CONFIG}' file missing "     
   exit 1
 fi
-source ./../${GLOBAL_CONFIG}
-if [ "${PACKAGE_DEPENDS}" = "" ]
+source ./${GLOBAL_CONFIG}
+
+if [ ! -f  ${PACKAGE_DEPENDS} ]
 then
-   echo "ERROR: PACKAGE_DEPENDS not set"
+   echo "ERROR: PACKAGE_DEPENDS file missing "  
    exit 1
 fi
-PACKAGE_DEPENDENCIES_FILE=`basename ${PACKAGE_DEPENDS}`
-source ./${PACKAGE_DEPENDENCIES_FILE}
+source ./${PACKAGE_DEPENDS}
+
 if [ ! -d ${PACKAGE_BASE} ]
 then
    echo "ERROR: Missing the install directory ${PACKAGE_BASE} "
-   exit 1
-fi
-
-
-       echo "${PACKAGE_BASE}/${bin_file} missing"
-       rstatus="FAILED"
-     fi
-done
-
-if [ "${rstatus}" == FAILED ]
-then
-   echo "${rstatus}"
    exit 1
 fi
 #Check the install
