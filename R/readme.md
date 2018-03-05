@@ -1,11 +1,10 @@
 # R
 
-# Bamtools
- 
 This sub-directory contains:
  - [The Install Script](#the-install-script)(Install)
  - [The Package Config File](#the-package-config-file)(bamttols_package.cfg)
  - [The Package Dependencies File](#the-package-dependencies-file)(bamttols_dependencies.cfg)
+ - [Bioconductor Packages Update](#bioconductor-packages-update)(checkPackageUpdate.r)
 
 ## The Install Script
  This script is called by the main install script 
@@ -13,11 +12,11 @@ This sub-directory contains:
 
 ### What it does:
   1) sources the main config file to set global path
-  2) sources the dependencies config file
-  3) runs the build and 
-     a. copy  the executables to /opt/software/bin
-     b. copy  the libraries to /opt/software/lib[64]
-     c. copy  the include to /opt/software/include
+  2) untar the downloaded tar file
+  3) builds and install R
+     a. copy  the executables to SOFTWARE_BASE/bin
+     b. copy  the libraries to SOFTWARE_BASE/lib[64]
+     c. copy  the include to SOFTWARE_BASE/include
  
 
 ### Note:
@@ -25,8 +24,8 @@ The following environment variables are expected to be set by the caller:
 
  1) GLOBAL_CONFIG  (Path to the main Configuration file
     ``` ${PACKAGE_DOWNLOADS_BASE}/Configuration ) ```
- 2) PACKAGE_BASE   (Path to the new release install directory  ${EXTERNAL_SOFTWARE_BASE}/${SHORT_NAME}/${RELEASE_DIR})
- 3) PACKAGE_DEPENDENCIES_FILE (The dependencies file for this tool  PACKAGE_DOWNLOADS_BASE/SHORT_NAME/
+ 2) PACKAGE_BASE   (Path to the new release install directory  ${EXTERNAL_SOFTWARE_BASE}/${TOOL_NAME}/${RELEASE_DIR})
+ 3) PACKAGE_DEPENDS (The dependencies file for this tool )
 
 
 ## The Package Config File 
@@ -45,6 +44,8 @@ Some key variables include:
   - CLONE_GIT
   
 ## The Package Dependencies File
+## Bioconductor Packages Update
+This R script Update Installed Bioconductor Packages 
 
 ## Appendix:
 ```
