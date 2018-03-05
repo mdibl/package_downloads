@@ -4,8 +4,10 @@ This sub-directory contains:
  - [The Install Script](#the-install-script)(Install)
  - [The Package Config File](#the-package-config-file)(bamttols_package.cfg)
  - [The Package Dependencies File](#the-package-dependencies-file)(bamttols_dependencies.cfg)
+ - [Generate Installed Package Repeort](#generate-installed-package-repeort)(genPackageReports.sh)
  - [Bioconductor Packages Update](#bioconductor-packages-update)(checkPackageUpdate.r)
  - [Installed Packages Report](#installed-packages-report)(genPackageReports.r)
+ 
 
 ## The Install Script
  This script is called by the main install script 
@@ -45,6 +47,18 @@ Some key variables include:
   - CLONE_GIT
   
 ## The Package Dependencies File
+
+## Generate Installed Package Repeort
+
+This is a wrapper script to call  R scripts that generates a list of 
+user-installed R packages with the version installed
+
+What it does: 
+ - Call [Bioconductor Packages Update](#bioconductor-packages-update)(checkPackageUpdate.r) to 
+  update the version of installed packages
+ - Call [Installed Packages Report](#installed-packages-report)(genPackageReports.r) to gereate the report
+
+
 ## Bioconductor Packages Update
 
 This R script runs the update command to update  Installed Bioconductor Packages.
