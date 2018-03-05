@@ -67,16 +67,16 @@ do
     echo "cp -p  ${PACKAGE_BASE}/${bin_file} ${SOFTWARE_BIN_BASE}"
     cp -P  ${PACKAGE_BASE}/${bin_file}  ${SOFTWARE_BIN_BASE}/
 done
-for include_name in ${INCLUDE_DIR} 
+for include_dir in ${INCLUDE_DIR} 
 do
-   cp -Rp ${PACKAGE_BASE}/${include_name} $SOFTWARE_INCLUDE_BASE/
+   cp -Rp ${PACKAGE_BASE}/${include_dir} $SOFTWARE_INCLUDE_BASE/
 done
-for lib_name in ${LIB_DIR} 
+for lib_dir in ${LIB_DIR} 
 do
-   cp -Rp ${PACKAGE_BASE}/${lib_name} ${SOFTWARE_LIB_BASE}/
+   cp -Rp ${PACKAGE_BASE}/${lib_dir} ${SOFTWARE_LIB_BASE}/
 done
-for lib_name in ${LIB64_DIR} 
+for lib_dir in ${LIB64_DIR} 
 do
-   cp -Rp ${PACKAGE_BASE}/${lib_name} ${SOFTWARE_LIB64_BASE}/
+   cp -Rp ${PACKAGE_BASE}/${lib_dir} ${SOFTWARE_LIB64_BASE}/
 done
 exit 0
