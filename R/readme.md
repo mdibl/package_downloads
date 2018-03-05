@@ -5,7 +5,7 @@ This sub-directory contains:
  - [The Package Config File](#the-package-config-file)(bamttols_package.cfg)
  - [The Package Dependencies File](#the-package-dependencies-file)(bamttols_dependencies.cfg)
  - [Bioconductor Packages Update](#bioconductor-packages-update)(checkPackageUpdate.r)
- - [Installed Packages Report](installed-packages-report)(genPackageReports.r)
+ - [Installed Packages Report](#installed-packages-report)(genPackageReports.r)
 
 ## The Install Script
  This script is called by the main install script 
