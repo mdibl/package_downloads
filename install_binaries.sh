@@ -63,6 +63,8 @@ echo ${rstatus}
 #Copy binaries and libraries to /opt/software/bin and /opt/software/lib
 for bin_file in ${FILE_CHECK}
 do
+    chmod 755 ${PACKAGE_BASE}/${bin_file}
+    echo "cp -p  ${PACKAGE_BASE}/${bin_file} ${SOFTWARE_BIN_BASE}"
     cp -P  ${PACKAGE_BASE}/${bin_file}  ${SOFTWARE_BIN_BASE}
 done
 
