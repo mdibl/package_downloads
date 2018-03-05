@@ -5,6 +5,7 @@ This sub-directory contains:
  - [The Package Config File](#the-package-config-file)(bamttols_package.cfg)
  - [The Package Dependencies File](#the-package-dependencies-file)(bamttols_dependencies.cfg)
  - [Bioconductor Packages Update](#bioconductor-packages-update)(checkPackageUpdate.r)
+ - [Installed Packages Report](installed-packages-report)(genPackageReports.r)
 
 ## The Install Script
  This script is called by the main install script 
@@ -45,7 +46,14 @@ Some key variables include:
   
 ## The Package Dependencies File
 ## Bioconductor Packages Update
-This R script Update Installed Bioconductor Packages 
+
+This R script runs the update command to update  Installed Bioconductor Packages.
+
+## Installed Packages Report
+
+This R script R lists all the packages installed and their versions.
+A small step towards managing package versions. You could also use the first column to reinstall user-installed R packages after an R upgrade.
+
 
 ## Appendix:
 ```
