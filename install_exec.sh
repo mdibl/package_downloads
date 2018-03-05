@@ -5,13 +5,15 @@
 # Date: January 2018
 #
 # This script is called by the main install script 
-# (install_package.sh)  to build and install 
-# a new version of the package 
+# (install_package.sh) for the install of packages we only download binanies
 #
 # What it does:
 # 1) source the main config file to set gloabl path
 # 2) source the dependencies config file
-# 3) copy  the executables to /opt/software/bin
+# 3) copy 
+#   a. executables to /opt/software/bin
+#   b. includes to /opt/software/include
+#   c. libs to /opt/software/lib[64]
 #
 #
 # Note: the following environment variables are expected to be set
