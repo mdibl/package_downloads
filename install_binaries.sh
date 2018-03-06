@@ -69,7 +69,8 @@ for include_dir in ${INCLUDE_DIR}
 do
     if [ ! -f ${PACKAGE_BASE}/${include_dir} ]
     then
-       echo "ERROR: install failed - ${PACKAGE_BASE}/${include_dir} missing" 
+       echo "ERROR: install failed - Include directory INCLUDE_DIR=${PACKAGE_BASE}/${include_dir} not set properly in" 
+       echo "${PACKAGE_DEPENDS}"
        rstatus="FAILED"
      fi
 done
