@@ -47,12 +47,7 @@ then
 fi
 
 source ./${GLOBAL_CONFIG}
-## 
-if [ "${TOOL_NAME}/Install" = "" ]
-then
-    echo "ERROR: Missing ${TOOL_NAME} install script `pwd`/${TOOL_NAME}/Install " 
-    exit 1
-fi
+
 source ./${PACKAGE_DEPENDS}
 
 rstatus=""
