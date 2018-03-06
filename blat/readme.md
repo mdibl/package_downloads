@@ -5,9 +5,9 @@ This sub-directory contains:
  - [The Package Config File](#the-package-config-file)(blat_package.cfg)
  - [The Package Dependencies File](#the-package-dependencies-file)(blat_dependencies.cfg)
 
-Since we do not intall blat from source, we download binaries from the download site - the install of this package uses the
-the install_binaries.sh script instead of blat specific install script 
-to copy the downloaded executables to the specified bin directory.
+Blat is one of the tools we do not intall from source,instead we download binaries from the download site.
+The main install script then calls the install_binaries.sh script to copy the downloaded executables 
+to the specified bin directory.
 
 
 ## The Package Config File 
@@ -29,6 +29,21 @@ Some key variables include:
   - BINARIES_INSTALL
   
 ## The Package Dependencies File
+
+Each tool's dependency file contains the pre-install and post-install sets of dependencies.
+Blat only uses few of these variables.
+
+### Used for Pre-Install Dependencies Check
+  - BIN_DEPENDENCIES
+  - LIB_DEPENDENCIES
+
+## Used To Verify the install was a success
+  - FILE_CHECK
+  - DIR_CHECK
+  - BIN_FILES
+  - INCLUDE_DIR
+  - LIB64_DIR
+  - LIB_DIR
 
 ## Apendix:
 ```
