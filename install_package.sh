@@ -94,12 +94,13 @@ export GLOBAL_CONFIG  PACKAGE_DEPENDS PACKAGE_BASE PACKAGE_CONFIG_FILE
 if [ "${BINARIES_INSTALL}" = true ]
 then
     ./${INSTALL_BINARIES_SCRIPT}
+    
 else
     ./${TOOL_NAME}/Install
 fi 
+[ $? -ne 0 ] && exit 1
 ./${CHECK_INSTALL_SCRIPT}
 [ $? -ne 0 ] && exit 1
-
 echo "Install Done" 
 exit 0
 
