@@ -68,7 +68,11 @@ then
     mv ${PACKAGE_BASE}/${GIT_REPOS}/* ${PACKAGE_BASE}
     rm -rf ${PACKAGE_BASE}/${GIT_REPOS}
 fi
-
+if [ -d ${PACKAGE_BASE}/${TEMP_DOWNLOAD_DIR} ]
+then
+    mv ${PACKAGE_BASE}/${TEMP_DOWNLOAD_DIR}/* ${PACKAGE_BASE}
+    rm -rf ${PACKAGE_BASE}/${TEMP_DOWNLOAD_DIR}
+fi
 rstatus="SUCCESS"
 for bin_file in ${BIN_FILES}
 do
