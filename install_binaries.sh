@@ -96,7 +96,13 @@ for bin_file in ${BIN_FILES}
 do
     chmod 755 ${PACKAGE_BASE}/${bin_file}
     echo "cp -p  ${PACKAGE_BASE}/${bin_file} ${SOFTWARE_BIN_BASE}"
-    cp -P  ${PACKAGE_BASE}/${bin_file}  ${SOFTWARE_BIN_BASE}/
+    if [ "${CREATE_BINFILE_SYM_LINK}" = true ]
+    then
+       [ -f ${SOFTWARE_BIN_BASE}/${bin_file} ] && rm -f ${SOFTWARE_BIN_BASE}/${bin_file}
+       ln -s ${PACKAGE_BASE}/${bin_file}  ${SOFTWARE_BIN_BASE}/${bin_file}
+    else
+        cp -P  ${PACKAGE_BASE}/${bin_file}  ${SOFTWARE_BIN_BASE}/
+    fi
 done
 for include_dir in ${INCLUDE_DIR} 
 do
