@@ -43,12 +43,22 @@ fi
 TOOL_NAME=$1
 if [ -f ${GLOBAL_CONFIG} ]
 then
-  echo "ERROR: Missing ${GLOBAL_CONFIG} file `pwd` " 
+  echo "ERROR: Missing GLOBAL_CONFIG file `pwd` " 
+  exit 1
 fi
-
+if [ ! -f ${PACKAGE_CONFIG_FILE} ]
+then
+   echo "ERROR: Missing PACKAGE_CONFIG_FILE file `pwd` " 
+   exit 1
+fi
+if [ ! -f ${PACKAGE_DEPENDS} ]
+then
+   echo "ERROR: Missing PACKAGE_DEPENDS file `pwd` " 
+   exit 1
+fi
 source ./${GLOBAL_CONFIG}
-
 source ./${PACKAGE_DEPENDS}
+source ./${PACKAGE_CONFIG_FILE}
 
 rstatus=""
 echo "Running the dependency test" 
@@ -81,7 +91,12 @@ then
   exit 1
 fi
 export GLOBAL_CONFIG  PACKAGE_DEPENDS PACKAGE_BASE PACKAGE_CONFIG_FILE 
-./${TOOL_NAME}/Install
+if [ "${BINARIES_INSTALL}" = true ]
+then
+
+else
+    ./${TOOL_NAME}/Install
+fi 
 ./${CHECK_INSTALL_SCRIPT}
 [ $? -ne 0 ] && exit 1
 
