@@ -37,7 +37,7 @@ source ./${GLOBAL_CONFIG}
 
 if [ ! -f  ${PACKAGE_DEPENDS} ]
 then
-   echo "ERROR: PACKAGE_DEPENDS file missing "  
+   echo "ERROR: ${PACKAGE_DEPENDS} file missing "  
    exit 1
 fi
 source ./${PACKAGE_DEPENDS}
@@ -47,6 +47,12 @@ then
    echo "ERROR: Missing the install directory ${PACKAGE_BASE} "
    exit 1
 fi
+if [ ! -f ${PACKAGE_CONFIG_FILE} ]
+then
+    echo "ERROR: ${PACKAGE_CONFIG_FILE}  file missing "
+   exit 1
+fi
+source ./${PACKAGE_CONFIG_FILE}
 #Check the install
 #Make sure files are installed where expected
 # 
@@ -56,6 +62,13 @@ then
     mv ${PACKAGE_BASE}/${release_dir}/* ${PACKAGE_BASE}
     rm -rf ${PACKAGE_BASE}/${release_dir}
 fi
+
+if [ -d ${PACKAGE_BASE}/${GIT_REPOS} ]
+then
+    mv ${PACKAGE_BASE}/${GIT_REPOS}/* ${PACKAGE_BASE}
+    rm -rf ${PACKAGE_BASE}/${GIT_REPOS}
+fi
+
 rstatus="SUCCESS"
 for bin_file in ${BIN_FILES}
 do
