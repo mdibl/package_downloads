@@ -44,6 +44,7 @@ DOWNLOAD_SCRIPT=download_package.sh
 CHECK_INSTALL_SCRIPT=check_package_install.sh
 CHECK_DEPENDS_SCRIPT=check_package_depends.sh
 INSTALL_PACKAGE_SCRIPT=install_package.sh
+INSTALL_BINARIES_SCRIPT=install_binaries.sh
 
 EXPORT_REPOS_SCRIPT=gitExportRepos.sh
 CLONE_REPOS_SCRIPT=gitCloneRepos.sh
