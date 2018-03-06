@@ -93,7 +93,7 @@ fi
 export GLOBAL_CONFIG  PACKAGE_DEPENDS PACKAGE_BASE PACKAGE_CONFIG_FILE 
 if [ "${BINARIES_INSTALL}" = true ]
 then
-
+    ./${INSTALL_BINARIES_SCRIPT}
 else
     ./${TOOL_NAME}/Install
 fi 
