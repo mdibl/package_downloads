@@ -41,7 +41,7 @@ then
   exit 1
 fi
 TOOL_NAME=$1
-if [ -f ${GLOBAL_CONFIG} ]
+if [ ! -f ${GLOBAL_CONFIG} ]
 then
   echo "ERROR: Missing GLOBAL_CONFIG file `pwd` " 
   exit 1
