@@ -1,40 +1,58 @@
-# Building and installing
+# Fastqc
+
+
+This sub-directory contains:
+ - [The Package Config File](#the-package-config-file)(fastqc_package.cfg)
+ - [The Package Dependencies File](#the-package-dependencies-file)(fastqc_dependencies.cfg)
+
+Fastqc is one of the tools we do not intall from source,instead we download binaries from the download site.
+The main install script then calls the install_binaries.sh script to copy the downloaded includes 
+to the specified include directory as specified in this package's global configuration file
+
+
+## The Package Config File 
+The config file sets environment variables specific to this tool.
+Some key variables include:
+
+  - SHORT_NAME  (same as the name of the tool local directory)
+  - REMOTE_SITE
+  - REMOTE_DIR
+  - REPOS_TAG_PATTERN
+  - REMOTE_URL
+  - REMOTE_VERSION_FILE
+  - VERSION_PREFIX
+  - VERSION_SUFFIX
+  - EXP_PREFIX
+  - RELEASE_DIR
+  - EXPORT_GIT
+  - CLONE_GIT
+  - BINARIES_INSTALL
+  
+## The Package Dependencies File
+
+Each tool's dependency file contains the pre-install and post-install sets of dependencies.
+Blat only uses few of these variables.
+
+### Used for Pre-Install Dependencies Check
+  - BIN_DEPENDENCIES
+  - LIB_DEPENDENCIES
+
+### Used To Verify the install was a success
+  - FILE_CHECK
+  - DIR_CHECK
+
+### Used to copy files to ../bin /../lib ../lib64 ../include 
+  - BIN_FILES
+  - INCLUDE_DIR
+  - LIB64_DIR
+  - LIB_DIR
+
+## Apendix:
+```
  See : https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
  
 ## Dependency
 From their site: A suitable Java Runtime Environment 
-
-## Build fastqc
-```
-  Linux:  They have included a wrapper script, called 'fastqc' which is the easiest way to
-start the program.  The wrapper is in the top level of the FastQC installation.  You
-may need to make this file executable:
-
-chmod 755 fastqc
-
-..but once you have done that you can run it directly
-
-./fastqc
-
-..or place a link in /usr/local/bin to be able to run the program from any location:
-
-sudo ln -s /path/to/FastQC/fastqc /opt/software/bin/fastqc
-
-
- ```
-## Check the Install
-There should be the executable fastqc is under the install root directory
-
-## Running FastQC
---------------
-
-You can run FastQC in one of two modes, either as an interactive graphical application
-in which you can dynamically load FastQ files and view their results.
-
-Alternatively you can run FastQC in a non-interactive mode where you specify the files
-you want to process on the command line and FastQC will generate an HTML report for
-each file without launching a user interface.  This would allow FastQC to be run as
-part of an analysis pipeline.
 
 ## Running FastQC as part of a pipeline
 ------------------------------------
@@ -96,3 +114,4 @@ The text tags @@FILENAME@@ and @@DATE@@ are placeholders which are filled in whe
 report it created.  You can use these placeholders in other parts of the header if you
 wish.
 
+```
