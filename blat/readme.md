@@ -37,9 +37,11 @@ Blat only uses few of these variables.
   - BIN_DEPENDENCIES
   - LIB_DEPENDENCIES
 
-## Used To Verify the install was a success
+### Used To Verify the install was a success
   - FILE_CHECK
   - DIR_CHECK
+
+### Used to copy files to ../bin /../lib ../lib64 ../include 
   - BIN_FILES
   - INCLUDE_DIR
   - LIB64_DIR
