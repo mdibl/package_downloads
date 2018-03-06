@@ -48,6 +48,14 @@ then
    exit 1
 fi
 #Check the install
+#Make sure files are installed where expected
+# 
+release_dir=`basename ${PACKAGE_BASE}`
+if [ -d ${PACKAGE_BASE}/${release_dir} ]
+then
+    mv ${PACKAGE_BASE}/${release_dir}/* ${PACKAGE_BASE}
+    rm -rf ${PACKAGE_BASE}/${release_dir}
+fi
 rstatus="SUCCESS"
 for bin_file in ${BIN_FILES}
 do
@@ -57,6 +65,15 @@ do
        rstatus="FAILED"
      fi
 done
+for include_dir in ${INCLUDE_DIR} 
+do
+    if [ ! -f ${PACKAGE_BASE}/${include_dir} ]
+    then
+       echo "ERROR: install failed - ${PACKAGE_BASE}/${include_dir} missing" 
+       rstatus="FAILED"
+     fi
+done
+
 echo ${rstatus}
 
 [ "$rstatus" == FAILED ] && exit 1
