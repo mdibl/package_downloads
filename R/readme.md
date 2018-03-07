@@ -15,7 +15,7 @@ This sub-directory contains:
 
 ### What it does:
   1) sources the main config file to set global path
-  2) untar the downloaded tar file
+  2) move downloaded content where expected
   3) builds and install R
      a. copy  the executables to SOFTWARE_BASE/bin
      b. copy  the libraries to SOFTWARE_BASE/lib[64]
