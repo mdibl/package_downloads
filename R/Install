@@ -46,15 +46,6 @@ then
 fi
 RELEASE_DIR=`basename ${PACKAGE_BASE}`
 cd ${PACKAGE_BASE}
-#
-# as defined in the package config file
-if [ ! -f ${REMOTE_FILES} ]
-then
-   echo "ERROR - tar file:${REMOTE_FILES} missing under `pwd`"
-   exit 1 
-fi
-echo "Running ${TAR} -xvf ${REMOTE_FILES} command from "`pwd` 
-${TAR} -xvf ${REMOTE_FILES} 2>&1 
 if [ ! -d ${RELEASE_DIR} ]
 then
    rstatus="FAILED"
@@ -63,8 +54,7 @@ then
 fi
 mv ${RELEASE_DIR}/* .
 rm -rf ${RELEASE_DIR}/
-#cleanup the tar file
-rm -f $REMOTE_FILES
+
 echo "Running the install from "`pwd` 
 ./configure --prefix=$SOFTWARE_BASE --with-x=no
 make
