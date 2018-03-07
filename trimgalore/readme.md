@@ -49,11 +49,14 @@ Blat only uses few of these variables.
 ## Apendix:
 
 ```
-Trim Galore! is a wrapper around Cutadapt and FastQC to consistently apply adapter and quality trimming to FastQ files, with extra functionality for RRBS data.
+Trim Galore! is a wrapper around Cutadapt and FastQC to consistently apply adapter
+and quality trimming to FastQ files, with extra functionality for RRBS data.
 
 ## Installation
 
-Trim Galore! is a a Perl wrapper around two tools: Cutadapt and FastQC. To use, ensure that these two pieces of software are available and copy the trim_galore script to a location available on the PATH.
+Trim Galore! is a a Perl wrapper around two tools: Cutadapt and FastQC. 
+To use, ensure that these two pieces of software are available and copy the trim_galore script 
+to a location available on the PATH.
 
 For example:
    # Check that cutadapt is installed
