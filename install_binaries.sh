@@ -61,14 +61,11 @@ if [ -d ${PACKAGE_BASE}/${release_dir} ]
 then
     mv ${PACKAGE_BASE}/${release_dir}/* ${PACKAGE_BASE}
     rm -rf ${PACKAGE_BASE}/${release_dir}
-fi
-
-if [ -d ${PACKAGE_BASE}/${GIT_REPOS} ]
+elif [ -d ${PACKAGE_BASE}/${GIT_REPOS} ]
 then
     mv ${PACKAGE_BASE}/${GIT_REPOS}/* ${PACKAGE_BASE}
     rm -rf ${PACKAGE_BASE}/${GIT_REPOS}
-fi
-if [ -d ${PACKAGE_BASE}/${TEMP_DOWNLOAD_DIR} ]
+elif [ "${TEMP_DOWNLOAD_DIR}" !="" ]
 then
     mv ${PACKAGE_BASE}/${TEMP_DOWNLOAD_DIR}/* ${PACKAGE_BASE}
     rm -rf ${PACKAGE_BASE}/${TEMP_DOWNLOAD_DIR}
