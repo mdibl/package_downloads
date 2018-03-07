@@ -5,8 +5,8 @@ This sub-directory contains:
  - [The Package Dependencies File](#the-package-dependencies-file)(stringtie_dependencies.cfg)
 
 Stringtie is one of the tools we do not intall from source,instead we download binaries from the download site.
-The main install script then calls the install_binaries.sh script to copy the downloaded includes 
-to the specified include directory as specified in this package's global configuration file
+The main install script then calls the install_binaries.sh script to copy the downloaded executable
+to the specified bin directory as specified in this package's global configuration file
 
 
 ## The Package Config File 
