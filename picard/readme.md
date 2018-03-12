@@ -50,19 +50,31 @@ Some key variables include:
 # Building and installing
  See : https://github.com/samtools/samtools/blob/develop/INSTALL 
  
-## Dependency
-### Programs:
-  * GNU make
-  * C compiler (e.g. gcc or clang)
-  * autoheader
-  * autoconf
+Building Picard
 
-### Libraries:
-  * zlib library <http://zlib.net>
-  * bzip2 library <http://bzip.org/>
-  * curses or GNU ncurses library <http://www.gnu.org/software/ncurses/>
+First, clone the repo:
+    git clone https://github.com/broadinstitute/picard.git
+    cd picard/
+Picard is now built using gradle. A wrapper script (gradlew) is included which will download the appropriate version of gradle on the first invocation.
 
-Notes: The bzip2 and liblzma dependencies can be removed if full CRAM support
-is not needed - see HTSlib  INSTALL file for details.
+To build a fully-packaged, runnable Picard jar with all dependencies included, run:
+
+    ./gradlew shadowJar
+The resulting jar will be in build/libs. To run it, the command is:
+    java -jar build/libs/picard.jar
+    
+    or
+    
+    java -jar build/libs/picard-<VERSION>-all.jar 
+To build a jar containing only Picard classes (without its dependencies), run:
+    ./gradlew jar
+To clean the build directory, run:
+    ./gradlew clean
+Running Tests
+
+To run all tests, the command is:
+    ./gradlew test
+To run a specific test, the command is:
+    ./gradlew test -Dtest.single=TestClassName 
 
 ```
