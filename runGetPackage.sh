@@ -160,6 +160,11 @@ else
       [ -f ${REMOTE_FILES} ] && ${untar_prog} ${REMOTE_FILES} ${local_untar_dir}
       [ -f $REMOTE_FILES ] && rm -f ${REMOTE_FILES} 
    fi
+   if [ -d ${RELEASE_DIR} ]
+   then
+       mv  ${RELEASE_DIR}/* .
+       rm -rf ${RELEASE_DIR}
+   fi
 fi
 #Check if this release directory was created
 if [ ! -d ${PACKAGE_BASE} ]
