@@ -63,13 +63,7 @@ do
        rstatus="FAILED"
      fi
 done
-
-if [ "${rstatus}" == FAILED ]
-then
-   echo "${rstatus}" 
-   exit 1
-fi
 echo ${rstatus} 
-
+[ "${rstatus}" == FAILED ] && exit 1
 exit 0
 
