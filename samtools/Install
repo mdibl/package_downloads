@@ -64,8 +64,9 @@ fi
 
 ./configure  --prefix=${SOFTWARE_BASE} --with-htslib=${HTSLIB_DIR}  2>&1 
 make  2>&1
+[ $? -ne 0 ] && exit 1
 make install 2>&1 
-
+[ $? -ne 0 ] && exit 1
 #Check the install
 rstatus="SUCCESS"
 for folder in ${DIR_CHECK}
