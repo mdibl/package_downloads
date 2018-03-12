@@ -8,7 +8,7 @@
 # (install_package.sh) for the install of packages we only download binanies
 #
 # What it does:
-# 1) source the main config file to set gloabl path
+# 1) source the main config file to set global path
 # 2) source the dependencies config file
 # 3) copy 
 #   a. executables to /opt/software/bin
