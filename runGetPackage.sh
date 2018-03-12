@@ -165,6 +165,11 @@ else
        mv  ${RELEASE_DIR}/* .
        rm -rf ${RELEASE_DIR}
    fi
+   if [ -d ${TEMP_DOWNLOAD_DIR} ]
+   then
+       mv ${TEMP_DOWNLOAD_DIR}/* .
+       rm -rf ${TEMP_DOWNLOAD_DIR}
+   fi
 fi
 #Check if this release directory was created
 if [ ! -d ${PACKAGE_BASE} ]
