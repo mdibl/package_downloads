@@ -61,6 +61,7 @@ fi
 #
 #specify that samtools is to be built and installed into bin,
 # lib, etc subdirectories under $PACKAGE_BASE.
+# Alos Path to where htslib package is installed locally
 
 ./configure  --prefix=${SOFTWARE_BASE} --with-htslib=${SOFTWARE_BASE}  2>&1 
 make  2>&1
