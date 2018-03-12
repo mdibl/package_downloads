@@ -48,7 +48,7 @@ Some key variables include:
 ## Appendix:
 ```
 # Building and installing
- See : https://github.com/samtools/samtools/blob/develop/INSTALL 
+ See : http://broadinstitute.github.io/picard/ 
  
 Building Picard
 
