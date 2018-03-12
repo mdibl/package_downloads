@@ -1,4 +1,4 @@
-# Bamtools
+# Samtools
  
 This sub-directory contains:
  - [The Install Script](#the-install-script)(Install)
