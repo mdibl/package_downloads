@@ -2,8 +2,7 @@
 
 # Organization: MDIBL
 # Author: Lucie Hutchins
-# Date: October 2017
-# Modified: February 2018
+# Date: January 2018
 #
 # This script is called by the main install script 
 # (install_package.sh)  to build and install 
@@ -11,8 +10,8 @@
 #
 # What it does:
 # 1) source the main config file to set global path
-# 2) configure and build the package
-# 3) install the package
+# 2) build the package
+#
 #
 # Note: the following environment variables are expected to be set
 # by the caller
@@ -45,29 +44,15 @@ then
    exit 1
 fi
 cd ${PACKAGE_BASE}
-
-if [ ! -f configure ]
-then
-   echo "Generating 'configure' file  under `pwd`" 
-   autoheader
-   autoconf -Wno-syntax
-fi
 # Run the install commands
-if [ ! -f  configure ]
+if [ ! -f  gradlew ]
 then
    echo "${PACKAGE_BASE}/configure missing" 
    exit 1  
 fi
 #
-#specify that samtools is to be built and installed into bin,
-# lib, etc subdirectories under $PACKAGE_BASE.
-# Alos Path to where htslib package is installed locally
+./gradlew  shadowJar  2>&1 
 
-./configure  --prefix=${SOFTWARE_BASE} --with-htslib=${SOFTWARE_BASE}  2>&1 
-make  2>&1
-[ $? -ne 0 ] && exit 1
-make install 2>&1 
-[ $? -ne 0 ] && exit 1
 #Check the install
 rstatus="SUCCESS"
 for folder in ${DIR_CHECK}
@@ -84,12 +69,6 @@ then
    echo "${rstatus}" 
    exit 1
 fi
-
-# Copy the header files to the bam include directory
-[ ! -d  ${SOFTWARE_INCLUDE_BASE}/bam ] &&mkdir -p ${SOFTWARE_INCLUDE_BASE}/bam
-
-#cp ${PACKAGE_BASE}/*.h ${SOFTWARE_INCLUDE_BASE}/bam/
-
 echo ${rstatus} 
 
 exit 0
