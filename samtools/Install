@@ -62,7 +62,7 @@ fi
 #specify that samtools is to be built and installed into bin,
 # lib, etc subdirectories under $PACKAGE_BASE.
 
-./configure  --prefix=${SOFTWARE_BASE} --with-htslib=${HTSLIB_DIR}  2>&1 
+./configure  --prefix=${SOFTWARE_BASE} --with-htslib=${SOFTWARE_BASE}  2>&1 
 make  2>&1
 [ $? -ne 0 ] && exit 1
 make install 2>&1 
