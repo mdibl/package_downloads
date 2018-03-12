@@ -86,15 +86,9 @@ fi
 # Copy the header files to the bam include directory
 [ ! -d  ${SOFTWARE_INCLUDE_BASE}/bam ] &&mkdir -p ${SOFTWARE_INCLUDE_BASE}/bam
 
-cp ${PACKAGE_BASE}/*.h ${SOFTWARE_INCLUDE_BASE}/bam/
+#cp ${PACKAGE_BASE}/*.h ${SOFTWARE_INCLUDE_BASE}/bam/
 
 echo ${rstatus} 
-#Copy binaries and libs to global path
-for folder in ${DIR_CHECK}
-do
-    echo "Copying ${PACKAGE_BASE}/${folder}/* to ${SOFTWARE_BASE}/${folder}/"
-    cp -pR ${PACKAGE_BASE}/${folder}/* ${SOFTWARE_BASE}/${folder}/
-done
 
 exit 0
 
