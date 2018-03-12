@@ -2,8 +2,8 @@
  
 This sub-directory contains:
  - [The Install Script](#the-install-script)(Install)
- - [The Package Config File](#the-package-config-file)(bamttols_package.cfg)
- - [The Package Dependencies File](#the-package-dependencies-file)(bamttols_dependencies.cfg)
+ - [The Package Config File](#the-package-config-file)(bamtools_package.cfg)
+ - [The Package Dependencies File](#the-package-dependencies-file)(bamtools_dependencies.cfg)
 
 ## The Install Script
  This script is called by the main install script 
