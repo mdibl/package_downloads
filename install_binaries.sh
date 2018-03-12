@@ -62,7 +62,7 @@ then
     mv ${PACKAGE_BASE}/${release_dir}/* ${PACKAGE_BASE}
     rm -rf ${PACKAGE_BASE}/${release_dir}
 fi
-if [ "${TEMP_DOWNLOAD_DIR}" !="" ]
+if [ "${TEMP_DOWNLOAD_DIR}" != "" ]
 then
     mv ${PACKAGE_BASE}/${TEMP_DOWNLOAD_DIR}/* ${PACKAGE_BASE}
     rm -rf ${PACKAGE_BASE}/${TEMP_DOWNLOAD_DIR}
