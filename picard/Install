@@ -55,11 +55,11 @@ fi
 
 #Check the install
 rstatus="SUCCESS"
-for folder in ${DIR_CHECK}
+for bin_file in ${FILE_CHECK}
 do
-    if [ ! -d ${PACKAGE_BASE}/${folder} ]
+    if [ ! -d ${PACKAGE_BASE}/${bin_file} ]
     then
-       echo "${PACKAGE_BASE}/${folder} missing" 
+       echo "${PACKAGE_BASE}/${bin_file} missing" 
        rstatus="FAILED"
      fi
 done
