@@ -2,8 +2,8 @@
  
 This sub-directory contains:
  - [The Install Script](#the-install-script)(Install)
- - [The Package Config File](#the-package-config-file)(samtools_package.cfg)
- - [The Package Dependencies File](#the-package-dependencies-file)(samtools_dependencies.cfg)
+ - [The Package Config File](#the-package-config-file)(picard_package.cfg)
+ - [The Package Dependencies File](#the-package-dependencies-file)(picard_dependencies.cfg)
 
 ## The Install Script
  This script is called by the main install script 
