@@ -54,19 +54,6 @@ then
 fi
 source ./${PACKAGE_CONFIG_FILE}
 #Check the install
-#Make sure files are installed where expected
-# 
-release_dir=`dirname ${PACKAGE_BASE}`
-if [ -d ${PACKAGE_BASE}/${release_dir} ]
-then
-    mv ${PACKAGE_BASE}/${release_dir}/* ${PACKAGE_BASE}
-    rm -rf ${PACKAGE_BASE}/${release_dir}
-fi
-if [ "${TEMP_DOWNLOAD_DIR}" != "" ]
-then
-    mv ${PACKAGE_BASE}/${TEMP_DOWNLOAD_DIR}/* ${PACKAGE_BASE}
-    rm -rf ${PACKAGE_BASE}/${TEMP_DOWNLOAD_DIR}
-fi
 rstatus="SUCCESS"
 for bin_file in ${BIN_FILES}
 do
