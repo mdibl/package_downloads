@@ -66,14 +66,35 @@ then
   exit 1
 fi
 source ./${GLOBAL_CONFIG}
-# Create base directories if not exist 
-[ ! -d ${SOFTWARE_BASE} ] && mkdir -p ${SOFTWARE_BASE}
-[ ! -d ${EXTERNAL_SOFTWARE_BASE} ] && mkdir -p ${EXTERNAL_SOFTWARE_BASE}
+# Create base directories if not exist
+# Make sure the directory is not empty or
+# the main root directory "/" 
+#
+bad_dir=false
+[ "${SOFTWARE_BASE}" = "" ] && bad_dir=true
+[ "${SOFTWARE_BASE}" = "/" ] && bad_dir=true
+if [ "$bad_dir" != true ]
+then
+   echo "ERROR - SOFTWARE_BASE has an invalid value: ${SOFTWARE_BASE}"
+   exit 1
+fi
+mkdir -p ${SOFTWARE_BASE}
+bad_dir=false
+[ "${EXTERNAL_SOFTWARE_BASE}" = "" ] && bad_dir=true
+[ "${EXTERNAL_SOFTWARE_BASE}" = "/" ] && bad_dir=true
+if [ "$bad_dir" != true ]
+then
+   echo "ERROR - EXTERNAL_SOFTWARE_BASE has an invalid value: ${EXTERNAL_SOFTWARE_BASE}"
+   exit 1
+fi
+ mkdir -p ${EXTERNAL_SOFTWARE_BASE}
+[ ! -d ${DOWNLOADS_LOG_DIR} ] && mkdir -p ${DOWNLOADS_LOG_DIR}
+
 [ ! -d ${SOFTWARE_BIN_BASE} ] && mkdir -p ${SOFTWARE_BIN_BASE}
 [ ! -d ${SOFTWARE_LIB_BASE} ] && mkdir -p ${SOFTWARE_LIB_BASE}
 [ ! -d ${SOFTWARE_LIB64_BASE} ] && mkdir -p ${SOFTWARE_LIB64_BASE}
 [ ! -d ${SOFTWARE_INCLUDE_BASE} ] && mkdir -p ${SOFTWARE_INCLUDE_BASE}
-[ ! -d ${DOWNLOADS_LOG_DIR} ] && mkdir -p ${DOWNLOADS_LOG_DIR}
+
 #set path to packages install base
 #and get the version to install from the flag file
 #
@@ -160,10 +181,13 @@ else
       [ -f ${REMOTE_FILES} ] && ${untar_prog} ${REMOTE_FILES} ${local_untar_dir}
       [ -f $REMOTE_FILES ] && rm -f ${REMOTE_FILES} 
    fi
-   if [ -d ${RELEASE_DIR} ]
+   if [ "${RELEASE_DIR}" != "" ]
    then
-       mv  ${RELEASE_DIR}/* .
-       rm -rf ${RELEASE_DIR}
+      if [ -d ${RELEASE_DIR} ]
+      then
+          mv  ${RELEASE_DIR}/* .
+          rm -rf ${RELEASE_DIR}
+      fi
    fi
    if [ "${TEMP_DOWNLOAD_DIR}" != "" ]
    then
