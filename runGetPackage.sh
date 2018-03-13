@@ -89,7 +89,6 @@ then
 fi
  mkdir -p ${EXTERNAL_SOFTWARE_BASE}
 [ ! -d ${DOWNLOADS_LOG_DIR} ] && mkdir -p ${DOWNLOADS_LOG_DIR}
-
 [ ! -d ${SOFTWARE_BIN_BASE} ] && mkdir -p ${SOFTWARE_BIN_BASE}
 [ ! -d ${SOFTWARE_LIB_BASE} ] && mkdir -p ${SOFTWARE_LIB_BASE}
 [ ! -d ${SOFTWARE_LIB64_BASE} ] && mkdir -p ${SOFTWARE_LIB64_BASE}
