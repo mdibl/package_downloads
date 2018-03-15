@@ -32,7 +32,7 @@ function displayTools() {
     done
     echo ""
 }
-
+date | tee -a ${LOG_FILE}
 echo "
 ***************************************
  BIOCORE PACKAGE INSTALL AUTOMATION 
@@ -87,14 +87,9 @@ PREVIOUS_RELEASE=""
 ## set release number to current value in ${RELEASE_FILE}
 [ -f ${RELEASE_FILE} ] &&  REVIOUS_RELEASE=`cat ${RELEASE_FILE}`
 
-date | tee -a ${LOG_FILE}
-echo "**********              *******************" | tee -a ${LOG_FILE}
 echo ""
 echo "Setting ${TOOL_NAME}'s Release version to ${RELEASE_NUMBER}"| tee -a ${LOG_FILE}
 echo "The Release version info is stored in  ${RELEASE_FILE}"| tee -a ${LOG_FILE}
-echo ""
-echo "**********  *******************************"| tee -a ${LOG_FILE}
-
 echo ""| tee -a ${LOG_FILE}
 
 RELEASE_NUMBER=`echo $RELEASE_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
