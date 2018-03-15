@@ -13,7 +13,8 @@ This sub-directory contains:
 
 ### What it does:
   1) sources the main config file to set global path
-  2) builds and install the package
+  2) sources package specific config file
+  3) builds and install the package
   ```
   copy  the executables to SOFTWARE_BASE/bin  
  ```
