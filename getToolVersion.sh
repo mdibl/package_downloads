@@ -105,7 +105,7 @@ touch ${LOG_FILE}
 
 ## set release number to current value in ${RELEASE_FILE}
 [ -f ${RELEASE_FILE} ] &&  RELEASE_NUMBER=`cat ${RELEASE_FILE}`
-echo " Checking ${TOOL_NAME}'s  Current Release"| tee -a ${LOG_FILE}
+echo "Checking ${TOOL_NAME}'s  Current Release"| tee -a ${LOG_FILE}
 echo "The current version info is stored in  ${RELEASE_FILE}"| tee -a ${LOG_FILE}
 
 if [ "${CLONE_GIT}" = true ]
@@ -120,15 +120,18 @@ then
         exit 1
     fi
     cd ${GIT_REPOS}
+    echo "-------------------------------------"
+    echo "Cloning repos to get current release version"
+    echo ""
     ${GIT} pull 2>&1 | tee -a ${LOG_FILE}
     RELEASE_TOKEN=`${GIT} rev-list --tags --max-count=1`
     RELEASE_NUMBER=`${GIT} describe --tags ${RELEASE_TOKEN}`
 else
     FILE_TOKEN=`basename ${REMOTE_VERSION_FILE}`
     LOCAL_VERSION_FILE=${PACKAGE_DOWNLOADS_BASE}/${FILE_TOKEN}
-    echo "Downloaded files are under ${PACKAGE_DOWNLOADS_BASE}"| tee -a ${LOG_FILE}
+    echo "-------------------------------------"
+    echo "Downloading release info file to get current release version"| tee -a ${LOG_FILE}
     echo "File to download:${REMOTE_VERSION_FILE}"| tee -a ${LOG_FILE}
-    echo "Script :$DOWNLOAD_SCRIPT"| tee -a ${LOG_FILE}
     ${WGET}  -O ${LOCAL_VERSION_FILE} ${REMOTE_VERSION_FILE} 2>&1 | tee -a ${LOG_FILE}
     if [ ! -f ${LOCAL_VERSION_FILE} ]
     then
@@ -139,11 +142,11 @@ else
     RELEASE_NUMBER=`${EXPRESSION} | grep "${VERSION_PREFIX}" |sed "s/${VERSION_PREFIX}//" `
     [ "${VERSION_SUFFIX}" != "" ] && RELEASE_NUMBER=`echo ${RELEASE_NUMBER} | sed "s/${VERSION_SUFFIX}//"`
 fi
+echo "------------------------------"
 RELEASE_NUMBER=`echo $RELEASE_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
 
 ## Create the current release Number file
-echo "${TOOL_NAME} release: ${RELEASE_NUMBER} "
-echo "Updating ${RELEASE_FILE} with version:${RELEASE_NUMBER}"
+echo "${TOOL_NAME} release: ${RELEASE_NUMBER}  detected"
 if [[ ${RELEASE_NUMBER} =~ ${REPOS_TAG_PATTERN} ]]
 then
    rm -f ${RELEASE_FILE}
@@ -156,7 +159,7 @@ then
 fi
 cd ${WORKING_DIR}
 source ./${PACKAGE_CONFIG_FILE}
-echo "Current Release Number:${RELEASE_NUMBER}"| tee -a ${LOG_FILE}
+echo ""
 if [ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ]
 then
     echo "WARNING"
