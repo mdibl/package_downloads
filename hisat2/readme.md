@@ -13,12 +13,9 @@ This sub-directory contains:
 
 ### What it does:
   1) sources the main config file to set global path
-  2) move downloaded content where expected
-  3) builds and install R
+  2) builds and install the package
   ```
-     a. copy  the executables to SOFTWARE_BASE/bin
-     b. copy  the libraries to SOFTWARE_BASE/lib[64]
-     c. copy  the include to SOFTWARE_BASE/include
+  copy  the executables to SOFTWARE_BASE/bin  
  ```
 
 ### Note:
@@ -46,27 +43,6 @@ Some key variables include:
   - CLONE_GIT
   
 ## The Package Dependencies File
-
-## Generate Installed Package Repeort
-
-This is a wrapper script to call  R scripts that generates a list of 
-user-installed R packages with the version installed
-
-What it does: 
- - Call [Bioconductor Packages Update](#bioconductor-packages-update)(checkPackageUpdate.r) to 
-  update the version of installed packages
- - Call [Installed Packages Report](#installed-packages-report)(genPackageReports.r) to gereate the report
-
-
-## Bioconductor Packages Update
-
-This R script runs the update command to update  Installed Bioconductor Packages.
-
-## Installed Packages Report
-
-This R script R lists all the packages installed and their versions.
-A small step towards managing package versions. You could also use the first column to reinstall user-installed R packages after an R upgrade.
-
 
 ## Appendix:
 ```
