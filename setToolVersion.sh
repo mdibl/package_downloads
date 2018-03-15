@@ -89,12 +89,14 @@ PREVIOUS_RELEASE=""
 
 date | tee -a ${LOG_FILE}
 echo "**********              *******************" | tee -a ${LOG_FILE}
+echo ""
 echo " Setting ${TOOL_NAME}'s Release to ${RELEASE_NUMBER}"| tee -a ${LOG_FILE}
-echo " The release flag contained  ${PREVIOUS_RELEASE}"| tee -a ${LOG_FILE}
+echo "The version info is stored in  ${RELEASE_FILE}"| tee -a ${LOG_FILE}
+echo ""
 echo "**********  *******************************"| tee -a ${LOG_FILE}
 
 echo ""| tee -a ${LOG_FILE}
-echo "The tool's version info is stored in  ${RELEASE_FILE}"| tee -a ${LOG_FILE}
+
 RELEASE_NUMBER=`echo $RELEASE_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
 echo "Updating ${RELEASE_FILE} with version:${RELEASE_NUMBER}"
 if [[ ${RELEASE_NUMBER} =~ ${REPOS_TAG_PATTERN} ]]
@@ -108,8 +110,8 @@ then
     echo ""
     echo "WARNING:"
     echo "  ${TOOL_NAME} version $RELEASE_NUMBER is already installed."
-    echo "   See: ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} "
-    echo "   Remove this directory first if you want to re-install this version"
+    echo "  See: ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} "
+    echo "  Remove this directory first if you want to re-install this version"
 fi
 
 echo ""| tee -a ${LOG_FILE}
