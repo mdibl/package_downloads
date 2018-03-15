@@ -23,6 +23,7 @@ cd `dirname $0`
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
 GLOBAL_CONFIG=Configuration
+date | tee -a ${LOG_FILE}
 
 function displayTools() {
     echo ""
@@ -104,12 +105,7 @@ touch ${LOG_FILE}
 
 ## set release number to current value in ${RELEASE_FILE}
 [ -f ${RELEASE_FILE} ] &&  RELEASE_NUMBER=`cat ${RELEASE_FILE}`
-
-date | tee -a ${LOG_FILE}
-echo "**********              *******************" | tee -a ${LOG_FILE}
 echo " Checking ${TOOL_NAME}'s  Current Release"| tee -a ${LOG_FILE}
-echo "**********  *******************************"| tee -a ${LOG_FILE}
-echo ""| tee -a ${LOG_FILE}
 echo "The current version info is stored in  ${RELEASE_FILE}"| tee -a ${LOG_FILE}
 
 if [ "${CLONE_GIT}" = true ]
@@ -163,9 +159,10 @@ source ./${PACKAGE_CONFIG_FILE}
 echo "Current Release Number:${RELEASE_NUMBER}"| tee -a ${LOG_FILE}
 if [ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ]
 then
-    echo "${TOOL_NAME} version $RELEASE_NUMBER is already installed."
-    echo "See: ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} "
-    echo " Remove this directory first if you want to re-install this version"
+    echo "WARNING"
+    echo "  ${TOOL_NAME} version $RELEASE_NUMBER is already installed."
+    echo "  See: ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} "
+    echo "  Remove this directory first if you want to re-install this version"
 fi
 echo ""| tee -a ${LOG_FILE}
 echo "Program complete"| tee -a ${LOG_FILE}
