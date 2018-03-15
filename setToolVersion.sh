@@ -114,7 +114,6 @@ if [ -f ${RELEASE_FILE} ]
 then
    RELEASE_NUMBER=`cat ${RELEASE_FILE}`
 fi
-i
 echo "Release Directory:${RELEASE_DIR}"| tee -a ${LOG_FILE}
 
 echo ""| tee -a ${LOG_FILE}
