@@ -123,16 +123,23 @@ then
     echo "-------------------------------------"
     echo "Cloning repos to get current release version"
     echo ""
+    echo ">>>>>>>> Git output starts here "
     ${GIT} pull 2>&1 | tee -a ${LOG_FILE}
     RELEASE_TOKEN=`${GIT} rev-list --tags --max-count=1`
     RELEASE_NUMBER=`${GIT} describe --tags ${RELEASE_TOKEN}`
+    echo "<<<<<<<< Git output ends here "
+    echo ""
 else
     FILE_TOKEN=`basename ${REMOTE_VERSION_FILE}`
     LOCAL_VERSION_FILE=${PACKAGE_DOWNLOADS_BASE}/${FILE_TOKEN}
     echo "-------------------------------------"
-    echo "Downloading release info file to get current release version"| tee -a ${LOG_FILE}
+    echo "Using Wget to Download the release version file"| tee -a ${LOG_FILE}
     echo "File to download:${REMOTE_VERSION_FILE}"| tee -a ${LOG_FILE}
+    echo ""
+    echo ">>>>>>>> Wget output starts here "
     ${WGET}  -O ${LOCAL_VERSION_FILE} ${REMOTE_VERSION_FILE} 2>&1 | tee -a ${LOG_FILE}
+    echo "<<<<<<<< Wget output ends here "
+    echo ""
     if [ ! -f ${LOCAL_VERSION_FILE} ]
     then
         echo "Download failed: ${LOCAL_VERSION_FILE} is missing" 
