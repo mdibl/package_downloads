@@ -44,17 +44,8 @@ then
    echo "ERROR: Missing the install directory ${PACKAGE_BASE} "
    exit 1
 fi
-RELEASE_DIR=`basename ${PACKAGE_BASE}`
-cd ${PACKAGE_BASE}
-if [ ! -d ${RELEASE_DIR} ]
-then
-   rstatus="FAILED"
-   echo "Command $TAR -xvf $REMOTE_FILES failed - missing directory ${RELEASE_DIR}"
-   exit 1
-fi
-mv ${RELEASE_DIR}/* .
-rm -rf ${RELEASE_DIR}/
 
+cd ${PACKAGE_BASE}
 echo "Running the install from "`pwd` 
 ./configure --prefix=$SOFTWARE_BASE --with-x=no
 make
