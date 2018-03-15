@@ -111,6 +111,10 @@ echo "The current version info is stored in  ${RELEASE_FILE}"| tee -a ${LOG_FILE
 if [ "${CLONE_GIT}" = true ]
 then
     #clone repos to get current release tag
+    echo "-------------------------------------"
+    echo "Cloning repos to get current release version"
+    echo ""
+    echo ">>>>>>>> Git output starts here "
     [ ! -d  ${PACKAGE_GIT_CLONE_BASE} ] && mkdir -p ${PACKAGE_GIT_CLONE_BASE}
     cd ${PACKAGE_GIT_CLONE_BASE}
     [ ! -d ${GIT_REPOS} ] && ${GIT} clone  ${REMOTE_VERSION_FILE}
@@ -120,10 +124,6 @@ then
         exit 1
     fi
     cd ${GIT_REPOS}
-    echo "-------------------------------------"
-    echo "Cloning repos to get current release version"
-    echo ""
-    echo ">>>>>>>> Git output starts here "
     ${GIT} pull 2>&1 | tee -a ${LOG_FILE}
     RELEASE_TOKEN=`${GIT} rev-list --tags --max-count=1`
     RELEASE_NUMBER=`${GIT} describe --tags ${RELEASE_TOKEN}`
