@@ -64,10 +64,11 @@ cmake -DCMAKE_INSTALL_PREFIX=${PACKAGE_BASE} .. 2>&1
 make 2>&1 
 make install 2>&1 
 #Check the install
+
 rstatus="SUCCESS"
 for pkg_dir in ${DIR_CHECK}
 do
-    if [ ! -f ${pkg_dir} ]
+    if [ ! -f ${PACKAGE_BASE}/${pkg_dir} ]
     then
        echo "$pkg_dir missing under ${PACKAGE_BASE} "
        rstatus="FAILED"
@@ -76,7 +77,7 @@ done
 
 for pkg_file in ${FILE_CHECK}
 do
-    if [ ! -f ${pkg_file} ]
+    if [ ! -f ${PACKAGE_BASE}/${pkg_file} ]
     then
        echo "$pkg_file missing under ${PACKAGE_BASE} "
        rstatus="FAILED"
