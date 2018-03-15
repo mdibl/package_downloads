@@ -1,31 +1,29 @@
 # Picard
  
 This sub-directory contains:
- - [The Install Script](#the-install-script)(Install)
  - [The Package Config File](#the-package-config-file)(picard_package.cfg)
  - [The Package Dependencies File](#the-package-dependencies-file)(picard_dependencies.cfg)
 
-## The Install Script
- This script is called by the main install script 
-(install_package.sh)  to build and install  a new version of the package 
+Picard is one of the tools we do not intall from source,instead we download binaries from the download site.
+  
+## The Package Dependencies File
 
-### What it does:
-  1) sources the main config file to set global path
-  2) sources the dependencies config file
-  3) runs the build and Install to
-  ```
-   a. copy  the executables to /opt/software/bin
-   b. copy  the libraries to /opt/software/lib[64]
-   c. copy  the include to /opt/software/include
-  ```
+Each tool's dependency file contains the pre-install and post-install sets of dependencies.
+Blat only uses few of these variables.
 
-### Note:
-The following environment variables are expected to be set by the caller:
+### Used for Pre-Install Dependencies Check
+  - BIN_DEPENDENCIES
+  - LIB_DEPENDENCIES
 
- 1) GLOBAL_CONFIG  (Path to the main Configuration file
-    ``` ${PACKAGE_DOWNLOADS_BASE}/Configuration ) ```
- 2) PACKAGE_BASE   (Path to the new release install directory  ${EXTERNAL_SOFTWARE_BASE}/${SHORT_NAME}/${RELEASE_DIR})
- 3) PACKAGE_DEPENDENCIES_FILE (The dependencies file for this tool  PACKAGE_DOWNLOADS_BASE/SHORT_NAME/
+### Used To Verify the install was a success
+  - FILE_CHECK
+  - DIR_CHECK
+
+### Used to copy files to ../bin /../lib ../lib64 ../include 
+  - BIN_FILES
+  - INCLUDE_DIR
+  - LIB64_DIR
+  - LIB_DIR
 
 
 ## The Package Config File 
@@ -43,18 +41,19 @@ Some key variables include:
   - EXPORT_GIT
   - CLONE_GIT
   
-## The Package Dependencies File
 
 ## Appendix:
 ```
-# Building and installing
+# Building and installing from source 
+
  See : http://broadinstitute.github.io/picard/ 
  
-Building Picard
+Building Picard From Source
 
-First, clone the repo:
+First, clone the repos:
     git clone https://github.com/broadinstitute/picard.git
     cd picard/
+
 Picard is now built using gradle. A wrapper script (gradlew) is included which will download the appropriate version of gradle on the first invocation.
 
 To build a fully-packaged, runnable Picard jar with all dependencies included, run:
