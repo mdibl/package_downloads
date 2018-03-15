@@ -77,7 +77,7 @@ FASTA/FASTQ files preprocessing.
 ## Prerequisites
  * pkg-config
  * wget
- * Fastx-toolkit version 0.0.13 requires libgtextutils-0.6 (available here for download)
+ * Fastx-toolkit version 0.0.13 requires libgtextutils-0.6 
  * A recent g++ compiler (tested with GNU G++ 4.1.2 and later).
  * The fasta_clipping_histogram tool requires two perl modules: PerlIO::gzip and GD::Graph::bars.
  * The fastx_barcode_splitter tool requires GNU sed.
