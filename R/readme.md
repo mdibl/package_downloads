@@ -17,10 +17,11 @@ This sub-directory contains:
   1) sources the main config file to set global path
   2) move downloaded content where expected
   3) builds and install R
+  ```
      a. copy  the executables to SOFTWARE_BASE/bin
      b. copy  the libraries to SOFTWARE_BASE/lib[64]
      c. copy  the include to SOFTWARE_BASE/include
- 
+ ```
 
 ### Note:
 The following environment variables are expected to be set by the caller:
