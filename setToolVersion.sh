@@ -69,25 +69,48 @@ LOG_FILE="${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${TOOL_NAME}.log"
 
 rm -rf ${LOG_FILE}
 touch ${LOG_FILE}
+
+## Path relative to this script base
+PACKAGE_CONFIG_FILE=${TOOL_NAME}/${TOOL_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
+if [ ! -f ${PACKAGE_CONFIG_FILE} ]
+then
+    echo "ERROR: ${PACKAGE_CONFIG_FILE} missing under: ${WORKING_DIR}"
+    exit 1
+fi
+source ./${PACKAGE_CONFIG_FILE}
+#
+## Path relative to this package install base
+PACKAGE_DOWNLOADS_BASE=${EXTERNAL_SOFTWARE_BASE}/${TOOL_NAME}
+[ ! -d ${PACKAGE_DOWNLOADS_BASE} ] && mkdir -p ${PACKAGE_DOWNLOADS_BASE}
+RELEASE_FILE=${PACKAGE_DOWNLOADS_BASE}/${CURRENT_FLAG_FILE}
 PREVIOUS_RELEASE=""
 ## set release number to current value in ${RELEASE_FILE}
-[ -f ${RELEASE_FILE} ] &&  RELEASE_NUMBER=`cat ${RELEASE_FILE}`
+[ -f ${RELEASE_FILE} ] &&  REVIOUS_RELEASE=`cat ${RELEASE_FILE}`
 
 date | tee -a ${LOG_FILE}
 echo "**********              *******************" | tee -a ${LOG_FILE}
-echo " Setting ${TOOL_NAME}'s Release to "| tee -a ${LOG_FILE}
+echo " Setting ${TOOL_NAME}'s Release to ${RELEASE_NUMBER}"| tee -a ${LOG_FILE}
+echo " The release flag contained  ${PREVIOUS_RELEASE}"| tee -a ${LOG_FILE}
 echo "**********  *******************************"| tee -a ${LOG_FILE}
 
 echo ""| tee -a ${LOG_FILE}
-echo "The current version info is stored in  ${RELEASE_FILE}"| tee -a ${LOG_FILE}
+echo "The tool's version info is stored in  ${RELEASE_FILE}"| tee -a ${LOG_FILE}
 
 RELEASE_NUMBER=`echo $RELEASE_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
-
-## Create the current release Number file
-echo "${TOOL_NAME} release: ${RELEASE_NUMBER} "
 echo "Updating ${RELEASE_FILE} with version:${RELEASE_NUMBER}"
+if [[ ${RELEASE_NUMBER} =~ ${REPOS_TAG_PATTERN} ]]
+then
+   rm -f ${RELEASE_FILE}
+   touch ${RELEASE_FILE}
+   echo "${RELEASE_NUMBER}" > ${RELEASE_FILE}
+fi
+if [ -f ${RELEASE_FILE} ]
+then
+   RELEASE_NUMBER=`cat ${RELEASE_FILE}`
+fi
 
-echo "Current Release Number:${RELEASE_NUMBER}"| tee -a ${LOG_FILE}
+echo "Release Directory:${RELEASE_DIR}"| tee -a ${LOG_FILE}
+
 echo ""| tee -a ${LOG_FILE}
 echo "Program complete"| tee -a ${LOG_FILE}
 exit 0
