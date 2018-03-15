@@ -158,7 +158,7 @@ if [ -f ${RELEASE_FILE} ]
 then
    RELEASE_NUMBER=`cat ${RELEASE_FILE}`
 fi
-
+source ./${PACKAGE_CONFIG_FILE}
 echo "Current Release Number:${RELEASE_NUMBER}"| tee -a ${LOG_FILE}
 if [ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ]
 then
