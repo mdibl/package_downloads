@@ -71,8 +71,8 @@ source ./${GLOBAL_CONFIG}
 # the main root directory "/" 
 #
 bad_dir=false
-[ "${SOFTWARE_BASE}" == "" ] && bad_dir=true
-[ "${SOFTWARE_BASE}" == "/" ] && bad_dir=true
+[ "$SOFTWARE_BASE" == "" ] && bad_dir=true
+[ "$SOFTWARE_BASE" == "/" ] && bad_dir=true
 if [ "$bad_dir" != true ]
 then
    echo "ERROR - SOFTWARE_BASE has an invalid value: ${SOFTWARE_BASE}"
