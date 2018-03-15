@@ -95,14 +95,7 @@ echo "**********  *******************************"| tee -a ${LOG_FILE}
 
 echo ""| tee -a ${LOG_FILE}
 echo "The tool's version info is stored in  ${RELEASE_FILE}"| tee -a ${LOG_FILE}
-
 RELEASE_NUMBER=`echo $RELEASE_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
-if [ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ]
-then
-    echo "${TOOL_NAME} version $RELEASE_NUMBER is already installed."
-    echo "See: ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} "
-    echo " Remove this directory first if you want to re-install this version"
-fi
 echo "Updating ${RELEASE_FILE} with version:${RELEASE_NUMBER}"
 if [[ ${RELEASE_NUMBER} =~ ${REPOS_TAG_PATTERN} ]]
 then
@@ -110,11 +103,14 @@ then
    touch ${RELEASE_FILE}
    echo "${RELEASE_NUMBER}" > ${RELEASE_FILE}
 fi
-if [ -f ${RELEASE_FILE} ]
+if [ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ]
 then
-   RELEASE_NUMBER=`cat ${RELEASE_FILE}`
+    echo ""
+    echo "WARNING:"
+    echo "  ${TOOL_NAME} version $RELEASE_NUMBER is already installed."
+    echo "   See: ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} "
+    echo "   Remove this directory first if you want to re-install this version"
 fi
-echo "Release Directory:${RELEASE_DIR}"| tee -a ${LOG_FILE}
 
 echo ""| tee -a ${LOG_FILE}
 echo "Program complete"| tee -a ${LOG_FILE}
