@@ -44,5 +44,18 @@ Some key variables include:
 
 ## Appendix:
 ```
+See: https://github.com/timflutre/trimmomatic
+Installation
+============
 
+For the impatients:
+	make
+	make check
+	make install
+
+By default everything is installed in a directory bin/ in ${HOME}. 
+If the bin/ directory does not exist, it will be created.
+To install elsewhere, use the option INSTALL, for instance: 
+	make install INSTALL="/usr/local/"
+ 
 ```
