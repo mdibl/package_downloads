@@ -15,6 +15,7 @@
 #   
 # This is run on demand
 #
+
 cd `dirname $0`
 
 SCRIPT_NAME=`basename $0`
@@ -32,6 +33,7 @@ function displayTools() {
     done
     echo ""
 }
+echo ""
 date | tee -a ${LOG_FILE}
 echo "
 ***************************************
@@ -86,8 +88,6 @@ RELEASE_FILE=${PACKAGE_DOWNLOADS_BASE}/${CURRENT_FLAG_FILE}
 PREVIOUS_RELEASE=""
 ## set release number to current value in ${RELEASE_FILE}
 [ -f ${RELEASE_FILE} ] &&  REVIOUS_RELEASE=`cat ${RELEASE_FILE}`
-
-echo ""
 echo "Setting ${TOOL_NAME}'s Release version to ${RELEASE_NUMBER}"| tee -a ${LOG_FILE}
 echo "The Release version info is stored in  ${RELEASE_FILE}"| tee -a ${LOG_FILE}
 echo ""| tee -a ${LOG_FILE}
@@ -102,7 +102,6 @@ then
 fi
 if [ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ]
 then
-    echo ""
     echo "WARNING:"
     echo "  ${TOOL_NAME} version $RELEASE_NUMBER is already installed."
     echo "  See: ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} "
