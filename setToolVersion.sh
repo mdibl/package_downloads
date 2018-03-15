@@ -90,15 +90,15 @@ PREVIOUS_RELEASE=""
 date | tee -a ${LOG_FILE}
 echo "**********              *******************" | tee -a ${LOG_FILE}
 echo ""
-echo " Setting ${TOOL_NAME}'s Release to ${RELEASE_NUMBER}"| tee -a ${LOG_FILE}
-echo "The version info is stored in  ${RELEASE_FILE}"| tee -a ${LOG_FILE}
+echo "Setting ${TOOL_NAME}'s Release version to ${RELEASE_NUMBER}"| tee -a ${LOG_FILE}
+echo "The Release version info is stored in  ${RELEASE_FILE}"| tee -a ${LOG_FILE}
 echo ""
 echo "**********  *******************************"| tee -a ${LOG_FILE}
 
 echo ""| tee -a ${LOG_FILE}
 
 RELEASE_NUMBER=`echo $RELEASE_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
-echo "Updating ${RELEASE_FILE} with version:${RELEASE_NUMBER}"
+
 if [[ ${RELEASE_NUMBER} =~ ${REPOS_TAG_PATTERN} ]]
 then
    rm -f ${RELEASE_FILE}
