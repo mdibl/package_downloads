@@ -68,7 +68,7 @@ make install 2>&1
 rstatus="SUCCESS"
 for pkg_dir in ${DIR_CHECK}
 do
-    if [ ! -f ${PACKAGE_BASE}/${pkg_dir} ]
+    if [ ! -d ${PACKAGE_BASE}/${pkg_dir} ]
     then
        echo "$pkg_dir missing under ${PACKAGE_BASE} "
        rstatus="FAILED"
