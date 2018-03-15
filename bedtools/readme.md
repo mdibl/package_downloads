@@ -12,12 +12,7 @@ This sub-directory contains:
 ### What it does:
   1) sources the main config file to set global path
   2) sources the dependencies config file
-  3) runs the build and 
-  ```
-     a. copy  the executables to /opt/software/bin
-     b. copy  the libraries to /opt/software/lib[64]
-     c. copy  the include to /opt/software/include
-  ```
+  3) runs the build and copy  the executables to /opt/software/bin
 
 ### Note:
 The following environment variables are expected to be set by the caller:
