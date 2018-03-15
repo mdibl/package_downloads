@@ -2,21 +2,18 @@
 #
 # Organization: MDIBL
 # Author: Lucie Hutchins
-# Date: February 2018
+# Date: March 2018
 #
-#A script that downloads and stores locally
-# a file containing the current release info.
-# Only used for tools with no valid git repos irelease tags
+# A script that sets the tool's release version
+# in the tool's current_release_number file to the value specified by the user
 #
 # What it does:
-#  1) 
-#     a. For non git repos releases - downloads the current release Readme file (*.txt, *.html, ...) 
-#       from the downloads site - parses it to extract the latest release number
+#  1) Create a directory for this tool if not exists under EXTERNAL_SOFTWARE_BASE
+#  2) sets the current release number to the specified value 
 #
-#     b. For git repos releases - clones the repos - extract the latest release number
-#  2) sets the current release number flag
-#
-# This can be scheduled on Jenkins to run dailly
+# Usage: ./setToolVersion.sh <tool_name> <version>
+#   
+# This is run on demand
 #
 cd `dirname $0`
 
@@ -43,15 +40,17 @@ echo "
 "
 
 ## Validate usage
-if [ $# -lt 1 ]
+if [ $# -lt 2 ]
 then
-    echo "Usage: ./${SCRIPT_NAME} tool_name"
-    echo "example: ./${SCRIPT_NAME} blat"
+    echo "Usage: ./${SCRIPT_NAME} tool_name tool_version"
+    echo "example: ./${SCRIPT_NAME} trimmomatic 0.36"
     displayTools
     exit 1
 fi
 
 TOOL_NAME=$1
+RELEASE_NUMBER=$2
+
 if [ ! -d ${TOOL_NAME} ]
 then
    echo "ERROR: No automation found for ${TOOL_NAME}"
@@ -66,98 +65,27 @@ then
   exit 1
 fi
 source ./${GLOBAL_CONFIG}
-
-#
-## Path relative to this script base
-PACKAGE_CONFIG_FILE=${TOOL_NAME}/${TOOL_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
-if [ ! -f ${PACKAGE_CONFIG_FILE} ]
-then
-    echo "ERROR: ${PACKAGE_CONFIG_FILE} missing under: ${WORKING_DIR}"
-    exit 1
-fi
-source ./${PACKAGE_CONFIG_FILE}
-#
-## Path relative to this package install base
-PACKAGE_DOWNLOADS_BASE=${EXTERNAL_SOFTWARE_BASE}/${TOOL_NAME}
-RELEASE_FILE=${PACKAGE_DOWNLOADS_BASE}/${CURRENT_FLAG_FILE}
-[ ! -d ${PACKAGE_DOWNLOADS_BASE} ] && mkdir -p ${PACKAGE_DOWNLOADS_BASE}
-
-## Check if wget is installed 
-if [ ! -f ${WGET} ]
-then
-  echo "Can't use 'wget' command to download some of our packages "
-  echo "Wget not installed on `uname -n`"
-  exit 1 	
-fi
-## Check if git is installed 
-if [ ! -f ${GIT} ]
-then
-  echo "Can't use 'git' command to download some of our packages"
-  echo "Git not installed on `uname -n`"
-  exit 1 	
-fi
-
 LOG_FILE="${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${TOOL_NAME}.log"
 
 rm -rf ${LOG_FILE}
 touch ${LOG_FILE}
-
+PREVIOUS_RELEASE=""
 ## set release number to current value in ${RELEASE_FILE}
 [ -f ${RELEASE_FILE} ] &&  RELEASE_NUMBER=`cat ${RELEASE_FILE}`
 
 date | tee -a ${LOG_FILE}
 echo "**********              *******************" | tee -a ${LOG_FILE}
-echo " Checking ${TOOL_NAME}'s  Current Release"| tee -a ${LOG_FILE}
+echo " Setting ${TOOL_NAME}'s Release to "| tee -a ${LOG_FILE}
 echo "**********  *******************************"| tee -a ${LOG_FILE}
+
 echo ""| tee -a ${LOG_FILE}
 echo "The current version info is stored in  ${RELEASE_FILE}"| tee -a ${LOG_FILE}
 
-if [ "${CLONE_GIT}" = true ]
-then
-    #clone repos to get current release tag
-    [ ! -d  ${PACKAGE_GIT_CLONE_BASE} ] && mkdir -p ${PACKAGE_GIT_CLONE_BASE}
-    cd ${PACKAGE_GIT_CLONE_BASE}
-    [ ! -d ${GIT_REPOS} ] && ${GIT} clone  ${REMOTE_VERSION_FILE}
-    if [ ! -d ${GIT_REPOS} ]
-    then
-        echo "${GIT} clone for ${REMOTE_VERSION_FILE} FAILED"| tee -a ${LOG_FILE}
-        exit 1
-    fi
-    cd ${GIT_REPOS}
-    ${GIT} pull 2>&1 | tee -a ${LOG_FILE}
-    RELEASE_TOKEN=`${GIT} rev-list --tags --max-count=1`
-    RELEASE_NUMBER=`${GIT} describe --tags ${RELEASE_TOKEN}`
-else
-    FILE_TOKEN=`basename ${REMOTE_VERSION_FILE}`
-    LOCAL_VERSION_FILE=${PACKAGE_DOWNLOADS_BASE}/${FILE_TOKEN}
-    echo "Downloaded files are under ${PACKAGE_DOWNLOADS_BASE}"| tee -a ${LOG_FILE}
-    echo "File to download:${REMOTE_VERSION_FILE}"| tee -a ${LOG_FILE}
-    echo "Script :$DOWNLOAD_SCRIPT"| tee -a ${LOG_FILE}
-    ${WGET}  -O ${LOCAL_VERSION_FILE} ${REMOTE_VERSION_FILE} 2>&1 | tee -a ${LOG_FILE}
-    if [ ! -f ${LOCAL_VERSION_FILE} ]
-    then
-        echo "Download failed: ${LOCAL_VERSION_FILE} is missing" 
-        exit 1
-    fi
-    EXPRESSION="$EXP_PREFIX ${LOCAL_VERSION_FILE}"
-    RELEASE_NUMBER=`${EXPRESSION} | grep "${VERSION_PREFIX}" |sed "s/${VERSION_PREFIX}//" `
-    [ "${VERSION_SUFFIX}" != "" ] && RELEASE_NUMBER=`echo ${RELEASE_NUMBER} | sed "s/${VERSION_SUFFIX}//"`
-fi
 RELEASE_NUMBER=`echo $RELEASE_NUMBER | sed -e 's/[[:space:]]*$//' | sed -e 's/^[[:space:]]*//'`
 
 ## Create the current release Number file
 echo "${TOOL_NAME} release: ${RELEASE_NUMBER} "
 echo "Updating ${RELEASE_FILE} with version:${RELEASE_NUMBER}"
-if [[ ${RELEASE_NUMBER} =~ ${REPOS_TAG_PATTERN} ]]
-then
-   rm -f ${RELEASE_FILE}
-   touch ${RELEASE_FILE}
-   echo "${RELEASE_NUMBER}" > ${RELEASE_FILE}
-fi
-if [ -f ${RELEASE_FILE} ]
-then
-   RELEASE_NUMBER=`cat ${RELEASE_FILE}`
-fi
 
 echo "Current Release Number:${RELEASE_NUMBER}"| tee -a ${LOG_FILE}
 echo ""| tee -a ${LOG_FILE}
