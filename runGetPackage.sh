@@ -71,8 +71,8 @@ source ./${GLOBAL_CONFIG}
 # the main root directory "/" 
 #
 bad_dir=false
-[ "${SOFTWARE_BASE}" = "" ] && bad_dir=true
-[ "${SOFTWARE_BASE}" = "/" ] && bad_dir=true
+[ "${SOFTWARE_BASE}" == "" ] && bad_dir=true
+[ "${SOFTWARE_BASE}" == "/" ] && bad_dir=true
 if [ "$bad_dir" != true ]
 then
    echo "ERROR - SOFTWARE_BASE has an invalid value: ${SOFTWARE_BASE}"
@@ -80,8 +80,8 @@ then
 fi
 mkdir -p ${SOFTWARE_BASE}
 bad_dir=false
-[ "${EXTERNAL_SOFTWARE_BASE}" = "" ] && bad_dir=true
-[ "${EXTERNAL_SOFTWARE_BASE}" = "/" ] && bad_dir=true
+[ "${EXTERNAL_SOFTWARE_BASE}" == "" ] && bad_dir=true
+[ "${EXTERNAL_SOFTWARE_BASE}" == "/" ] && bad_dir=true
 if [ "$bad_dir" != true ]
 then
    echo "ERROR - EXTERNAL_SOFTWARE_BASE has an invalid value: ${EXTERNAL_SOFTWARE_BASE}"
