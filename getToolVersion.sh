@@ -160,6 +160,12 @@ then
 fi
 
 echo "Current Release Number:${RELEASE_NUMBER}"| tee -a ${LOG_FILE}
+if [ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ]
+then
+    echo "${TOOL_NAME} version $RELEASE_NUMBER is already installed."
+    echo "See: ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} "
+    echo " Remove this directory first if you want to re-install this version"
+fi
 echo ""| tee -a ${LOG_FILE}
 echo "Program complete"| tee -a ${LOG_FILE}
 exit 0
