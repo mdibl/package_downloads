@@ -3,7 +3,7 @@
 # Organization: MDIBL
 # Author: Lucie Hutchins
 # Date: September 2017
-# Modified: February 2018
+# Modified: March 2018
 #
 # Wrapper script to call scripts that download and install a new package
 # It creates an additional log that could be use later on
@@ -166,7 +166,10 @@ echo "==" | tee -a $LOG
 if [ "${EXPORT_GIT}" = true ]
 then
     #export git repos
-   ./${EXPORT_REPOS_SCRIPT} ${GIT_ORG} ${GIT_REPOS} ${RELEASE_NUMBER} ${PACKAGE_DOWNLOADS_BASE} 2>&1 | tee -a $LOG
+    if [ "${NO_DOWNLOAD}" != true ]
+    then
+        ./${EXPORT_REPOS_SCRIPT} ${GIT_ORG} ${GIT_REPOS} ${RELEASE_NUMBER} ${PACKAGE_DOWNLOADS_BASE} 2>&1 | tee -a $LOG
+    fi
 else
    # Download the executable
    ./${DOWNLOAD_SCRIPT}  2>&1 | tee -a $LOG
