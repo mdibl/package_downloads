@@ -84,8 +84,8 @@ echo ${rstatus}
 [ "${rstatus}" == FAILED ] &&  exit 1
 
 # Copy the header files to the bam include directory
-#[ ! -d  ${SOFTWARE_INCLUDE_BASE}/bam ] && mkdir -p ${SOFTWARE_INCLUDE_BASE}/bam
-#cp ${PACKAGE_BASE}/*.h ${SOFTWARE_INCLUDE_BASE}/bam/
+[ ! -d  ${SOFTWARE_INCLUDE_BASE}/bam ] && mkdir -p ${SOFTWARE_INCLUDE_BASE}/bam
+cp ${PACKAGE_BASE}/*.h ${SOFTWARE_INCLUDE_BASE}/bam/
 
 exit 0
 
