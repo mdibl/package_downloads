@@ -12,7 +12,8 @@ This sub-directory contains:
 ### What it does:
   1) sources the main config file to set global path
   2) sources the dependencies config file
-  3) runs the build and copy the executables to /opt/software/bin
+  3) set the virtualenv for this package version
+  3) build and copy the executables to /opt/software/bin
 
 ### Note:
 The following environment variables are expected to be set by the caller:
