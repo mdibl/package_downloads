@@ -44,6 +44,22 @@ Some key variables include:
   - CLONE_GIT
   
 ## The Package Dependencies File
+Each tool's dependency file contains the pre-install and post-install sets of dependencies.
+Samtools only uses few of these variables.
+
+### Used for Pre-Install Dependencies Check
+  - BIN_DEPENDENCIES
+  - LIB_DEPENDENCIES
+
+### Used To Verify the install was a success
+  - FILE_CHECK
+  - DIR_CHECK
+
+### Used to copy files to ../bin /../lib ../lib64 ../include 
+  - BIN_FILES
+  - INCLUDE_DIR
+  - LIB64_DIR
+  - LIB_DIR
 
 ## Appendix:
 ```
