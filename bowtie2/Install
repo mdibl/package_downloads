@@ -47,7 +47,7 @@ fi
 cd ${PACKAGE_BASE}
 #
 #update path to binaries to /opt/software/bin
-sed -i -e  's@prefix :=[[:space:]].*@'"prefix :=  ${SOFTWARE_BASE}"'@' Makefile
+sed -i -e  's@prefix[[:space:]].*=[[:space:]].*@'"prefix :=  ${SOFTWARE_BASE}"'@' Makefile
 
 make allall 2>&1
 #Check the install
