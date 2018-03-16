@@ -3,7 +3,7 @@
 # Organization: MDIBL
 # Author: Lucie Hutchins
 # Date: October 2017
-# Modified: February 2018
+# Modified: March 2018
 #
 # This script is called by the main install script 
 # (install_package.sh)  to build and install 
@@ -47,7 +47,8 @@ fi
 cd ${PACKAGE_BASE}
 #
 #update path to binaries to /opt/software/bin
-sed -i -e 's/prefix =[[:space:]].*/prefix = \/opt\/software/' Makefile
+sed -i -e  's@prefix =[[:space:]].*@'"prefix =  ${SOFTWARE_BASE}"'@' Makefile
+
 make allall 2>&1
 #Check the install
 rstatus="SUCCESS"
