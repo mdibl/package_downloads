@@ -61,11 +61,7 @@ do
      fi
 done
 echo ${rstatus}
-if [ "${rstatus}" == FAILED ]
-then
-   echo "${rstatus}" 
-   exit 1
-fi
+[ "${rstatus}" == FAILED ] && exit 1
 #Copy binaries to /opt/software/bin
 make install
 #make clean
