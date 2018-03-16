@@ -60,13 +60,12 @@ do
        rstatus="FAILED"
      fi
 done
-
+echo ${rstatus}
 if [ "${rstatus}" == FAILED ]
 then
    echo "${rstatus}" 
    exit 1
 fi
-echo ${rstatus}
 #Copy binaries to /opt/software/bin
 make install
 #make clean
