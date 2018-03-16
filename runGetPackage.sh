@@ -166,8 +166,10 @@ echo "==" | tee -a $LOG
 if [ "${EXPORT_GIT}" = true ]
 then
     #export git repos
-    if [ "${NO_DOWNLOAD}" != true ]
+    if [ "${NO_DOWNLOAD}" = true ]
     then
+        mkdir -p ${PACKAGE_BASE} 
+    else
         ./${EXPORT_REPOS_SCRIPT} ${GIT_ORG} ${GIT_REPOS} ${RELEASE_NUMBER} ${PACKAGE_DOWNLOADS_BASE} 2>&1 | tee -a $LOG
     fi
 else
