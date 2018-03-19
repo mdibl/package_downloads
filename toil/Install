@@ -88,6 +88,10 @@ fi
 #exit virtualenv
 #
 deactivate
+
+mkdir -p ${BLOBAL_VIRTUAL_ENV_BASE}
+cd ${BLOBAL_VIRTUAL_ENV_BASE}
+ln -s ${TOIL_BASE} 
 #make clean
 exit 0
 
