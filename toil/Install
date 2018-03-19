@@ -52,8 +52,8 @@ source ./${toil_config}
 ## Download virtual env 
 cd ${EXTERNAL_SOFTWARE_BASE}/${GIT_REPOS}
 curl -O ${VIRTUAL_ENV_URL}
-$ tar xvfz ${VIRTUAL_ENV_FILE}
-$ cd ${VIRTUAL_ENV_DIR}
+${TAR} xvfz ${VIRTUAL_ENV_FILE}
+cd ${VIRTUAL_ENV_DIR}
 #Create virtualenv directory for this repos as needed
 if [ ! -d ${TOIL_BASE} ]
 then
