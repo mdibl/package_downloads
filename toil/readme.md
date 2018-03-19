@@ -12,7 +12,9 @@ This sub-directory contains:
 ### What it does:
   1) sources the main config file to set global path
   2) sources the dependencies config file
-  3) build and copy the executables to /opt/software/bin
+  3) Create and activate the virtualenv for this install
+  4) Install Toil
+  5) Install CWL 
 
 ### Note:
 The following environment variables are expected to be set by the caller:
@@ -59,6 +61,7 @@ STAR only uses few of these variables.
 ## Appendix:
 ```
 
-Toil currently supports only Python 2.7. If you don’t satisfy this requirement, consider using anaconda to create an alternate Python 2.7 installation.
+Toil currently supports only Python 2.7. If you don’t satisfy this requirement, 
+consider using anaconda to create an alternate Python 2.7 installation.
 
 See http://toil.readthedocs.io/en/latest/gettingStarted/install.html#basic-installation
