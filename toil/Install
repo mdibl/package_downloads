@@ -81,9 +81,9 @@ ln -s  ${TOIL_BASE}
 rstatus="SUCCESS"
 for bin_file in ${FILE_CHECK}
 do
-    if [ ! -f ${TOIL_BASE}/bin/${bin_file} ]
+    if [ ! -f ${TOIL_BASE}/${bin_file} ]
     then
-       echo "${TOIL_BASE}/bin/${bin_file} missing"
+       echo "${TOIL_BASE}/${bin_file} missing"
        rstatus="FAILED"
      fi
 done
