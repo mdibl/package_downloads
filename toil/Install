@@ -69,6 +69,10 @@ source $TOIL_BASE/bin/activate
 pip install toil 2>&1 
 pip install toil cwl 2>&1 
 
+cd ${EXTERNAL_SOFTWARE_BASE}/${GIT_REPOS}
+[ -d ${RELEASE_DIR} ] && rm -rf ${RELEASE_DIR}
+ln -s  ${TOIL_BASE}
+
 #Check the install
 rstatus="SUCCESS"
 for bin_file in ${FILE_CHECK}
