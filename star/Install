@@ -67,11 +67,9 @@ do
      fi
 done
 
-if [ "${rstatus}" == FAILED ]
-then
-   echo "${rstatus}"
-   exit 1
-fi
+echo ${rstatus} 
+
+[ "${rstatus}" == FAILED ] && exit 1
 
 for bin_file in ${FILE_CHECK}
 do
@@ -79,7 +77,6 @@ do
    cp -P ${PACKAGE_BASE}/${bin_file} ${SOFTWARE_BIN_BASE}
 done
 
-echo ${rstatus} 
 #make manual
 #make clean
 exit 0
