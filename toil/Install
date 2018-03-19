@@ -59,7 +59,7 @@ fi
 # activate virtualenv
 source $TOIL_BASE/bin/activate
 #upgrade pip just in case there is a newer version
-${PIP} install --upgrade ${PIP}
+sudo ${PIP} install --upgrade ${PIP}
 
 ${PIP} install toil 2>&1 
 ${PIP} install toil cwl 2>&1 
