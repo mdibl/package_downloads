@@ -59,15 +59,15 @@ if [ ! -d ${TOIL_BASE} ]
 then
     mkdir -p ${TOIL_BASE}
     #${VIRTUALENV} -p ${PYTHON} ${TOIL_BASE}
-    ${PYTHON} virtualenv.py ${TOIL_BASE}
+   ${PYTHON} virtualenv.py ${TOIL_BASE}
 fi
 #
 # activate virtualenv
 source $TOIL_BASE/bin/activate
 #upgrade pip just in case there is a newer version
 
-${PIP} install toil 2>&1 
-${PIP} install toil cwl 2>&1 
+pip install toil 2>&1 
+pip install toil cwl 2>&1 
 
 #Check the install
 rstatus="SUCCESS"
