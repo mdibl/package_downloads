@@ -38,6 +38,7 @@ then
    echo "ERROR: PACKAGE_DEPENDS not set"
    exit 1
 fi
+
 PACKAGE_DEPENDENCIES_FILE=`basename ${PACKAGE_DEPENDS}`
 source ./${PACKAGE_DEPENDENCIES_FILE}
 toil_config=`basename ${PACKAGE_CONFIG_FILE}`
@@ -48,12 +49,17 @@ then
   exit 1
 fi
 source ./${toil_config}
-
+## Download virtual env 
+cd ${EXTERNAL_SOFTWARE_BASE}/${GIT_REPOS}
+curl -O ${VIRTUAL_ENV_URL}
+$ tar xvfz ${VIRTUAL_ENV_FILE}
+$ cd ${VIRTUAL_ENV_DIR}
 #Create virtualenv directory for this repos as needed
 if [ ! -d ${TOIL_BASE} ]
 then
     mkdir -p ${TOIL_BASE}
-    ${VIRTUALENV} -p ${PYTHON} ${TOIL_BASE}
+    #${VIRTUALENV} -p ${PYTHON} ${TOIL_BASE}
+    ${PYTHON} virtualenv.py ${TOIL_BASE}
 fi
 #
 # activate virtualenv
