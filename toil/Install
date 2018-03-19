@@ -92,6 +92,8 @@ deactivate
 mkdir -p ${BLOBAL_VIRTUAL_ENV_BASE}
 cd ${BLOBAL_VIRTUAL_ENV_BASE}
 ln -s ${TOIL_BASE} 
+rm -f ${GIT_REPOS}
+ln -s ${TOIL_BASE} ${GIT_REPOS}
 #make clean
 exit 0
 
