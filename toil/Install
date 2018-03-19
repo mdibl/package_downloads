@@ -69,6 +69,10 @@ source $TOIL_BASE/bin/activate
 pip install toil 2>&1 
 pip install toil cwl 2>&1 
 
+#exit virtualenv
+#
+deactivate
+
 cd ${EXTERNAL_SOFTWARE_BASE}/${GIT_REPOS}
 [ -d ${RELEASE_DIR} ] && rm -rf ${RELEASE_DIR}
 ln -s  ${TOIL_BASE}
@@ -83,16 +87,11 @@ do
        rstatus="FAILED"
      fi
 done
+echo "$rstatus" 
+[ "$rstatus" == FAILED ] && exit 1
 
-if [ "$rstatus" == FAILED ]
-then
-   echo "$rstatus" 
-   exit 1
-fi
-#exit virtualenv
+## Create symbolic link under global path
 #
-deactivate
-
 mkdir -p ${BLOBAL_VIRTUAL_ENV_BASE}
 cd ${BLOBAL_VIRTUAL_ENV_BASE}
 ln -s ${TOIL_BASE} 
