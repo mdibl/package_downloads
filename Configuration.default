@@ -32,12 +32,18 @@ PACKAGE_GIT_CLONE_BASE=${PACKAGE_DOWNLOADS_BASE}/temp/github_repos
 #Log files associated with this product will be stored here
 DOWNLOADS_LOG_DIR=${LOGS_BASE}/package_downloads
 
+##Globally Installed dependencies 
 WGET=`which wget`
 GIT=`which git`
 TAR=`which tar`
 LOCATE=`which locate`
+
+## Few packages use python 
 PIP=`which pip`
 VIRTUALENV=`which virtualenv`
+PYTHON=`which python`
+
+
 #relative to this package base (package_downloads)
 GLOBAL_CONFIG=Configuration
 DOWNLOAD_SCRIPT=download_package.sh
