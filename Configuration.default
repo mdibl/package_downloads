@@ -55,8 +55,9 @@ INSTALL_BINARIES_SCRIPT=install_binaries.sh
 EXPORT_REPOS_SCRIPT=gitExportRepos.sh
 CLONE_REPOS_SCRIPT=gitCloneRepos.sh
 
-GET_TOOL_VERSION=
-SET_TOOL_VERSION=
+GET_TOOL_VERSION_SCRIPT=getToolVersion.sh
+SET_TOOL_VERSION_SCRIPT=setToolVersion.sh
+GET_PACKAGE_MAIN_SCRIPT=runGetPackage.sh
 
 ## Relative to each bioformatics tool base within this package
 PACKAGE_CONFIGFILE_SUFFIX=_package.cfg
