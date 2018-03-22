@@ -3,11 +3,6 @@
 # Organization: MDIBL
 # Author: Lucie Hutchins
 # Date: February 2018
-#
-#A script that downloads and stores locally
-# a file containing the current release info.
-# Only used for tools with no valid git repos irelease tags
-#
 # What it does:
 #  1) 
 #     a. For non git repos releases - downloads the current release Readme file (*.txt, *.html, ...) 
@@ -16,7 +11,6 @@
 #     b. For git repos releases - clones the repos - extract the latest release number
 #  2) sets the current release number flag
 #
-# This can be scheduled on Jenkins to run dailly
 #
 cd `dirname $0`
 
