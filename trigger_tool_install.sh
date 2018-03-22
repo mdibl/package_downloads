@@ -67,6 +67,15 @@ then
     exit 1
 fi
 
+PACKAGE_DOWNLOADS_BASE=${EXTERNAL_SOFTWARE_BASE}/${TOOL_NAME}
+RELEASE_FILE=${PACKAGE_DOWNLOADS_BASE}/${CURRENT_FLAG_FILE}
+if [ ! -f ${RELEASE_FILE} ]
+then
+   echo "ERROR: ${RELEASE_FILE} file missing"
+   exit 1
+fi
+RELEASE_NUMBER=`cat ${RELEASE_FILE}`
+
 PACKAGE_CONFIG_FILE=${TOOL_NAME}/${TOOL_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
 if [ ! -f ${PACKAGE_CONFIG_FILE} ]
 then
@@ -75,7 +84,7 @@ then
 fi
 #if this version of the tool is already installed, do run run the main install script
 source ./${PACKAGE_CONFIG_FILE}
-[ -d ${EXTERNAL_SOFTWARE_BASE}/${TOOL_NAME}/${RELEASE_DIR} ] && exit 1
+[ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ] && exit 1
 
 ## Run the main install script to install the version of the tool found in current_release file 
 echo "Running cmd: ./${GET_PACKAGE_MAIN_SCRIPT} ${TOOL_NAME}  -- from `pwd`"
