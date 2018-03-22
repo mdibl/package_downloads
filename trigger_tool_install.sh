@@ -67,7 +67,17 @@ then
     exit 1
 fi
 
-## Call runGetPackage.sh to install the specified release
+PACKAGE_CONFIG_FILE=${TOOL_NAME}/${TOOL_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
+if [ ! -f ${PACKAGE_CONFIG_FILE} ]
+then
+  echo "${TOOL_NAME}'S confifiguration file: '${PACKAGE_CONFIG_FILE}' missing under `pwd`" 
+  exit 1
+fi
+#if this version of the tool is already installed, do run run the main install script
+source ./${PACKAGE_CONFIG_FILE}
+[ -d ${EXTERNAL_SOFTWARE_BASE}/${TOOL_NAME}/${RELEASE_DIR} ] && exit 1
+
+## Run the main install script to install the version of the tool found in current_release file 
 echo "Running cmd: ./${GET_PACKAGE_MAIN_SCRIPT} ${TOOL_NAME}  -- from `pwd`"
 ./${GET_PACKAGE_MAIN_SCRIPT} ${TOOL_NAME}
 
