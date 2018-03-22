@@ -54,12 +54,12 @@ source ./${GLOBAL_CONFIG}
 ## Update the release flag file
 if [ $# -lt 2 ]
 then 
-    echo "Running cmd: ./${GET_TOOL_VERSION} ${TOOL_NAME}  -- from `pwd`"
-    ./${GET_TOOL_VERSION} ${TOOL_NAME}
+    echo "Running cmd: ./${GET_TOOL_VERSION_SCRIPT} ${TOOL_NAME}  -- from `pwd`"
+    ./${GET_TOOL_VERSION_SCRIPT} ${TOOL_NAME}
 else
     TOOL_VERSION=$2
-    echo "Running cmd:  ./{SET_TOOL_VERSION}  ${TOOL_NAME} ${TOOL_VERSION}  -- from `pwd` "
-    ./${SET_TOOL_VERSION}  ${TOOL_NAME} ${TOOL_VERSION}
+    echo "Running cmd:  ./{SET_TOOL_VERSION_SCRIPT}  ${TOOL_NAME} ${TOOL_VERSION}  -- from `pwd` "
+    ./${SET_TOOL_VERSION_SCRIPT}  ${TOOL_NAME} ${TOOL_VERSION}
 fi
 if [ $? -ne 0 ]
 then
