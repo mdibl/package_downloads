@@ -52,7 +52,7 @@ then
 fi
 source ./${GLOBAL_CONFIG}
 ## Update the release flag file
-if [ $# -gt 1 ]
+if [ $# -lt 2 ]
 then 
     echo "Running cmd: ./${GET_TOOL_VERSION} ${TOOL_NAME}  -- from `pwd`"
     ./${GET_TOOL_VERSION} ${TOOL_NAME}
