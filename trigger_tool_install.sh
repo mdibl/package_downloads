@@ -4,7 +4,7 @@
 # Author: Lucie Hutchins
 # Date:  March 2018
 #
-# Wrapper script to call getToolVersion.sh and runGetPackage.sh scripts
+# Wrapper script to call getToolVersion.sh/setToolVersion.sh and runGetPackage.sh scripts
 # To download and install the current version of the tool.
 # If a second argument is specified, then it's used as the version
 # to install
@@ -12,7 +12,10 @@
 #
 # What it does:
 # 1) sources global configs
-# 2) Calls the appropriate download script to download the specified version of this package 
+# 2) Calls the appropriate getToolVersion.sh/setToolVersion.sh to update the release flag file
+# 3) Check if the specifide tool version is installed
+# 4) Trigger the install if the specified tool's version is not installed
+#
 
 cd `dirname $0`
 WORKING_DIR=`pwd`
