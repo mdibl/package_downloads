@@ -42,7 +42,7 @@ then
   echo ""
   echo "Example: ./${SCRIPT_NAME} bamtools [v2.5.1]"
   echo ""
-  echo "A trigger that calls scripts that download and install the current version of the tool."
+  echo "A trigger that calls scripts involved in the download and install of a new package."
   echo "If a second argument is specified,then it's used as the version to install."
   echo "It triggers the install only if the specified tool version is not installed."
   echo ""
