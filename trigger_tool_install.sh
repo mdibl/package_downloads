@@ -48,7 +48,7 @@ then
   echo ""
   echo "NOTE: If you provide the tool_version argument, "
   echo "make sure the format follows the pattern specified in REPOS_TAG_PATTERN variable "
-  echo "in the tool's config file"
+  echo "in the tool's config file (*_package.cfg)"
   displayTools
   exit 1
 fi
