@@ -36,7 +36,10 @@ function displayTools() {
 
 if [ $# -lt 1 ]
 then
+  echo "***********************************************"
+  echo ""
   echo "Usage: ./${SCRIPT_NAME} tool_name [tool_version]"
+  echo ""
   echo "Example: ./${SCRIPT_NAME} bamtools [v2.5.1]"
   echo ""
   echo "A wrapper script that calls scripts that download and install the current version of the tool."
