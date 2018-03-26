@@ -38,6 +38,10 @@ if [ $# -lt 1 ]
 then
   echo "Usage: ./${SCRIPT_NAME} tool_name [tool_version]"
   echo "Example: ./${SCRIPT_NAME} bamtools [v2.5.1]"
+  echo ""
+  echo "A wrapper script that calls scripts that download and install the current version of the tool."
+  echo "If a second argument is specified,then it's used as the version to install."
+  echo "It triggers the install only if the specified tool version is not installed."
   displayTools
   exit 1
 fi
