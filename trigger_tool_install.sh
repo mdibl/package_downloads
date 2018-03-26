@@ -45,6 +45,10 @@ then
   echo "A trigger that calls scripts that download and install the current version of the tool."
   echo "If a second argument is specified,then it's used as the version to install."
   echo "It triggers the install only if the specified tool version is not installed."
+  echo ""
+  echo "NOTE: If you provide the tool_version argument, "
+  echo "make sure the format follows the pattern specified in REPOS_TAG_PATTERN variable "
+  echo "in the tool's config file"
   displayTools
   exit 1
 fi
