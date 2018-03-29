@@ -72,22 +72,10 @@ LOG_FILE="${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${TOOL_NAME}.log"
 rm -rf ${LOG_FILE}
 touch ${LOG_FILE}
 
-## Path relative to this script base
-PACKAGE_CONFIG_FILE=${TOOL_NAME}/${TOOL_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
-if [ ! -f ${PACKAGE_CONFIG_FILE} ]
-then
-    echo "ERROR: ${PACKAGE_CONFIG_FILE} missing under: ${WORKING_DIR}"
-    exit 1
-fi
-source ./${PACKAGE_CONFIG_FILE}
-#
 ## Path relative to this package install base
 PACKAGE_DOWNLOADS_BASE=${EXTERNAL_SOFTWARE_BASE}/${TOOL_NAME}
 [ ! -d ${PACKAGE_DOWNLOADS_BASE} ] && mkdir -p ${PACKAGE_DOWNLOADS_BASE}
 RELEASE_FILE=${PACKAGE_DOWNLOADS_BASE}/${CURRENT_FLAG_FILE}
-PREVIOUS_RELEASE=""
-## set release number to current value in ${RELEASE_FILE}
-[ -f ${RELEASE_FILE} ] &&  REVIOUS_RELEASE=`cat ${RELEASE_FILE}`
 echo "Setting ${TOOL_NAME}'s Release version to ${RELEASE_NUMBER}"| tee -a ${LOG_FILE}
 echo "The Release version info is stored in  ${RELEASE_FILE}"| tee -a ${LOG_FILE}
 echo ""| tee -a ${LOG_FILE}
@@ -100,6 +88,16 @@ then
    touch ${RELEASE_FILE}
    echo "${RELEASE_NUMBER}" > ${RELEASE_FILE}
 fi
+
+## Path relative to this script base
+PACKAGE_CONFIG_FILE=${TOOL_NAME}/${TOOL_NAME}${PACKAGE_CONFIGFILE_SUFFIX}
+if [ ! -f ${PACKAGE_CONFIG_FILE} ]
+then
+    echo "ERROR: ${PACKAGE_CONFIG_FILE} missing under: ${WORKING_DIR}"
+    exit 1
+fi
+source ./${PACKAGE_CONFIG_FILE}
+#
 if [ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ]
 then
     echo "WARNING:"
