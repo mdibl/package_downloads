@@ -7,7 +7,7 @@ This sub-directory contains:
 
 ## USAGE: ./trigger_tool_install.sh tool_name [tool_version]
 
-After installing the package_downloads See: https://github.com/mdibl/package_downloads/wiki
+After installing the package_downloads See: https://github.com/mdibl/package_downloads/wiki/How-To-Install-This-Repos
 
 **cd**  to package_downloads/ install root directory and run 
 ```
