@@ -5,6 +5,21 @@ This sub-directory contains:
  - [The Package Config File](#the-package-config-file)(bedtools_package.cfg)
  - [The Package Dependencies File](#the-package-dependencies-file)(bedtools_dependencies.cfg)
 
+## USAGE: ./trigger_tool_install.sh tool_name [tool_version]
+
+After installing the package_downloads repos 
+
+See: https://github.com/mdibl/package_downloads/wiki/How-To-Install-This-Repos
+
+**cd**  to package_downloads/ install root directory and run 
+```
+
+Example 1: ./trigger_tool_install.sh bedtools
+The above command tells the trigger script to install the current version of bamtools
+
+Example 2: ./trigger_tool_install.sh bedtools v2.27.0
+The above command tells the trigger script to install version v2.27.0
+```
 ## The Install Script
  This script is called by the main install script 
 (install_package.sh)  to build and install  a new version of the package 
