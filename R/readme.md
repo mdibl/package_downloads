@@ -9,6 +9,17 @@ This sub-directory contains:
  - [Installed Packages Report](#installed-packages-report)(genPackageReports.r)
  
 
+## USAGE: ./trigger_tool_install.sh tool_name [tool_version]
+```
+cd to package_downloads/ and run 
+
+Example 1: ./trigger_tool_install.sh R
+The above command tells the trigger script to install the current version of R
+
+Example 2: ./trigger_tool_install.sh  3.4.21
+The above command tells the trigger script to install version 3.4.21
+```
+
 ## The Install Script
  This script is called by the main install script 
 (install_package.sh)  to build and install  a new version of the package 
