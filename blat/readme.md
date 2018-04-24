@@ -10,6 +10,19 @@ The main install script then calls the install_binaries.sh script to copy the do
 to the specified bin directory.
 
 
+## USAGE: ./trigger_tool_install.sh tool_name
+
+After installing the package_downloads repos 
+
+See: https://github.com/mdibl/package_downloads/wiki/How-To-Install-This-Repos
+
+**cd**  to package_downloads/ install root directory and run 
+```
+
+Example : ./trigger_tool_install.sh blat
+The above command tells the trigger script to install the current version of blat
+```
+
 ## The Package Config File 
 The config file sets environment variables specific to this tool.
 Some key variables include:
