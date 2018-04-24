@@ -11,7 +11,7 @@ This sub-directory contains:
 
 ## USAGE: ./trigger_tool_install.sh tool_name [tool_version]
 ```
-cd to package_downloads/ and run 
+cd to package_downloads/ root directory and run 
 
 Example 1: ./trigger_tool_install.sh R
 The above command tells the trigger script to install the current version of R
