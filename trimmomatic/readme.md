@@ -9,7 +9,7 @@ In addition, since we can't at the moment automate the porcess of getting the cu
 we run the install command with the version to install as argument.
 
 ```
-  Example: 
+  Usage: 
    ./trigger_install.sh trimmomatic 0.36
 ```
   
