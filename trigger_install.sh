@@ -98,7 +98,7 @@ then
 fi
 #if this version of the tool is already installed, do run run the main install script
 source ./${PACKAGE_CONFIG_FILE}
-[ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ] && exit 1
+[ -d ${PACKAGE_DOWNLOADS_BASE}/${RELEASE_DIR} ] && exit 0
 
 ## Run the main install script to install the version of the tool found in current_release file 
 echo "Running cmd: ./${GET_PACKAGE_MAIN_SCRIPT} ${TOOL_NAME}  -- from `pwd`"
