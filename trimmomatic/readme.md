@@ -5,6 +5,13 @@ This sub-directory contains:
  - [The Package Dependencies File](#the-package-dependencies-file)(trimmomatic_dependencies.cfg)
 
 Trimmomatic is one of the tools we do not intall from source,instead we download binaries from the download site.
+In addition, since we can't at the moment automate the porcess of getting the current version of this tool,
+we run the install command with the version to install as argument.
+
+```
+  Example: 
+   ./trigger_install.sh trimmomatic 0.36
+```
   
 ## The Package Dependencies File
 
