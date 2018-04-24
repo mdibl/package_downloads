@@ -20,6 +20,7 @@ The above command tells the trigger script to install the current version of bam
 Example 2: ./trigger_tool_install.sh bedtools v2.27.0
 The above command tells the trigger script to install version v2.27.0
 ```
+
 ## The Install Script
  This script is called by the main install script 
 (install_package.sh)  to build and install  a new version of the package 
