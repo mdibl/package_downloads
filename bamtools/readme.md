@@ -6,8 +6,11 @@ This sub-directory contains:
  - [The Package Dependencies File](#the-package-dependencies-file)(bamtools_dependencies.cfg)
 
 ## USAGE: ./trigger_tool_install.sh tool_name [tool_version]
+
+After installing the package_downloads See: [[How To Install This Repos| How-To-Install-This-Repos]]
+
+**cd**  to package_downloads/ install root directory and run 
 ```
-cd to package_downloads/ root directory and run 
 
 Example 1: ./trigger_tool_install.sh bamtools
 The above command tells the trigger script to install the current version of bamtools
