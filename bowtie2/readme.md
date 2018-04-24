@@ -5,6 +5,22 @@ This sub-directory contains:
  - [The Package Config File](#the-package-config-file)(bowtie2_package.cfg)
  - [The Package Dependencies File](#the-package-dependencies-file)(bowtie2_dependencies.cfg)
 
+## USAGE: ./trigger_tool_install.sh tool_name [tool_version]
+
+After installing the package_downloads repos 
+
+See: https://github.com/mdibl/package_downloads/wiki/How-To-Install-This-Repos
+
+**cd**  to package_downloads/ install root directory and run 
+```
+
+Example 1: ./trigger_tool_install.sh bowtie2
+The above command tells the trigger script to install the current version of bowtie2
+
+Example 2: ./trigger_tool_install.sh bowtie2 v2.3.4.0
+The above command tells the trigger script to install version v2.3.4.0
+```
+
 ## The Install Script
  This script is called by the main install script 
 (install_package.sh)  to build and install  a new version of the package 
