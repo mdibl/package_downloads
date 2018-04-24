@@ -17,8 +17,8 @@ See: https://github.com/mdibl/package_downloads/wiki/How-To-Install-This-Repos
 Example 1: ./trigger_tool_install.sh bowtie2
 The above command tells the trigger script to install the current version of bowtie2
 
-Example 2: ./trigger_tool_install.sh bowtie2 v2.3.4.0
-The above command tells the trigger script to install version v2.3.4.0
+Example 2: ./trigger_tool_install.sh bowtie2 v2.3.3.1
+The above command tells the trigger script to install version v2.3.3.2
 ```
 
 ## The Install Script
