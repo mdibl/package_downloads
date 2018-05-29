@@ -2,8 +2,7 @@
 
 # Organization: MDIBL
 # Author: Lucie Hutchins
-# Date: September 2017
-# Modified: February 2018
+# Date: May 2018
 #
 # This script is called by the main install script 
 # (install_package.sh)  to build and install 
@@ -55,17 +54,9 @@ fi
 
 cd $PACKAGE_BASE
 
-mkdir build 
-if [ ! -d build ]
-then
-   echo "Could not create the 'build' directory under `pwd`" 
-   exit 1
-fi
-# Run the install commands
-cd build
-cmake -DCMAKE_INSTALL_PREFIX=${PACKAGE_BASE} .. 2>&1 
-make 2>&1 
-make install 2>&1 
+make 2>&1
+make ebseq 2>&1
+make install DESTDIR=${PACKAGE_BASE} 2>&1
 #Check the install
 
 rstatus="SUCCESS"
