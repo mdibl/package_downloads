@@ -53,6 +53,7 @@ then
 fi
 
 cd $PACKAGE_BASE
+mkdir -p bin 
 
 make 2>&1
 make ebseq 2>&1
