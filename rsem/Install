@@ -57,7 +57,7 @@ mkdir -p bin
 
 make 2>&1
 make ebseq 2>&1
-make install DESTDIR=${PACKAGE_BASE} 2>&1
+make install DESTDIR=${PACKAGE_BASE}/bin 2>&1
 #Check the install
 
 rstatus="SUCCESS"
