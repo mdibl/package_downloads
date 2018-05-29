@@ -1,9 +1,9 @@
-# Bamtools
+# RSEM
  
 This sub-directory contains:
  - [The Install Script](#the-install-script)(Install)
- - [The Package Config File](#the-package-config-file)(bamtools_package.cfg)
- - [The Package Dependencies File](#the-package-dependencies-file)(bamtools_dependencies.cfg)
+ - [The Package Config File](#the-package-config-file)(rsem_package.cfg)
+ - [The Package Dependencies File](#the-package-dependencies-file)(semdependencies.cfg)
 
 ## USAGE: ./trigger_tool_install.sh tool_name [tool_version]
 
@@ -14,11 +14,11 @@ See: https://github.com/mdibl/package_downloads/wiki/How-To-Install-This-Repos
 **cd**  to package_downloads/ install root directory and run 
 ```
 
-Example 1: ./trigger_tool_install.sh bamtools
-The above command tells the trigger script to install the current version of bamtools
+Example 1: ./trigger_tool_install.sh rsem
+The above command tells the trigger script to install the current version of rsem
 
-Example 2: ./trigger_tool_install.sh bamtools v2.4.1
-The above command tells the trigger script to install version v2.4.1
+Example 2: ./trigger_tool_install.sh rsem v1.3.0
+The above command tells the trigger script to install version v1.3.0
 ```
 
 ## The Install Script
@@ -60,7 +60,7 @@ Some key variables include:
   
 ## The Package Dependencies File
 Each tool's dependency file contains the pre-install and post-install sets of dependencies.
-Bamtools only uses few of these variables.
+RSEM only uses few of these variables.
 
 ### Used for Pre-Install Dependencies Check
   - BIN_DEPENDENCIES
@@ -79,30 +79,18 @@ Bamtools only uses few of these variables.
 ## Appendix:
 ```
 
- See : https://github.com/pezmaster31/bamtools/wiki/Building-and-installing 
+ See : https://github.com/deweylab/RSEM 
  
 Dependencies:
-From their site, BamTools has been migrated to a CMake-based build system.
-BamTools requires CMake (version >= 2.6.4). If you are missing CMake or have an older version, 
-check your OS package manager (for Linux users) 
-or download it here: http://www.cmake.org/cmake/resources/software.html .
+From their site, Prerequisites
+
+C++, Perl and R are required to be installed.
+
+To use the --gff3 option of rsem-prepare-reference, Python is also required to be installed.
+
+To take advantage of RSEM's built-in support for the Bowtie/Bowtie 2/STAR alignment program, you must have Bowtie/Bowtie 2/STAR installed.
 
 bash
   Note: To check is cmake is installed, run the following command: cmake --version
 
-Build BamTools
-
-  * cd to the install root directory (path2/bamtools
-  * mkdir build
-  * cd build
-  * cmake ..
-  * make
-  * cd ..
-
-Check the Install
-There should be the bin/ , lib/ , and include/ subdirectories 
-under the install root directory
- bamtools/bin
- bamtools/lib
- bamtools/include
 ```
