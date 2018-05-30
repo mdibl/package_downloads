@@ -30,8 +30,7 @@ The above command tells the trigger script to install version v1.3.0
   2) sources the dependencies config file
   3) runs the build and 
      a. copy  the executables to /opt/software/bin
-     b. copy  the libraries to /opt/software/lib[64]
-     c. copy  the include to /opt/software/include
+    
  
 
 ### Note:
