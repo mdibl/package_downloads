@@ -12,9 +12,8 @@
 # 1) source the main config file to set global path
 # 2) source the dependencies config file
 # 3) runs the build and 
-#    a. copy  the executables to /opt/software/bin
-#    b. copy  the libraries to /opt/software/lib[64]
-#    c. copy  the include to /opt/software/include
+#    a. copy  the executables from PACKAGE_BASE/usr/local/bin to /opt/software/bin
+#   
 #
 #
 #
@@ -84,6 +83,8 @@ then
    echo "${rstatus}" 
    exit 1
 fi
+#Copy executable to /opt/software/bin
+cp -R ${PACKAGE_BASE}/bin/usr/local/bin ${SOFTWARE_BIN_BASE}
 echo ${rstatus}
 
 exit 0
