@@ -15,9 +15,9 @@ SOFTWARE_BASE=/opt/software
 #Path to Packages install
 EXTERNAL_SOFTWARE_BASE=/opt/software/external
 #Path to where the repos package_downloads is installed
-PACKAGE_DOWNLOADS_BASE=/home/bioadmin/package_downloads
+PACKAGE_DOWNLOADS_BASE=/opt/software/internal/package_downloads
 #Path to logs -
-LOGS_BASE=/data/logs
+LOGS_BASE=/opt/software/logs
 #
 # ***** CHANGE - Ends *****
 #
