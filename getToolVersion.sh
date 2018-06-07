@@ -91,7 +91,7 @@ then
   echo "Git not installed on `uname -n`"
   exit 1 	
 fi
-
+[ ! -d ${DOWNLOADS_LOG_DIR} ] && mkdir -p ${DOWNLOADS_LOG_DIR}
 LOG_FILE="${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${TOOL_NAME}.log"
 
 rm -rf ${LOG_FILE}
