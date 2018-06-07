@@ -11,13 +11,13 @@
 #
 #Path to parent directory of software bin, include, lib  
 #Should be included in your environment PATH 
-SOFTWARE_BASE=/mnt/software
+SOFTWARE_BASE=/opt/software
 #Path to Packages install
-EXTERNAL_SOFTWARE_BASE=/mnt/software/external
+EXTERNAL_SOFTWARE_BASE=/opt/software/external
 #Path to where the repos package_downloads is installed
-PACKAGE_DOWNLOADS_BASE=/mnt/software/internal/package_downloads
+PACKAGE_DOWNLOADS_BASE=/opt/software/internal/package_downloads
 #Path to logs -
-LOGS_BASE=/mnt/software/logs
+LOGS_BASE=/opt/software/logs
 #
 # ***** CHANGE - Ends *****
 #
