@@ -74,6 +74,11 @@ Htslib only uses few of these variables.
     liblzma    (required, unless configured with --disable-lzma)
     libcurl    (optional, but strongly recommended)
     libcrypto  (optional for Amazon S3 support; not needed on MacOS)
+### Installing bzlib.h
+[ec2-user@ip-172-31-40-156 ~]$ sudo yum search bzip2
+[ec2-user@ip-172-31-40-156 ~]$ sudo yum info bzip2-devel
+[ec2-user@ip-172-31-40-156 ~]$ sudo yum install bzip2-devel
+[ec2-user@ip-172-31-40-156 ~]$ sudo yum install bzip2-libs
 
 ## Configure and Install Htslib
 
