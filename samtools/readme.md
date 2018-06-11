@@ -81,4 +81,7 @@ Samtools only uses few of these variables.
 Notes: The bzip2 and liblzma dependencies can be removed if full CRAM support
 is not needed - see HTSlib  INSTALL file for details.
 
+Installing curses 
+
+sudo yum install ncurses-devel ncurses
 ```
