@@ -80,6 +80,9 @@ FASTA/FASTQ files preprocessing.
  * Fastx-toolkit version 0.0.13 requires libgtextutils-0.6 
  * A recent g++ compiler (tested with GNU G++ 4.1.2 and later).
  * The fasta_clipping_histogram tool requires two perl modules: PerlIO::gzip and GD::Graph::bars.
+   ** Install cpan : sudo yum install perl-CPAN
+   ** Install modules:
+   *** cpan PerlIO::gzip
  * The fastx_barcode_splitter tool requires GNU sed.
  * The fastq_quality_boxplot tool requires gnuplot version 4.2 or newer.
 
