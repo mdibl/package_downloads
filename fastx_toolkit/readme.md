@@ -74,10 +74,58 @@ FASTA/FASTQ files preprocessing.
 # Building and installing
  See : http://hannonlab.cshl.edu/fastx_toolkit/download.html 
  
+ Software Requirements
+=====================
+
+1. GCC is required to compile most tools.
+
+2. FASTA-Clipping-Histogram tool requires Perl, the "PerlIO::gzip",
+   "GD::Graph::bars" modules.
+   
+   Installing the perl modules can be accomplised by running:
+
+   $ sudo cpan 'PerlIO::gzip'
+   $ sudo cpan 'GD::Graph::bars'
+   
+3. FASTX-Barcode-Splitter requires the GNU Sed program.
+   
+4. FASTQ-Quality-Boxplot and FASTQ-Nucleotides-Distribution requires the
+   'gnuplot' program.
+
+
+Installation
+============
+
+To compile to tools, run:
+
+  $ ./configure
+  $ make
+  
+To install the tools, run (as root):
+
+  $ sudo make install
+
+This will install the tools into /usr/local/bin.
+To install the tools to a different location, change the 'configure' step to:
+
+  $ ./configure --prefix=/DESTINATION/DIRECTORY
+ 
 ## Prerequisites
  * pkg-config
  * wget
- * Fastx-toolkit version 0.0.13 requires libgtextutils-0.6 
+ * Fastx-toolkit version 0.0.14 requires libgtextutils-0.7 
+ ** 
+ //
+ // Install libgtextutils
+ //
+ $ wget http://cancan.cshl.edu/labmembers/gordon/files/libgtextutils-0.7.tar.gz
+ $ tar -xjf libgtextutils-0.7.tar.gz
+ $ cd libgtextutils-0.7
+ $ sudo ./configure
+ $ sudo make
+ $ sudo make install
+ $ cd ..
+ //
  * A recent g++ compiler (tested with GNU G++ 4.1.2 and later).
  * The fasta_clipping_histogram tool requires two perl modules: PerlIO::gzip and GD::Graph::bars.
    ** Install cpan : sudo yum install perl-CPAN
