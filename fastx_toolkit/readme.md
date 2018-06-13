@@ -83,6 +83,9 @@ FASTA/FASTQ files preprocessing.
    ** Install cpan : sudo yum install perl-CPAN
    ** Install modules:
    *** cpan PerlIO::gzip
+   ** sudo yum install perl-GD
+   ** sudo cpan ExtUtils::MakeMaker
+   ** sudo cpan GD::Graph
  * The fastx_barcode_splitter tool requires GNU sed.
  * The fastq_quality_boxplot tool requires gnuplot version 4.2 or newer.
 
