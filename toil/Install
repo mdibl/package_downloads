@@ -50,21 +50,16 @@ then
 fi
 source ./${toil_config}
 ## Download virtual env 
-cd ${EXTERNAL_SOFTWARE_BASE}/${GIT_REPOS}
-virtual_toil_base=.virtualenvs/${RELEASE_DIR}
-####curl -O ${VIRTUAL_ENV_URL}
-####${TAR} xvfz ${VIRTUAL_ENV_FILE}
-####cd ${VIRTUAL_ENV_DIR}
 #Create virtualenv directory for this repos as needed
-if [ ! -d ${virtual_toil_base} ]
+if [ ! -d ${TOIL_BASE} ]
 then
-    mkdir -p ${virtual_toil_base}
-    ${VIRTUALENV} -p ${PYTHON} ${virtual_toil_base}
+    mkdir -p ${TOIL_BASE}
+    ${VIRTUALENV} -p ${PYTHON} ${TOIL_BASE}
     #${PYTHON} virtualenv.py ${TOIL_BASE}
 fi
 #
 # activate virtualenv
-source $virtual_toil_base/bin/activate
+source $TOIL_BASE/bin/activate
 #upgrade pip just in case there is a newer version
 
 pip install toil 2>&1 
@@ -76,15 +71,15 @@ deactivate
 
 cd ${EXTERNAL_SOFTWARE_BASE}/${GIT_REPOS}
 [ -d ${RELEASE_DIR} ] && rm -rf ${RELEASE_DIR}
-ln -s  ${virtual_toil_base}
+ln -s  ${TOIL_BASE}
 
 #Check the install
 rstatus="SUCCESS"
 for bin_file in ${FILE_CHECK}
 do
-    if [ ! -f ${virtual_toil_base}/${bin_file} ]
+    if [ ! -f ${TOIL_BASE}/${bin_file} ]
     then
-       echo "${virtual_toil_base}/${bin_file} missing"
+       echo "${TOIL_BASE}/${bin_file} missing"
        rstatus="FAILED"
      fi
 done
@@ -93,11 +88,11 @@ echo "$rstatus"
 
 ## Create symbolic link under global path
 #
-mkdir -p ${BLOBAL_VIRTUAL_ENV_BASE}
-cd ${BLOBAL_VIRTUAL_ENV_BASE}
-ln -s ${virtual_toil_base} 
+mkdir -p ${GLOBAL_VIRTUAL_ENV_BASE}
+cd ${GLOBAL_VIRTUAL_ENV_BASE}
+ln -s ${TOIL_BASE} 
 rm -f ${GIT_REPOS}
-ln -s ${virtual_toil_base} ${GIT_REPOS}
+ln -s ${TOIL_BASE} ${GIT_REPOS}
 #make clean
 exit 0
 
