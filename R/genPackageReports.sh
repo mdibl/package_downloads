@@ -10,6 +10,7 @@ REPORTS_DIR=/mnt/data/reports/R
 LOG_DIR=/mnt/data/logs/package_downloads
 
 mkdir -p $REPORTS_DIR
+mkdir -p $LOG_DIR
 DATE=`date +"%Y-%m-%d"`
 REPORT=$REPORTS_DIR/$DATE.R.Packages.txt
 LOG=$LOG_DIR/$DATE.R.Packages.log
