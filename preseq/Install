@@ -45,9 +45,6 @@ then
 fi
 cd ${PACKAGE_BASE}
 #
-#update path to binaries to /opt/software/bin
-sed -i -e  's@prefix =[[:space:]].*@'"prefix =  ${SOFTWARE_BASE}"'@' Makefile
-export NO_TBB=1
 make all SAMTOOLS_DIR=$samtools 2>&1
 #Check the install
 rstatus="SUCCESS"
