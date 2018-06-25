@@ -75,14 +75,19 @@ done
 for dependency in $LIB_DEPENDENCIES
 do
   tokens=`locate $dependency`
+  lib_found="No"
   for lib_path in $tokens
   do
-    if [ ! -f ${lib_path} ]
+    token=`basename ${lib_path}`
+    if [ "$token" == $dependency ]
     then
-       echo "ERROR: Dependency  ${lib_path} missing"
-       rstatus="Failed"
+       lib_found="Yes"
     fi
   done
+  if [ "$lib_found" == No ]
+  then
+     rstatus="Failed"
+  fi
 done
 echo "$rstatus"
 if [ "$rstatus" == Failed ]
