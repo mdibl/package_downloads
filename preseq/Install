@@ -37,6 +37,7 @@ then
    exit 1
 fi
 PACKAGE_DEPENDENCIES_FILE=`basename ${PACKAGE_DEPENDS}`
+samtools=$EXTERNAL_SOFTWARE_BASE/samtools/samtools
 source ./${PACKAGE_DEPENDENCIES_FILE}
 if [ ! -d ${PACKAGE_BASE} ]
 then
@@ -64,6 +65,15 @@ then
 fi
 echo $rstatus 
 #Copy binaries to /opt/software/bin
+for bin_file in ${FILE_CHECK}
+do
+    if [ ! -f ${PACKAGE_BASE}/$bin_file ]
+    then
+       echo "${PACKAGE_BASE}/$bin_file missing"
+       rstatus="FAILED"
+     fi
+done
+
 #make clean
 exit 0
 
