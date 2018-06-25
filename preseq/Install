@@ -46,7 +46,7 @@ then
 fi
 cd ${PACKAGE_BASE}
 #
-make all SAMTOOLS_DIR=$samtools 2>&1
+make all 2>&1
 #Check the install
 rstatus="SUCCESS"
 for bin_file in ${FILE_CHECK}
