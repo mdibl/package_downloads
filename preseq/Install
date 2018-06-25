@@ -65,13 +65,10 @@ then
 fi
 echo $rstatus 
 #Copy binaries to /opt/software/bin
-for bin_file in ${FILE_CHECK}
+for bin_file in ${BIN_FILES}
 do
-    if [ ! -f ${PACKAGE_BASE}/$bin_file ]
-    then
-       echo "${PACKAGE_BASE}/$bin_file missing"
-       rstatus="FAILED"
-     fi
+    echo "Copying ${PACKAGE_BASE}/$bin_file  to $SOFTWARE_BIN_BASE"
+    cp ${PACKAGE_BASE}/$bin_file $SOFTWARE_BIN_BASE
 done
 
 #make clean
