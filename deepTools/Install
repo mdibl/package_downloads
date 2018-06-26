@@ -1,0 +1,139 @@
+#!/bin/sh
+
+# Organization: MDIBL
+# Author: Lucie Hutchins
+# Date: September 2017
+# Modified: February 2018
+#
+# This script is called by the main install script 
+# (install_package.sh)  to build and install 
+# a new version of the package 
+#
+# What it does:
+# 1) source the main config file to set global path
+# 2) source the dependencies config file
+# 3) runs the build and 
+#    a. copy  the executables to /opt/software/bin
+#    b. copy  the libraries to /opt/software/lib[64]
+#    c. copy  the include to /opt/software/include
+#
+#
+#
+# Note: the following environment variables are expected to be set
+# by the caller
+# 1) GLOBAL_CONFIG
+# 2) PACKAGE_BASE
+# 3) PACKAGE_DEPENDS
+#
+cd `dirname $0`
+SCRIPT_NAME=`basename $0`
+WORKING_DIR=`pwd`
+echo "==" 
+echo "Server Name: `uname -n`" 
+echo "Install Date: `date`" 
+if [ ! -f ../${GLOBAL_CONFIG} ]
+then
+  echo "'../${GLOBAL_CONFIG}' file missing "     
+  exit 1
+fi
+source ./../${GLOBAL_CONFIG}
+if [ "${PACKAGE_DEPENDS}" = "" ]
+then
+   echo "ERROR: PACKAGE_DEPENDS not set"
+   exit 1
+fi
+PACKAGE_DEPENDENCIES_FILE=`basename ${PACKAGE_DEPENDS}`
+PACKAGE_CONFIG=`basename ${PACKAGE_CONFIG_FILE}`
+source ./${PACKAGE_DEPENDENCIES_FILE}
+source ./${PACKAGE_CONFIG}
+
+if [ ! -d ${PACKAGE_BASE} ]
+then
+   echo "ERROR: Missing the install directory ${PACKAGE_BASE} "
+   exit 1
+fi
+
+cd $PACKAGE_BASE
+
+mkdir build 
+if [ ! -d build ]
+then
+   echo "Could not create the 'build' directory under `pwd`" 
+   exit 1
+fi
+# Run the install commands
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=${PACKAGE_BASE} .. 2>&1 
+make 2>&1 
+make install 2>&1 
+#Check the install
+
+rstatus="SUCCESS"
+for pkg_dir in ${DIR_CHECK}
+do
+    if [ ! -d ${PACKAGE_BASE}/${pkg_dir} ]
+    then
+       echo "$pkg_dir missing under ${PACKAGE_BASE} "
+       rstatus="FAILED"
+     fi
+done
+
+for pkg_file in ${FILE_CHECK}
+do
+    if [ ! -f ${PACKAGE_BASE}/${pkg_file} ]
+    then
+       echo "$pkg_file missing under ${PACKAGE_BASE} "
+       rstatus="FAILED"
+     fi
+done
+
+if [ "${rstatus}" == FAILED ]
+then
+   echo "${rstatus}" 
+   exit 1
+fi
+echo ${rstatus}
+
+## Copy the excutable to the path  -- specific to bamtools install ## 
+RELEASE_NUMBER=`echo ${RELEASE_NUMBER}| sed -e 's/^v//'`
+cd ${PACKAGE_BASE}/${BIN_DIR}
+if [ -f $BIN_FILE ]
+then
+   cp -p ${BIN_FILE} ${SOFTWARE_BASE}/${BIN_DIR}/${BIN_FILE}-${RELEASE_NUMBER}
+   cd ${SOFTWARE_BASE}/${BIN_DIR}
+   rm -f ${BIN_FILE}
+   ln -s ${BIN_FILE}-${RELEASE_NUMBER} ${BIN_FILE}
+fi
+echo "${BIN_FILE} copied to ${SOFTWARE_BASE}/${BIN_DIR}"
+## Copy the include to the path 
+cd ${PACKAGE_BASE}/${INCLUDE_DIR}
+if [ -d ${INCLUDE_DIR_NAME} ]
+then
+   cp -pR ${INCLUDE_DIR_NAME}  ${SOFTWARE_BASE}/${INCLUDE_DIR}/${INCLUDE_DIR_NAME}-${RELEASE_NUMBER}
+   cd ${SOFTWARE_BASE}/${INCLUDE_DIR}
+   [ -f ${INCLUDE_DIR_NAME} ] && rm -f ${INCLUDE_DIR_NAME}
+   ln -s ${INCLUDE_DIR_NAME}-${RELEASE_NUMBER} ${INCLUDE_DIR_NAME}
+fi
+echo "${INCLUDE_DIR_NAME} copied to ${SOFTWARE_BASE}/${INCLUDE_DIR}"
+## Copy libs to the path 
+cd ${PACKAGE_BASE}/${LIB_DIR}
+if [ -d ${LIB_PACKG_CFG} ]
+then
+   cp -pR ${LIB_PACKG_CFG}  ${SOFTWARE_BASE}/${LIB_DIR}/${GIT_REPOS}-${LIB_PACKG_CFG}-${RELEASE_NUMBER}
+   cd  ${SOFTWARE_BASE}/${LIB_DIR}
+   [ -f ${LIB_PACKG_CFG} ] && rm -f  ${SOFTWARE_BASE}/${LIB_DIR}/$LIB_PACKG_CFG
+   ln -s ${GIT_REPOS}-${LIB_PACKG_CFG}-${RELEASE_NUMBER} ${LIB_PACKG_CFG}
+fi
+echo "${LIB_PACKG_CFG} copied to ${SOFTWARE_BASE}/${LIB_DIR}" 
+
+cd ${PACKAGE_BASE}/${LIB_DIR}
+if [ -f ${LIB_FILE} ]
+then
+   cp -p ${LIB_FILE}  ${SOFTWARE_BASE}/${LIB_DIR}/${LIB_FILE}-${RELEASE_NUMBER}
+   [ -f  ${SOFTWARE_BASE}/${LIB_DIR}/${LIB_FILE} ] && rm -f  ${SOFTWARE_BASE}/${LIB_DIR}/${LIB_FILE}
+   cd  ${SOFTWARE_BASE}/${LIB_DIR}
+   ln -s ${LIB_FILE}-${RELEASE_NUMBER} ${LIB_FILE}
+fi
+echo "${LIB_FILE} copied to  ${SOFTWARE_BASE}/${LIB_DIR}" 
+exit 0
+
