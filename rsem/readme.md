@@ -87,9 +87,12 @@ C++, Perl and R are required to be installed.
 
 To use the --gff3 option of rsem-prepare-reference, Python is also required to be installed.
 
-To take advantage of RSEM's built-in support for the Bowtie/Bowtie 2/STAR alignment program, you must have Bowtie/Bowtie 2/STAR installed.
+To take advantage of RSEM's built-in support for 
+the Bowtie/Bowtie2/STAR alignment program,
+you must have Bowtie/Bowtie2/STAR installed.
 
 bash
-  Note: To check is cmake is installed, run the following command: cmake --version
+  Note: To check is cmake is installed,
+  run the following command: cmake --version
 
 ```
