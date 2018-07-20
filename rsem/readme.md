@@ -96,3 +96,34 @@ bash
   run the following command: cmake --version
 
 ```
+## Building indexes
+```
+EXAMPLES
+    1) Suppose we have mouse RNA-Seq data and want to use the UCSC mm9
+    version of the mouse genome. We have downloaded the UCSC Genes
+    transcript annotations in GTF format (as mm9.gtf) using the Table
+    Browser and the knownIsoforms.txt file for mm9 from the UCSC Downloads.
+    We also have all chromosome files for mm9 in the directory '/data/mm9'.
+    We want to put the generated reference files under '/ref' with name
+    'mouse_0'. We do not add any poly(A) tails. Please note that GTF files
+    generated from UCSC's Table Browser do not contain isoform-gene
+    relationship information. For the UCSC Genes annotation, this
+    information can be obtained from the knownIsoforms.txt file. Suppose we
+    want to build Bowtie indices and Bowtie executables are found in
+    '/sw/bowtie'.
+
+    There are two ways to write the command:
+
+Suppose we want to build STAR indices in the above example and save
+    index files under '/ref' with name 'mouse_0'. Assuming STAR executable
+    is '/sw/STAR', the command will be:
+
+ rsem-prepare-reference --gtf mm9.gtf \
+                        --transcript-to-gene-map knownIsoforms.txt \
+                        --star \
+                        --star-path /sw/STAR \
+                        -p 8 \
+                        /data/mm9/chr1.fa,/data/mm9/chr2.fa,...,/data/mm9/chrM.fa \
+                        /ref/mouse_0
+
+```
