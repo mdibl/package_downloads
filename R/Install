@@ -50,6 +50,12 @@ echo "Running the install from "`pwd`
 ./configure --prefix=$SOFTWARE_BASE --with-x=no
 make
 make install
+[ $? -ne 0 ] && exit 1
+
+## run the script that installs user's specified R packages
+
+cd $WORKING_DIR
+./installPackage.r
 
 #make install-info
 #make install-pdf
