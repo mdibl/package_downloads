@@ -13,6 +13,7 @@
 # 1) source the main config file to set global path
 # 2) untar the downloaded tar file
 # 3) builds and install R
+# 4) run the script that installs user's specified R packages
 #
 # Note: the following environment variables are expected to be set
 # by the caller
