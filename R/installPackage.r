@@ -5,11 +5,15 @@
 # Credit: https://bioconductor.org/install/ 
 #
 source("https://bioconductor.org/biocLite.R")
-biocLite(ask=FALSE)  
-biocLite("openssl")  
+biocLite(ask=FALSE)
+biocLite("openssl")   #one of sleuth's dependencies
 biocLite(c("GenomicFeatures", "AnnotationDbi"))
-biocLite("devtools")    # only if devtools not yet installed
+biocLite(c("DESeq","DESeq2"))
+biocLite("devtools")    #one of sleuth's dependencies
+biocLite("RMySQL")  #one of RUVSeq's dependencies
+biocLite("pasilla")
+biocLite("remotes") #one of sleuth's dependencies
 biocLite("pachterlab/sleuth")
 biocLite("RUVSeq")
-biocLite("RMySQL")
-biocLite("pasilla")
+biocLite("configr")
+biocLite(c("config","edge"))                           
