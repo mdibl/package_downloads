@@ -16,4 +16,5 @@ biocLite("remotes") #one of sleuth's dependencies
 biocLite("pachterlab/sleuth")
 biocLite("RUVSeq")
 biocLite("configr")
-biocLite(c("config","edge"))                           
+biocLite(c("config","edge"))  
+biocLite("extrafont")
