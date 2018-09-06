@@ -2,8 +2,8 @@
 
 # Organization: MDIBL
 # Author: Lucie Hutchins
-# Date: September 2017
-# Modified: February 2018
+# Date: June 2018
+# Modified: September 2018
 #
 # This script is called by the main install script 
 # (install_package.sh)  to build and install 
