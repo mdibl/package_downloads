@@ -55,17 +55,8 @@ fi
 
 cd $PACKAGE_BASE
 
-mkdir build 
-if [ ! -d build ]
-then
-   echo "Could not create the 'build' directory under `pwd`" 
-   exit 1
-fi
-# Run the install commands
-cd build
-cmake -DCMAKE_INSTALL_PREFIX=${PACKAGE_BASE} .. 2>&1 
-make 2>&1 
-make install 2>&1 
+python setup.py install --prefix ${SOFTWARE_BASE}
+
 #Check the install
 
 rstatus="SUCCESS"
@@ -93,47 +84,5 @@ then
    exit 1
 fi
 echo ${rstatus}
-
-## Copy the excutable to the path  -- specific to bamtools install ## 
-RELEASE_NUMBER=`echo ${RELEASE_NUMBER}| sed -e 's/^v//'`
-cd ${PACKAGE_BASE}/${BIN_DIR}
-if [ -f $BIN_FILE ]
-then
-   cp -p ${BIN_FILE} ${SOFTWARE_BASE}/${BIN_DIR}/${BIN_FILE}-${RELEASE_NUMBER}
-   cd ${SOFTWARE_BASE}/${BIN_DIR}
-   rm -f ${BIN_FILE}
-   ln -s ${BIN_FILE}-${RELEASE_NUMBER} ${BIN_FILE}
-fi
-echo "${BIN_FILE} copied to ${SOFTWARE_BASE}/${BIN_DIR}"
-## Copy the include to the path 
-cd ${PACKAGE_BASE}/${INCLUDE_DIR}
-if [ -d ${INCLUDE_DIR_NAME} ]
-then
-   cp -pR ${INCLUDE_DIR_NAME}  ${SOFTWARE_BASE}/${INCLUDE_DIR}/${INCLUDE_DIR_NAME}-${RELEASE_NUMBER}
-   cd ${SOFTWARE_BASE}/${INCLUDE_DIR}
-   [ -f ${INCLUDE_DIR_NAME} ] && rm -f ${INCLUDE_DIR_NAME}
-   ln -s ${INCLUDE_DIR_NAME}-${RELEASE_NUMBER} ${INCLUDE_DIR_NAME}
-fi
-echo "${INCLUDE_DIR_NAME} copied to ${SOFTWARE_BASE}/${INCLUDE_DIR}"
-## Copy libs to the path 
-cd ${PACKAGE_BASE}/${LIB_DIR}
-if [ -d ${LIB_PACKG_CFG} ]
-then
-   cp -pR ${LIB_PACKG_CFG}  ${SOFTWARE_BASE}/${LIB_DIR}/${GIT_REPOS}-${LIB_PACKG_CFG}-${RELEASE_NUMBER}
-   cd  ${SOFTWARE_BASE}/${LIB_DIR}
-   [ -f ${LIB_PACKG_CFG} ] && rm -f  ${SOFTWARE_BASE}/${LIB_DIR}/$LIB_PACKG_CFG
-   ln -s ${GIT_REPOS}-${LIB_PACKG_CFG}-${RELEASE_NUMBER} ${LIB_PACKG_CFG}
-fi
-echo "${LIB_PACKG_CFG} copied to ${SOFTWARE_BASE}/${LIB_DIR}" 
-
-cd ${PACKAGE_BASE}/${LIB_DIR}
-if [ -f ${LIB_FILE} ]
-then
-   cp -p ${LIB_FILE}  ${SOFTWARE_BASE}/${LIB_DIR}/${LIB_FILE}-${RELEASE_NUMBER}
-   [ -f  ${SOFTWARE_BASE}/${LIB_DIR}/${LIB_FILE} ] && rm -f  ${SOFTWARE_BASE}/${LIB_DIR}/${LIB_FILE}
-   cd  ${SOFTWARE_BASE}/${LIB_DIR}
-   ln -s ${LIB_FILE}-${RELEASE_NUMBER} ${LIB_FILE}
-fi
-echo "${LIB_FILE} copied to  ${SOFTWARE_BASE}/${LIB_DIR}" 
 exit 0
 
