@@ -100,9 +100,5 @@ Build BamTools
   * python setup.py install --prefix /User/Tools/deepToolsx.x
   
 Check the Install
-There should be the bin/ , lib/ , and include/ subdirectories 
-under the install root directory
- bamtools/bin
- bamtools/lib
- bamtools/include
+
 ```
