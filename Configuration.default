@@ -16,6 +16,10 @@ SOFTWARE_BASE=/opt/software
 EXTERNAL_SOFTWARE_BASE=/opt/software/external
 #Path to where the repos package_downloads is installed
 PACKAGE_DOWNLOADS_BASE=/opt/software/internal/package_downloads
+
+#path to where htslib package is installed - used by samtools (--with-htslib=DIR) 
+HSTLIB_INSTALL_DIR=$EXTERNAL_SOFTWARE_BASE/htslib/htslib
+
 #Path to logs -
 LOGS_BASE=/opt/software/logs
 #
