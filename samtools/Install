@@ -63,7 +63,7 @@ fi
 # lib, etc subdirectories under $PACKAGE_BASE.
 # Alos Path to where htslib package is installed locally
 
-./configure  --prefix=${SOFTWARE_BASE} --with-htslib=${SOFTWARE_BASE}  2>&1 
+./configure  --prefix=${SOFTWARE_BASE} --with-htslib=${SOFTWARE_LIB_BASE}  2>&1 
 make  2>&1
 [ $? -ne 0 ] && exit 1
 make install 2>&1 
