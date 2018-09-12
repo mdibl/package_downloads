@@ -71,30 +71,6 @@ do
       rstatus="Failed"
    fi
 done
-# Check LIBRARY dependencies
-for dependency in $LIB_DEPENDENCIES
-do
-  tokens=`locate $dependency`
-  lib_found="No"
-  for lib_path in $tokens
-  do
-    token=`basename ${lib_path}`
-    if [ "$token" == $dependency ]
-    then
-       lib_found="Yes"
-    fi
-  done
-  if [ "$lib_found" == No ]
-  then
-     rstatus="Failed"
-  fi
-done
-echo "$rstatus"
-if [ "$rstatus" == Failed ]
-then
-  echo "Dependency test Failed" 
-  exit 1
-fi
 export GLOBAL_CONFIG  PACKAGE_DEPENDS PACKAGE_BASE PACKAGE_CONFIG_FILE 
 if [ "${BINARIES_INSTALL}" = true ]
 then
