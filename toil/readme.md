@@ -59,6 +59,7 @@ STAR only uses few of these variables.
   - LIB_DIR
   
 ## Appendix:
+See: https://toil.readthedocs.io/en/3.15.0/gettingStarted/install.html#basic-installation
 ```
 
 Toil currently supports only Python 2.7. If you don’t satisfy this requirement, 
