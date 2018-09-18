@@ -1,0 +1,13 @@
+!/bin/sh
+
+# Organization: MDIBL
+# Author: Lucie Hutchins
+# MODIFIED: September 2018
+#
+# This script is 
+
+sudo pip install toil[all] 2>&1 
+## Check the install
+
+
+exit 0
