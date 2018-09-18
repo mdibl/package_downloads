@@ -7,7 +7,8 @@ This sub-directory contains:
 
 ## The Install Script
  This script is called by the main install script 
-(install_package.sh)  to build and install  a new version of the package 
+(install_package.sh)  to build and install  a new version of the package .
+Toil is a python package with pip install option. 
 
 ### What it does:
   1) sources the main config file to set global path
