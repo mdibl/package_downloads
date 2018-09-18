@@ -51,15 +51,15 @@ fi
 source ./${toil_config}
 ## Download virtual env 
 #Create virtualenv directory for this repos as needed
-if [ ! -d ${TOIL_BASE} ]
+if [ ! -d ${PYTHON2_TOIL_BASE} ]
 then
-    mkdir -p ${TOIL_BASE}
-    ${VIRTUALENV} -p ${PYTHON} ${TOIL_BASE}
+    mkdir -p ${PYTHON2_TOIL_BASE}
+    ${VIRTUALENV} -p ${PYTHON2} ${PYTHON2_TOIL_BASE}
     #${PYTHON} virtualenv.py ${TOIL_BASE}
 fi
 #
 # activate virtualenv
-source $TOIL_BASE/bin/activate
+source $PYTHON2_TOIL_BASE/bin/activate
 #upgrade pip just in case there is a newer version
 
 pip install toil 2>&1 
@@ -71,7 +71,7 @@ deactivate
 
 cd ${EXTERNAL_SOFTWARE_BASE}/${GIT_REPOS}
 [ -d ${RELEASE_DIR} ] && rm -rf ${RELEASE_DIR}
-ln -s  ${TOIL_BASE}
+ln -s  ${PYTHON2_TOIL_BASE}
 
 #Check the install
 rstatus="SUCCESS"
