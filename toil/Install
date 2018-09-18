@@ -4,26 +4,60 @@
 # Author: Lucie Hutchins
 # MODIFIED: September 2018
 #
-# This script is 
+# 
+cd `dirname $0`
+SCRIPT_NAME=`basename $0`
+WORKING_DIR=`pwd`
+
+echo "==" 
+echo "Server Name: `uname -n`" 
+echo "Install Date: `date`" 
+if [ ! -f ../${GLOBAL_CONFIG} ]
+then
+  echo "'../${GLOBAL_CONFIG}' file missing "     
+  exit 1
+fi
+source ./../${GLOBAL_CONFIG}
+if [ "${PACKAGE_DEPENDS}" = "" ]
+then
+   echo "ERROR: PACKAGE_DEPENDS not set"
+   exit 1
+fi
+
+PACKAGE_DEPENDENCIES_FILE=`basename ${PACKAGE_DEPENDS}`
+source ./${PACKAGE_DEPENDENCIES_FILE}
+toil_config=`basename ${PACKAGE_CONFIG_FILE}`
+
+if [ ! -f ${toil_config} ]
+then
+  echo "'${toil_config}' file missing under `pwd` "     
+  exit 1
+fi
+source ./${toil_config}
 
 sudo pip install toil[all] 2>&1 
 
 #Check the install
 rstatus="SUCCESS"
-for folder in ${DIR_CHECK}
+echo "Check the install" 
+for executable_file in $BIN_FILES
 do
-    if [ ! -d ${PACKAGE_BASE}/${folder} ]
-    then
-       echo "${PACKAGE_BASE}/${folder} missing" 
-       rstatus="FAILED"
-     fi
+   token=`which ${executable_file}`
+   if [ ! -f "${executable_file}" ]
+   then
+      echo "ERROR: Executable ${executable_file} missing" 
+      rstatus="FAILED"
+   fi
 done
-
 echo ${rstatus} 
 
 [ "${rstatus}" == FAILED ] &&  exit 1
 
-## Check the install
-
+## This is just a placeholder
+## 
+cd ${EXTERNAL_SOFTWARE_BASE}/${GIT_REPOS}
+[ ! -d ${RELEASE_DIR} ] && mkdir ${RELEASE_DIR}
+rm -f ${GIT_REPOS}
+ln -s ${RELEASE_DIR} ${GIT_REPOS}
 
 exit 0
