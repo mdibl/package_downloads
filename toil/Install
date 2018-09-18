@@ -9,6 +9,11 @@
 cd `dirname $0`
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
+
+GLOBAL_CONFIG="Configuration"
+PACKAGE_DEPENDENCIES_FILE=toil_dependencies.cfg
+toil_config=toil_package.cfg
+
 echo "==" 
 echo "Server Name: `uname -n`" 
 echo "Install Date: `date`" 
@@ -18,16 +23,7 @@ then
   exit 1
 fi
 source ./../${GLOBAL_CONFIG}
-if [ "${PACKAGE_DEPENDS}" = "" ]
-then
-   echo "ERROR: PACKAGE_DEPENDS not set"
-   exit 1
-fi
-
-PACKAGE_DEPENDENCIES_FILE=`basename ${PACKAGE_DEPENDS}`
 source ./${PACKAGE_DEPENDENCIES_FILE}
-toil_config=`basename ${PACKAGE_CONFIG_FILE}`
-
 if [ ! -f ${toil_config} ]
 then
   echo "'${toil_config}' file missing under `pwd` "     
