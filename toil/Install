@@ -7,6 +7,22 @@
 # This script is 
 
 sudo pip install toil[all] 2>&1 
+
+#Check the install
+rstatus="SUCCESS"
+for folder in ${DIR_CHECK}
+do
+    if [ ! -d ${PACKAGE_BASE}/${folder} ]
+    then
+       echo "${PACKAGE_BASE}/${folder} missing" 
+       rstatus="FAILED"
+     fi
+done
+
+echo ${rstatus} 
+
+[ "${rstatus}" == FAILED ] &&  exit 1
+
 ## Check the install
 
 
