@@ -9,7 +9,6 @@
 cd `dirname $0`
 SCRIPT_NAME=`basename $0`
 WORKING_DIR=`pwd`
-
 echo "==" 
 echo "Server Name: `uname -n`" 
 echo "Install Date: `date`" 
