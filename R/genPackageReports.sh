@@ -23,7 +23,7 @@ rm -f $REPORT
 touch $REPORT
 cd `dirname $0`
 
-./$UPDATE_PACKAGE_SCRIPT  2>&1 | tee -a  $LOG
+sudo ./$UPDATE_PACKAGE_SCRIPT  2>&1 | tee -a  $LOG
 
 #There should be the genPackageReports.r R script
 # in the same directory as this script
