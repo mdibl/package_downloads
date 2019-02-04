@@ -24,7 +24,8 @@ echo "`date`" | tee -a $log_file
 [ ! -f ./ucsc.cfg ] && exit 1
 
 source ./ucsc.cfg
-$rsync_prog $rsync_options $local_ucsc_binaries_dir $remote_user@$remote_server:$remote_api_repos_base
+
+$rsync_prog $rsync_options $remote_url $local_ucsc_binaries_base
 
 echo "`date`" | tee -a $log_file
 #rsync_options="--links --ignore-errors"
