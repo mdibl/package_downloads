@@ -7,27 +7,24 @@
 script_name=`basename $0`
 cd `dirname $0`
 working_dir=`pwd`
-LOG_BASE=`dirname $working_dir`/logs
-[ ! -d $LOG_BASE ] && mkdir $LOG_BASE
-log_file=$LOG_BASE/$script_name.log
-rm -f $log_file
-touch $log_file
-
-echo "`date`" | tee -a $log_file
-[ ! -f ./api.cfg ] && exit 1
-
-source ./api.cfg
 rsync_prog=`which rsync`
+
 if [ ! -f $rsync_prog ]
 then
    echo $rsync_prog
    echo "'rsync' not installed on `uname -n`"
    exit 1
 fi
-#rsync_options="--links --ignore-errors"
-rsync_options=" -avz --exclude=logs"
+LOG_BASE=`dirname $working_dir`/logs
+[ ! -d $LOG_BASE ] && mkdir $LOG_BASE
+log_file=$LOG_BASE/$script_name.log
+rm -f $log_file
+touch $log_file
+echo "`date`" | tee -a $log_file
+[ ! -f ./ucsc.cfg ] && exit 1
 
-$rsync_prog $rsync_options $local_api_repos_dir $remote_user@$remote_server:$remote_api_repos_base
+source ./ucsc.cfg
+$rsync_prog $rsync_options $local_ucsc_binaries_dir $remote_user@$remote_server:$remote_api_repos_base
 
 echo "`date`" | tee -a $log_file
 #rsync_options="--links --ignore-errors"
