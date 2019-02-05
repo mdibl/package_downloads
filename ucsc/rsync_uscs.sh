@@ -25,6 +25,8 @@ echo "`date`" | tee -a $log_file
 
 source ./ucsc.cfg
 
+[ ! -d $local_ucsc_binaries_base ] && mkdir -p $local_ucsc_binaries_base
+
 $rsync_prog $rsync_options $remote_url $local_ucsc_binaries_base
 
 echo "`date`" | tee -a $log_file
