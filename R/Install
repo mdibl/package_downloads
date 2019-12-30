@@ -48,15 +48,15 @@ fi
 
 cd ${PACKAGE_BASE}
 echo "Running the install from "`pwd` 
-./configure --prefix=$SOFTWARE_BASE --with-x=no
-make
-make install
+sudo ./configure --prefix=$SOFTWARE_BASE --with-x=no
+sudo make
+sudo make install
 [ $? -ne 0 ] && exit 1
 
 ## run the script that installs user's specified R packages
 
 cd $WORKING_DIR
-./installPackage.r
+sudo ./installPackage.r
 
 #make install-info
 #make install-pdf
