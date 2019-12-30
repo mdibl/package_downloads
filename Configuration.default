@@ -81,6 +81,6 @@ export PACKAGE_GIT_CLONE_BASE GIT_CLONE_URL_BASE GIT_DOWNLOADS_URL_BASE
 export DOWNLOADS_LOG_DIR WGET GIT
 
 
-EMAIL_TO=lucie.hutchins@mdibl.org
+EMAIL_TO=bioadmin@mdibl.org
 
 export EMAIL_TO
