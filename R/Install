@@ -52,7 +52,7 @@ sudo ./configure --prefix=$SOFTWARE_BASE --enable-R-shlib
 sudo make
 sudo make install
 sudo make install-info
-sudo make-install-pdf
+sudo make install-pdf
 [ $? -ne 0 ] && exit 1
 
 ## run the script that installs user's specified R packages
