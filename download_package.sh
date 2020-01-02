@@ -39,10 +39,11 @@ fi
 source ./${GLOBAL_CONFIG}
 source ./${PACKAGE_CONFIG_FILE}
 
+sudo chmod g+w ${DOWNLOADS_LOG_DIR}
 LOG=${DOWNLOADS_LOG_DIR}/${SCRIPT_NAME}.${RELEASE_DIR}.log
 WGET_COMMAND="${WGET_OPTIONS} '${REMOTE_URL}'"
-rm -f ${LOG}
-touch ${LOG}
+sudo rm -f ${LOG}
+sudo touch ${LOG}
 
 if [ "${DOWNLOADS_LOG_DIR}" = "" ]
 then
